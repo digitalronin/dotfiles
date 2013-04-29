@@ -1,0 +1,82 @@
+set-option -g prefix C-a
+
+# allow Ctrl-a a to move cursor to beginning of line
+bind a send-prefix
+
+#set-option -g mode-mouse on
+# from: https://wincent.com/blog/tweaking-command-t-and-vim-for-use-in-the-terminal-and-tmux
+# mouse can be used to select panes
+set-option -g mouse-select-pane on
+# mouse can be used to select windows (by clicking in the status bar)
+set-option -g mouse-select-window on
+# mouse can be used to resize panes (by dragging dividers)
+set-option -g mouse-resize-pane on
+# not really sure what this does, but with it, the scrollwheel works inside Vim
+set-option -g mouse-utf8 on
+# allow mouse to enter copy mode and initiate selection
+set-window-option -g mode-mouse on
+
+# vi keys for pane-to-pane movement
+#bind h select-pane -L
+#bind j select-pane -D
+#bind k select-pane -U
+#unbind l
+#bind l select-pane -R
+unbind \;
+bind \; last-window
+unbind "'"
+bind "'" last-pane
+
+
+# Smart pane switching with awareness of vim splits
+# https://gist.github.com/mislav/5189704
+bind k run-shell 'tmux-vim-select-pane -U'
+bind j run-shell 'tmux-vim-select-pane -D'
+bind h run-shell 'tmux-vim-select-pane -L'
+unbind l
+bind l run-shell 'tmux-vim-select-pane -R'
+# bind -n "C-\\" run-shell 'tmux-vim-select-pane -l'
+
+# zoom pane to window so I can copy/paste
+# without worrying about pane boundaries
+#unbind +
+#bind + \
+#  new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read' \;\
+#  swap-pane -s tmux-zoom.0 \;\
+#  select-window -t tmux-zoom
+#
+#unbind -
+#bind - \
+#  last-window \;\
+#  swap-pane -s tmux-zoom.0 \;\
+#  kill-window -t tmux-zoom
+
+if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
+
+# use C-a v to paste the tmux buffer
+bind v paste-buffer
+# use C-a y to copy the tmux buffer to the system clipboard
+bind y run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+
+# Set the esc/alt disambiguation timeout to 50ms. The default is half a second, which makes vim kind of painful.
+set-option -sg escape-time 50
+
+# Copy input to all panes
+# easily toggle synchronization (mnemonic: e is for echo)
+bind e setw synchronize-panes on
+bind E setw synchronize-panes off
+
+# appearance
+set-option -g pane-active-border-fg red
+set -g status-bg blue
+set-window-option -g window-status-current-bg red
+set -g base-index 1
+set-option -g default-terminal "screen-256color"
+
+# Set window notifications
+setw -g monitor-activity on
+set -g visual-activity on
+
+# display numbers in panes for longer
+set -g display-panes-time 3000
+
