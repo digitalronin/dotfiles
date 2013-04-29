@@ -1,0 +1,181 @@
+
+" Load all plugins
+execute pathogen#infect()
+execute pathogen#helptags()
+
+" Linux
+"set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+
+syntax enable
+
+if has('gui_running')
+  " set the screen width and height
+  "set guifont=Andale_Mono:h18
+  set guifont=Menlo:h14
+
+  set background=dark
+  colorscheme solarized
+else
+  "set background=light
+  "colorscheme SolarizedDark_modified
+  colorscheme twilight256
+endif
+"set background=dark
+
+"let g:solarized_contrast   = "high"
+"let g:solarized_visibility = "high"
+"let g:solarized_bold       = 0
+
+set antialias
+
+set ruler
+set shiftwidth=2
+
+"mouse support in terminal vim
+set mouse=a
+set ttyfast
+set ttymouse=xterm2
+
+set expandtab
+
+" Make splits open in sensible directions
+set splitbelow
+set splitright
+
+" Stop Netrw from doing weird shit on double-click. Instead,
+" double-click to select a word, triple-click to select a line
+map <2-LeftMouse> bve
+map <3-LeftMouse> 0V
+
+let mapleader = ","
+
+" copy to buffer
+vmap <Leader>cy :w! ~/.vimbuffer<CR>
+nmap <Leader>cy :.w! ~/vimbuffer<CR>
+" cut to buffer
+vmap <Leader>cx :w! ~/.vimbuffer<CR>gvx
+" paste from buffer
+map <Leader>cp :r ~/.vimbuffer<CR>
+
+"Abbreviations
+abbr doo do \|
+imap  ->
+imap  =>
+imap  #{
+imap  <%=  %><ESC>hhi
+imap  $this->
+abbr eend <% end -%>
+abbr vvd var_dump(
+
+" Tab navigation (cmd-shift-[/cmd-shift-] to go to prev/next tab)
+" THIS DOESN'T WORK IN TERMINAL VIM
+" nmap <D-S-]> :tabn<CR>
+" nmap <D-S-[> :tabp<CR>
+" " cmd-N to go to tab N
+" map <D-1> 1gt
+" map <D-2> 2gt
+" map <D-3> 3gt
+" map <D-4> 4gt
+" map <D-5> 5gt
+" map <D-6> 6gt
+" map <D-7> 7gt
+" map <D-8> 8gt
+" map <D-9> 9gt
+" map <D-0> :tablast<CR>
+
+" open method definition in a new tab
+nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
+
+"Text bubbling (requires 'unimpaired' plugin)
+" Bubble single lines
+nmap <C-k> [e
+nmap <C-j> ]e
+" Bubble multiple lines
+vmap <C-k> [egv
+vmap <C-j> ]egv
+
+" preserve visual selection when indenting/outdenting
+vmap > >gv
+vmap < <gv
+
+"Save
+map <Leader>w :w<CR>
+
+"NERDTree
+map <Leader>nt :NERDTreeToggle<CR>
+map <Leader>tt :TlistToggle<CR>
+
+"Goto file in new tab
+map <Leader>gf <C-w>gf<CR>
+"New tab
+map <Leader>tn :tabnew<CR>
+
+"comment on/off
+map <Leader>cc :s/^/#<CR>
+map <Leader>co :s/^#//<CR>
+
+"rails.vim shortcuts
+map <Leader>rm :Rmodel<CR>
+map <Leader>rv :Rview<CR>
+map <Leader>rc :Rcontroller<CR>
+map <Leader>rh :Rhelper<CR>
+map <Leader>rj :Rjavascript<CR>
+map <Leader>rl :Rlayout<CR>
+map <Leader>rs :Rstylesheet<CR>
+map <Leader>ro :Rlocale<CR>
+
+"tabularize
+map <Leader>a: :Tabularize /:\zs<CR>
+map <Leader>a, :Tabularize /,\zs<CR>
+map <Leader>a= :Tabularize /=<CR>
+map <Leader>af :Tabularize /=><CR>
+
+"rspec
+map <Leader>ofs :%s/ it / xit <CR>''?xit<CR>x:w<CR>
+map <Leader>ons :%s/ xit / it /<CR>'':w<CR>
+
+"test::unit
+map <Leader>oft :%s/def test/def xtest<CR>''?xtest<CR>x:w<CR>
+map <Leader>ont :%s/def xtest/def test/<CR>'':w<CR>
+
+"php unit test
+map <Leader>ofp :%s/function test/function xtest<CR>''?xtest<CR>x:w<CR>
+map <Leader>onp :%s/function xtest/function test/<CR>'':w<CR>
+" turn a comment into a test method
+map <Leader>pt <<xxx:s/ /_/gI  function test_A() {}kkk
+map <Leader>vd Ovar_dump();<ESC>hi
+
+map <Leader>db Odebugger; 1<CR><ESC>:w<CR>
+map <Leader>so Osave_and_open_page<CR><ESC>:w<CR>
+map <Leader>br Oborder: 2px solid red;<CR><ESC>:w<CR>
+map <Leader>ex Oecho "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";<CR><ESC>:w<CR>
+map <Leader>ru :!ruby %<CR>
+
+map <Leader>bo :BufOnly<CR>
+map <Leader>bd :bd<CR>
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line("'\"") <= line("$") |
+\   exe "normal g`\"" |
+\ endif
+
+"Load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
+
+" Load matchit (% to bounce from do to end, etc.)
+runtime! macros/matchit.vim
+
+" clean up the sign column for git-gutter
+highlight clear SignColumn
+
+" make ctrlp use the git project root as its starting directory
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = '\.(class)'
+
+" .vimrc
+map <Leader>sv :source ~/.vimrc<CR>''
+map <Leader>se :e ~/.vimrc<CR>
+
