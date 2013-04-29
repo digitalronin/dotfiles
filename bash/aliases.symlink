@@ -1,0 +1,24 @@
+alias 755='chmod 755'
+alias vi='vim'
+alias be='bundle exec'
+alias running='ps wwwaux | grep '
+alias v='cat ~/.vimbuffer'
+
+alias main='cd ${HOME}/admoda/RailsAdmin'
+alias r32='cd ${HOME}/admoda/amoda_rails32'
+alias ads='cd ${HOME}/admoda/Adserver'
+alias pup='cd ${HOME}/admoda/configuration_management/puppet'
+alias sys='cd ${HOME}/admoda/AmodaSysadmin'
+alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
+alias vadserver='cd ~/Projects/vagrant_admoda/; vagrant ssh adserver'
+alias accounts='cd ~/Projects/DSMK_Accounts/; ./run'
+
+alias ss='mongrel_rails start'
+alias sc='script/console'
+alias dbc='script/dbconsole'
+alias ls='ls -G'
+
+alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
+
+alias resque_admoda='ssh -L 5678:localhost:5678 admodamgmt1'
+alias resque_adultmoda='ssh -L 5678:localhost:5678 adultmodamgmt1'

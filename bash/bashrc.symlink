@@ -1,0 +1,30 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# These lines allow NERDTreeDirArrows to work
+# on Linux
+export LC_ALL=en_US.utf-8
+export LANG="$LC_ALL"
+
+export EDITOR=vim
+
+. ~/.aliases
+. ~/.git_aliases
+. ~/.git_completion
+
+# Prompt
+PS1="[\u@\h \W]$ "
+
+DISPLAY=:0.0
+
+if [ -x ~/.rbenv/bin/rbenv ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+# TODO: source any .*_env.sh files that exist
+
