@@ -1,0 +1,7 @@
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=public/assets
+--type-set=coffee=.coffee
+--type-set=haml=.haml
+--type-set=scss=.scss
+--type-set=puppet=.pp
