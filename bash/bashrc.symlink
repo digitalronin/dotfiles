@@ -21,6 +21,8 @@ PS1="[\u@\h \W]$ "
 
 DISPLAY=:0.0
 
+export PATH="$HOME/bin:$PATH"
+
 if [ -x ~/.rbenv/bin/rbenv ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
