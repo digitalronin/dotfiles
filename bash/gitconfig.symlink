@@ -1,0 +1,16 @@
+[core]
+        editor = /usr/bin/vi
+	excludesfile = /Users/david/.gitignore_global
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[user]
+	name = David Salgado
+	email = david@digitalronin.com
+[gui]
+	fontdiff = -family Courier -size 13 -weight normal -slant roman -underline 0 -overstrike 0
+[push]
+	default = matching
+[diff]
+	tool = meld
