@@ -1,4 +1,3 @@
-
 " Load all plugins
 execute pathogen#infect()
 execute pathogen#helptags()
@@ -103,6 +102,7 @@ map <Leader>w :w<CR>
 
 "NERDTree
 map <Leader>nt :NERDTreeToggle<CR>
+map <Leader>nf :NERDTreeFind<CR>
 map <Leader>tt :TlistToggle<CR>
 
 "Goto file in new tab
