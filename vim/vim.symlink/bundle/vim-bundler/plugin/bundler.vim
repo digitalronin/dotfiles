@@ -244,7 +244,7 @@ function! s:project_locked() dict abort
         endif
       elseif line =~# '^  \w\+: '
         let properties[matchstr(line, '\w\+')] = matchstr(line, ': \zs.*')
-      elseif line =~# '^    [a-zA-Z0-9_-]\+\s\+(\d\+'
+      elseif line =~# '^    [a-zA-Z0-9._-]\+\s\+(\d\+'
         let name = split(line, ' ')[0]
         let ver = substitute(line, '.*(\|).*', '', 'g')
         let properties.versions[name] = ver
@@ -279,6 +279,7 @@ function! s:project_paths(...) dict abort
       try
         exe chdir s:fnameescape(self.path())
         let gem_paths = split(system(prefix.'ruby -rubygems -e "print Gem.path.join(%(;))"'), ';')
+        exe chdir s:fnameescape(cwd)
       finally
         exe chdir s:fnameescape(cwd)
       endtry
@@ -341,6 +342,15 @@ function! s:project_paths(...) dict abort
             break
           endif
         endfor
+        if !has_key(paths, name)
+          for path in gem_paths
+            let dir = glob(path . '/gems/' . name . '-' . ver . '-*')
+            if isdirectory(dir)
+              let paths[name] = dir
+              break
+            endif
+          endfor
+        endif
       endfor
     endfor
 
@@ -468,11 +478,11 @@ augroup bundler_make
         \ if expand('<afile>:t') ==? 'gemfile' |
         \   call s:SetupMake() |
         \ endif
-  autocmd QuickFixCmdPre *make*
+  autocmd QuickFixCmdPre make,lmake
         \ if &makeprg =~# '^bundle' && exists('b:bundler_root') |
         \   call s:push_chdir() |
         \ endif
-  autocmd QuickFixCmdPost *make*
+  autocmd QuickFixCmdPost make,lmake
         \ if &makeprg =~# '^bundle' && exists('b:bundler_root') |
         \   call s:pop_command() |
         \   call s:project().paths("refresh") |
