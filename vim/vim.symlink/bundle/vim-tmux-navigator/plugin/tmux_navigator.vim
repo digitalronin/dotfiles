@@ -31,5 +31,5 @@ if $TMUX != ''
   nmap <silent> <c-a>k :call <SID>TmuxWinCmd('k')<cr>
   nmap <silent> <c-a>h :call <SID>TmuxWinCmd('h')<cr>
   nmap <silent> <c-a>l :call <SID>TmuxWinCmd('l')<cr>
-  " nmap <silent> <c-w>\ :call <SID>TmuxWinCmd('p')<cr>
+  "nmap <silent> <c-a>\ :call <SID>TmuxWinCmd('p')<cr>
 end
