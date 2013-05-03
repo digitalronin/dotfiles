@@ -17,6 +17,7 @@ I used to handle these as git submodules, but that started to get painful. So, I
           if git pull origin master
           then
             target_dir="$HOME/.dotfiles/vim/vim.symlink/bundle/$plugin"
+            rm -rf $target_dir/* 2>/dev/null
             mkdir $target_dir 2>/dev/null
             git archive master | tar -x -C $target_dir
           fi
