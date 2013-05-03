@@ -28,5 +28,11 @@ if [ -x ~/.rbenv/bin/rbenv ]; then
   eval "$(rbenv init -)"
 fi
 
+# Any files in the private.symlink directory will end up
+# being accessible via ~/.private
+# private.symlink is in .gitignore, so that private
+# information is not published to github
+. ~/.private/env.sh
+
 # TODO: source any .*_env.sh files that exist
 
