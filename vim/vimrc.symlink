@@ -110,10 +110,6 @@ map <Leader>gf <C-w>gf<CR>
 "New tab
 map <Leader>tn :tabnew<CR>
 
-"comment on/off
-map <Leader>cc :s/^/#<CR>
-map <Leader>co :s/^#//<CR>
-
 "rails.vim shortcuts
 map <Leader>rm :Rmodel<CR>
 map <Leader>rv :Rview<CR>
