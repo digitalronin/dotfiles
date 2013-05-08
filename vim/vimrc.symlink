@@ -177,4 +177,5 @@ let g:ctrlp_custom_ignore = '\.(class)'
 " .vimrc
 map <Leader>sv :source ~/.vimrc<CR>''
 map <Leader>se :e ~/.vimrc<CR>
-
+" cheat.txt
+:command Cheat sp ~/.dotfiles/vim/cheat.txt

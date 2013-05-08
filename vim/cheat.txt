@@ -1,0 +1,67 @@
+Vim
+
+Ctrl-o  - Move back through navigation history
+,w      - write buffer
+,bo     - bufonly
+,bd     - bufdelete
+
+,so - Add "save_and_open_file"
+,vd - Add "var_dump();"
+,br - Add "border: 2px solid red;"
+,db - Add "debugger; 1"
+
+,sv - open .vimrc
+,so - source the current file
+
+,a: - align on :
+,af - align on =>
+
+:sp [file]  - split pane [containing file]
+:vsp [file] - vsplit pane [containing file]
+
+Ctrl-a or Ctrl-w j/k/h/l  - move to split D/U/L/R
+Ctrl-w Ctrl-w             - cycle through splits
+Ctrl-w o                  - close all other splits
+
+Ctrl-l - =>
+Ctrl-k - ->
+Ctrl-h - #{
+Ctrl-y - <%=  %>
+
+
+,__ - toggle comment
+
+][q - cnext/cprev
+][Q - cfirst/clast
+
+Ctrl-k - bubble up
+Ctrl-j - bubble down
+
+>> - indent more
+<< - indent less
+
+NERDTree
+  ,nt - toggle NERDTree pane
+  ,nf - find current file in NERDTree
+  o   - open file
+  i   - open file in split
+  s   - open file in vsplit
+  gs  - open file in vsplit but stay in NERDTree pane
+
+Fugitive
+  Gstatus
+    - - stage/unstage
+    o - open file
+
+Tmux
+  ,     - rename window
+  {/}   - swap with pane left/right
+  space - cycle pane arrangement
+  p/n   - prev/next window
+  c     - create window
+
+Slate
+  Cmd-Alt-b - Chrome
+  Cmd-Alt-i - iTerm2
+
+
