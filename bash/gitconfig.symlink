@@ -1,16 +1,20 @@
 [core]
-        editor = /usr/bin/vi
-	excludesfile = /Users/david/.gitignore_global
+  editor = /usr/bin/vi
+  excludesfile = /Users/david/.gitignore_global
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
 [user]
-	name = David Salgado
-	email = david@digitalronin.com
+  name = David Salgado
+  email = david@digitalronin.com
 [gui]
-	fontdiff = -family Courier -size 13 -weight normal -slant roman -underline 0 -overstrike 0
+  fontdiff = -family Courier -size 13 -weight normal -slant roman -underline 0 -overstrike 0
 [push]
-	default = matching
+  default = matching
 [diff]
-	tool = meld
+  tool = meld
+[alias]
+  co = checkout
+  br = branch
+  mg = merge
