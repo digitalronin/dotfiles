@@ -46,6 +46,9 @@ set splitright
 map <2-LeftMouse> bve
 map <3-LeftMouse> 0V
 
+" Show git branch in the status line
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
 let mapleader = ","
 
 " copy to buffer
