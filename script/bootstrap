@@ -38,6 +38,11 @@ install_dotfiles () {
   backup_all=false
   skip_all=false
 
+  if [ "$1" == "-f" ] || [ "$1" == "--force" ]
+  then
+    overwrite_all=true
+  fi
+
   for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink`
   do
     dest="$HOME/.`basename \"${source%.*}\"`"
@@ -98,7 +103,9 @@ install_dotfiles () {
   done
 }
 
-install_dotfiles
+echo $1
+
+install_dotfiles $1
 
 echo ''
 echo '  All installed!'
