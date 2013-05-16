@@ -16,6 +16,10 @@ set-option -g mouse-utf8 on
 # allow mouse to enter copy mode and initiate selection
 set-window-option -g mode-mouse on
 
+# number windows and panes from 1, not 0
+set -g base-index 1
+set -g pane-base-index 1
+
 # vi keys for pane-to-pane movement
 #bind h select-pane -L
 #bind j select-pane -D
