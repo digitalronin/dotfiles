@@ -106,6 +106,12 @@ map <Leader>w :w<CR>
 "NERDTree
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
+
+"Ignore some files
+let NERDTreeIgnore=['\.class$']
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class
+
+"Taglist
 map <Leader>tt :TlistToggle<CR>
 
 "Goto file in new tab
@@ -177,5 +183,9 @@ let g:ctrlp_custom_ignore = '\.(class)'
 " .vimrc
 map <Leader>sv :source ~/.vimrc<CR>''
 map <Leader>se :e ~/.vimrc<CR>
+
 " cheat.txt
-:command Cheat sp ~/.dotfiles/vim/cheat.txt
+:command! Cheat sp ~/.dotfiles/vim/cheat.txt
+
+" run ctags
+:command! Ctags !ctags -R .

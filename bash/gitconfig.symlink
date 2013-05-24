@@ -1,6 +1,7 @@
 [core]
   editor = /usr/bin/vi
-  excludesfile = /Users/david/.gitignore_global
+  excludesfile = $HOME/.gitignore_global
+  pager = less -FRX
 [color]
   diff = auto
   status = auto

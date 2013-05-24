@@ -10,8 +10,8 @@ Ctrl-o  - Move back through navigation history
 ,br - Add "border: 2px solid red;"
 ,db - Add "debugger; 1"
 
-,sv - open .vimrc
-,so - source the current file
+,sv - source .vimrc
+,se - edit .vimrc
 
 ,a: - align on :
 ,af - align on =>
