@@ -51,12 +51,12 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 let mapleader = ","
 
-" copy to buffer
+" copy to ~/.vimbuffer
 vmap <Leader>cy :w! ~/.vimbuffer<CR>
 nmap <Leader>cy :.w! ~/vimbuffer<CR>
-" cut to buffer
+" cut to ~/.vimbuffer
 vmap <Leader>cx :w! ~/.vimbuffer<CR>gvx
-" paste from buffer
+" paste from ~/.vimbuffer
 map <Leader>cp :r ~/.vimbuffer<CR>
 
 "Abbreviations
