@@ -21,6 +21,7 @@ Ctrl-o  - Move back through navigation history
 
 :sp [file]  - split pane [containing file]
 :vsp [file] - vsplit pane [containing file]
+Ctrl-w q    - close a split
 
 Ctrl-a or Ctrl-w j/k/h/l  - move to split D/U/L/R
 Ctrl-w Ctrl-w             - cycle through splits
