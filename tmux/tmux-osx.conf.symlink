@@ -1,3 +1,5 @@
 # pbcopy/pbpaste workaround
 # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
-set-option -g default-command "reattach-to-user-namespace -l bash"
+# set-option -g default-command "reattach-to-user-namespace -l bash"
+# Updated version https://github.com/New-Bamboo/Hermes/blob/master/hermes/tmux.conf
+set-option -g default-command "reattach-to-user-namespace -l $SHELL; cd ."
