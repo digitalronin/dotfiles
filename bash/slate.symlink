@@ -102,10 +102,6 @@ bind x:alt;cmd focus ${app-git}
 # Window Hints
 bind e:cmd hint
 
-# Monitor Aliases
-alias mon-laptop 0
-alias mon-benq   1
-
 # 2 monitor layouts
 layout 2default ${app-evernote}:REPEAT ${laptop-full}
 layout 2default ${app-browser}:REPEAT  ${laptop-full}
