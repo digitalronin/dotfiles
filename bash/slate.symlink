@@ -29,6 +29,10 @@ alias laptop-right-twothirds ${right-twothirds} 0
 alias second-left-third      ${left-third}      1
 alias second-right-twothirds ${right-twothirds} 1
 
+alias top-left-quarter move screenOriginX;screenOriginY screenSizeX/2;screenSizeY/2
+alias top-right-quarter move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY/2
+alias bottom-left-quarter move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX/2;screenSizeY/2
+alias bottom-right-quarter move screenOriginX+screenSizeX/2;screenOriginY+screenSizeY/2 screenSizeX/2;screenSizeY/2
 
 # Resize Bindings
 bind right:alt       resize +10%   +0
@@ -59,6 +63,10 @@ bind 3:${hotkey}     ${left-half}
 bind 4:${hotkey}     ${right-half}
 bind 5:${hotkey}     ${left-third}
 bind 6:${hotkey}     ${right-twothirds}
+bind 7:${hotkey}     ${top-left-quarter}
+bind 8:${hotkey}     ${top-right-quarter}
+bind 9:${hotkey}     ${bottom-left-quarter}
+bind 0:${hotkey}     ${bottom-right-quarter}
 bind right:${hotkey} throw right resize
 bind left:${hotkey}  throw left  resize
 bind up:${hotkey}    throw up    resize
