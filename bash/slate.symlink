@@ -1,0 +1,121 @@
+# This is the default .slate file.
+# If no ~/.slate file exists this is the file that will be used.
+
+# master key combo for most actions
+alias hotkey cmd;alt;ctrl;s
+
+config defaultToCurrentScreen true
+config nudgePercentOf         screenSize
+config resizePercentOf        screenSize
+
+config windowHintsShowIcons           true
+config windowHintsIgnoreHiddenWindows false
+config windowHintsSpread              true
+
+
+# Screen positions and sizes
+alias laptop-full  throw 0 resize
+alias second-full  throw 1 resize
+
+alias left-half  move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias right-half move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+
+alias left-third      move screenOriginX;screenOriginY  screenSizeX/3;screenSizeY
+alias right-twothirds move screenOriginX+screenSizeX/3;screenOriginY  screenSizeX*2/3;screenSizeY
+
+alias laptop-left-third      ${left-third}      0
+alias laptop-right-twothirds ${right-twothirds} 0
+
+alias second-left-third      ${left-third}      1
+alias second-right-twothirds ${right-twothirds} 1
+
+
+# Resize Bindings
+bind right:alt       resize +10%   +0
+bind left:alt        resize -10%   +0
+bind up:alt          resize +0     -10%
+bind down:alt        resize +0     +10%
+bind right:ctrl;alt  resize -10%   +0 bottom-right
+bind left:ctrl;alt   resize +10%   +0 bottom-right
+bind up:ctrl;alt     resize +0     +10% bottom-right
+bind down:ctrl;alt   resize +0     -10% bottom-right
+
+# Push Bindings
+#bind right:ctrl;cmd  push right bar-resize:screenSizeX/3
+#bind left:ctrl;cmd   push left  bar-resize:screenSizeX/3
+#bind up:ctrl;cmd     push up    bar-resize:screenSizeY/2
+#bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
+
+# Nudge Bindings
+bind right:shift;alt nudge +10% +0
+bind left:shift;alt  nudge -10% +0
+bind up:shift;alt    nudge +0   -10%
+bind down:shift;alt  nudge +0   +10%
+
+# Throw Bindings
+bind 1:${hotkey}     ${laptop-full}
+bind 2:${hotkey}     ${second-full}
+bind 3:${hotkey}     ${left-half}
+bind 4:${hotkey}     ${right-half}
+bind 5:${hotkey}     ${left-third}
+bind 6:${hotkey}     ${right-twothirds}
+bind right:${hotkey} throw right resize
+bind left:${hotkey}  throw left  resize
+bind up:${hotkey}    throw up    resize
+bind down:${hotkey}  throw down  resize
+
+# Focus Bindings
+#bind right:cmd    focus right
+#bind left:cmd     focus left
+#bind up:cmd       focus up
+#bind down:cmd     focus down
+#bind up:cmd;alt   focus behind
+#bind down:cmd;alt focus behind
+
+# Grid
+bind g:${hotkey} grid padding:5 0:6,3 1:12,6
+
+# Apps
+alias app-browser  'Google Chrome'
+alias app-editor   'MacVim'
+alias app-evernote 'Evernote'
+alias app-finder   'Finder'
+alias app-terminal 'iTerm'
+alias app-chat     'HipChat'
+alias app-git      'GitX'
+bind b:alt;cmd focus ${app-browser}
+bind e:alt;cmd focus ${app-evernote}
+bind f:alt;cmd focus ${app-finder}
+bind i:alt;cmd focus ${app-terminal}
+bind v:alt;cmd focus ${app-editor}
+bind c:alt;cmd focus ${app-chat}
+bind x:alt;cmd focus ${app-git}
+
+# Window Hints
+bind e:cmd hint
+
+# Monitor Aliases
+alias mon-laptop 0
+alias mon-benq   1
+
+# 2 monitor layouts
+layout 2default ${app-evernote}:REPEAT ${laptop-full}
+layout 2default ${app-browser}:REPEAT  ${laptop-full}
+layout 2default ${app-editor}:REPEAT   ${laptop-full}
+layout 2default ${app-terminal}:REPEAT ${second-full}
+layout 2default ${app-chat}            ${second-left-third}
+
+# 1 monitor layouts
+layout 1default ${app-evernote}:REPEAT ${laptop-full}
+layout 1default ${app-terminal}:REPEAT ${laptop-full}
+layout 1default ${app-browser}:REPEAT  ${laptop-full}
+layout 1default ${app-finder}:REPEAT   ${laptop-full}
+layout 1default ${app-editor}:REPEAT   ${laptop-full}
+layout 1default ${app-git}:REPEAT      ${laptop-full}
+layout 1default ${app-chat}            ${laptop-left-third}
+
+bind ]:${hotkey} layout 2default
+bind [:${hotkey} layout 1default
+
+default 2default count:2
+default 1default count:1
