@@ -31,7 +31,7 @@ set antialias
 set wrap
 set ruler
 set shiftwidth=2
-set foldmethod=indent
+"set foldmethod=indent
 
 "Press F2 to paste in text without indenting
 set pastetoggle=<F2>
