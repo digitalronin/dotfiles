@@ -21,7 +21,8 @@ alias ls='ls -G'
 alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
 
 alias resque_admoda='ssh -L 5678:localhost:5678 admodamgmt1'
-alias resque_adultmoda='ssh -L 5678:localhost:5678 adultmodamgmt1'
+alias resque_adultmoda='ssh -L 5678:localhost:5678 adultmodamgmt2'
+alias ssh_hadoop='ssh -L 50031:localhost:50030 hdfs@hadoop1'
 
 alias tls='tmux list-sessions'
 alias ta='tmux attach -t'
