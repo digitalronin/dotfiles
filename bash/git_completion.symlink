@@ -9,6 +9,7 @@ _complete_git() {
   fi
 }
 complete -F _complete_git gb
+complete -F _complete_git gd
 complete -F _complete_git gm
 complete -F _complete_git gch
 complete -F _complete_git git push
