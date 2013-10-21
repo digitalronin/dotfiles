@@ -17,6 +17,7 @@ alias ss='mongrel_rails start'
 alias sc='script/console'
 alias dbc='script/dbconsole'
 alias ls='ls -G'
+alias ls='ls -l'
 
 alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
 
