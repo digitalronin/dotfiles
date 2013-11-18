@@ -130,16 +130,6 @@ map <Leader>gs :Gstatus<CR>
 map <Leader>gw :Gwrite<CR>
 map <Leader>gc :Gcommit<CR>
 
-"rails.vim shortcuts
-map <Leader>rm :Rmodel<CR>
-map <Leader>rv :Rview<CR>
-map <Leader>rc :Rcontroller<CR>
-map <Leader>rh :Rhelper<CR>
-map <Leader>rj :Rjavascript<CR>
-map <Leader>rl :Rlayout<CR>
-map <Leader>rs :Rstylesheet<CR>
-map <Leader>ro :Rlocale<CR>
-
 "tabularize
 map <Leader>a: :Tabularize /:\zs<CR>
 map <Leader>a, :Tabularize /,\zs<CR>
@@ -149,6 +139,10 @@ map <Leader>af :Tabularize /=><CR>
 "rspec
 map <Leader>ofs :%s/ it / xit <CR>''?xit<CR>x:w<CR>
 map <Leader>ons :%s/ xit / it /<CR>'':w<CR>
+map <Leader>rf :call RunCurrentSpecFile()<CR>
+map <Leader>rs :call RunNearestSpec()<CR>
+map <Leader>rl :call RunLastSpec()<CR>
+map <Leader>ra :call RunAllSpecs()<CR>
 
 "test::unit
 map <Leader>oft :%s/def test/def xtest<CR>''?xtest<CR>x:w<CR>
@@ -165,7 +159,6 @@ map <Leader>db Odebugger; 1<CR><ESC>:w<CR>
 map <Leader>so Osave_and_open_page<CR><ESC>:w<CR>
 map <Leader>br Oborder: 2px solid red;<CR><ESC>:w<CR>
 map <Leader>ex Oecho "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";<CR><ESC>:w<CR>
-map <Leader>ru :!ruby %<CR>
 
 map <Leader>bo :BufOnly<CR>
 map <Leader>bd :bd<CR>
