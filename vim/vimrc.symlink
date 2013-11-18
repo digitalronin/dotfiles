@@ -139,10 +139,10 @@ map <Leader>af :Tabularize /=><CR>
 "rspec
 map <Leader>ofs :%s/ it / xit <CR>''?xit<CR>x:w<CR>
 map <Leader>ons :%s/ xit / it /<CR>'':w<CR>
-map <Leader>rf :call RunCurrentSpecFile()<CR>
-map <Leader>rs :call RunNearestSpec()<CR>
-map <Leader>rl :call RunLastSpec()<CR>
-map <Leader>ra :call RunAllSpecs()<CR>
+map <Leader>rf :w<CR>:call RunCurrentSpecFile()<CR>
+map <Leader>rs :w<CR>:call RunNearestSpec()<CR>
+map <Leader>rl :w<CR>:call RunLastSpec()<CR>
+map <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 
 "test::unit
 map <Leader>oft :%s/def test/def xtest<CR>''?xtest<CR>x:w<CR>
