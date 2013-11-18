@@ -69,6 +69,12 @@ function! g:SyntasticLoclist.setName(name)
     let self._name = a:name
 endfunction
 
+function! g:SyntasticLoclist.decorate(name, filetype)
+    for e in self._rawLoclist
+        let e['text'] .= ' [' . a:filetype . '/' . a:name . ']'
+    endfor
+endfunction
+
 function! g:SyntasticLoclist.hasErrorsOrWarningsToDisplay()
     if self._hasErrorsOrWarningsToDisplay >= 0
         return self._hasErrorsOrWarningsToDisplay
@@ -141,17 +147,24 @@ function! g:SyntasticLoclist.filter(filters)
     return rv
 endfunction
 
-"display the cached errors for this buf in the location list
-function! g:SyntasticLoclist.show()
+function! g:SyntasticLoclist.setloclist()
     if !exists('w:syntastic_loclist_set')
         let w:syntastic_loclist_set = 0
     endif
-    call setloclist(0, self.filteredRaw(), g:syntastic_reuse_loc_lists && w:syntastic_loclist_set ? 'r' : ' ')
+    let replace = g:syntastic_reuse_loc_lists && w:syntastic_loclist_set
+    call syntastic#log#debug(g:SyntasticDebugNotifications, 'loclist: setloclist ' . (replace ? '(replace)' : '(new)'))
+    call setloclist(0, self.filteredRaw(), replace ? 'r' : ' ')
     let w:syntastic_loclist_set = 1
+endfunction
+
+"display the cached errors for this buf in the location list
+function! g:SyntasticLoclist.show()
+    call syntastic#log#debug(g:SyntasticDebugNotifications, 'loclist: show')
+    call self.setloclist()
 
     if self.hasErrorsOrWarningsToDisplay()
         let num = winnr()
-        exec "lopen " . g:syntastic_loc_list_height
+        execute "lopen " . g:syntastic_loc_list_height
         if num != winnr()
             wincmd p
         endif
@@ -178,6 +191,7 @@ endfunction
 " Non-method functions {{{1
 
 function! g:SyntasticLoclistHide()
+    call syntastic#log#debug(g:SyntasticDebugNotifications, 'loclist: hide')
     silent! lclose
 endfunction
 

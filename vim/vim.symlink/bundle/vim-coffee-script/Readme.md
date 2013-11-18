@@ -8,6 +8,7 @@ compiling, and more.
 ## Table of Contents
 
 - Installation
+  - [Requirements](#requirements)
   - [Install using Pathogen](#install-using-pathogen)
   - [Install using Vundle](#install-using-vundle)
   - [Install from a Zip File](#install-from-a-zip-file)
@@ -26,6 +27,11 @@ compiling, and more.
   - [Configuration Variables](#configuration-variables)
   - [Configure Syntax Highlighting](#configure-syntax-highlighting)
   - [Tune Vim for CoffeeScript](#tune-vim-for-coffeescript)
+
+## Requirements
+
+ - vim 7.4 or later
+ - coffee 1.2.0 or later
 
 ## Install using Pathogen
 
@@ -132,7 +138,7 @@ out [`:help :make`][make] for a full reference of the command.
 
 Consider the full signature of a `:make` call as
 
-    :[silent] make[!] [COFFEE-OPTIONS]... [ | cwindow]
+    :[silent] make[!] [COFFEE-OPTIONS]...
 
 By default `:make` shows all compiler output and jumps to the first line
 reported as an error. Compiler output can be hidden with a leading `:silent`:
@@ -160,30 +166,26 @@ Compiler errors are added to the [quickfix] list by `:make`, but the quickfix
 window isn't automatically shown. The [`:cwindow`][cwindow] command will pop up
 the quickfix window if there are any errors:
 
-    :make | cwindow
+    :make
+    :cwindow
 
-This is usually the desired behavior, so you may want to create a custom command
-for this in your vimrc:
+This is usually the desired behavior, so you may want to add an autocmd to your
+vimrc to do this automatically:
 
-    :command! -bang -bar -nargs=* Make make<bang> <args> | cwindow
+    autocmd QuickFixCmdPost * nested cwindow | redraw!
+
+The `redraw!` command is needed to fix a redrawing quirk in terminal vim, but
+can removed for gVim.
 
 [quickfix]: http://vimdoc.sourceforge.net/htmldoc/quickfix.html#quickfix
 [cwindow]: http://vimdoc.sourceforge.net/htmldoc/quickfix.html#:cwindow
 
 #### Recompile on write
 
-To recompile a file when it's written, add an autocmd like this to your
+To recompile a file when it's written, add a `BufWritePost` autocmd to your
 vimrc:
 
-    au BufWritePost *.coffee silent make!
-
-All of the customizations above can be used, too. This one compiles silently
-with the `-b` option and shows any errors:
-
-    au BufWritePost *.coffee silent make! -b | cwindow | redraw!
-
-The `redraw!` command is needed to fix a redrawing quirk in terminal vim, but
-can removed for gVim.
+    autocmd BufWritePost *.coffee silent make!
 
 #### Cake and Cakefiles
 
@@ -194,7 +196,7 @@ A `cake` compiler is also available with the call
 You can then use `:make` as above to run your Cakefile and capture any `coffee`
 errors:
 
-    :make build | cwindow
+    :silent make build
 
 It runs within the current directory, so make sure you're in the directory of
 your Cakefile before calling it.
@@ -582,16 +584,16 @@ Folding by indentation works well for CoffeeScript functions and classes:
 
 To fold by indentation in CoffeeScript files, add this line to your vimrc:
 
-    au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+    autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 
 With this, folding is disabled by default but can be quickly toggled per-file
 by hitting `zi`. To enable folding by default, remove `nofoldenable`:
 
-    au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+    autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 
 #### Two-space indentation
 
 To get standard two-space indentation in CoffeeScript files, add this line to
 your vimrc:
 
-    au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+    autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
