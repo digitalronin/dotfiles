@@ -107,5 +107,18 @@ echo $1
 
 install_dotfiles $1
 
+# Symlink private ssh config
+src=~/.private/ssh_config
+target=~/.ssh/config
+
+if [ -f $target ]
+then
+  mv $target ${target}.bak
+fi
+ln -s $src $target
+
+# backup ssh config
+cp $src ~/Dropbox
+
 echo ''
 echo '  All installed!'
