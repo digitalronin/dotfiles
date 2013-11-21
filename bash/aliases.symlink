@@ -12,8 +12,12 @@ alias sys='cd ${HOME}/admoda/AmodaSysadmin'
 alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
 alias vadserver='cd ~/Projects/vagrant_admoda/; vagrant ssh adserver'
 alias accounts='cd ~/Projects/DSMK_Accounts/; ./run'
+
 alias zr='zeus rspec'
 alias zrs='zeus rspec spec'
+
+alias sr='spring rspec'
+alias srs='spring rspec spec'
 
 alias ss='mongrel_rails start'
 alias sc='script/console'
