@@ -125,6 +125,10 @@ map <Leader>gf <C-w>gf<CR>
 "New tab
 map <Leader>tn :tabnew<CR>
 
+"Navigate the quickfix list
+map <Leader>qn :cnext<CR>
+map <Leader>qp :cprev<CR>
+
 "Fugitive shortcuts
 map <Leader>gs :Gstatus<CR>
 map <Leader>gw :Gwrite<CR>
@@ -135,6 +139,7 @@ map <Leader>a: :Tabularize /:\zs<CR>
 map <Leader>a, :Tabularize /,\zs<CR>
 map <Leader>a= :Tabularize /=<CR>
 map <Leader>af :Tabularize /=><CR>
+map <Leader>{ :Tabularize /{<CR>:Tabularize /}<CR>
 
 "rspec
 map <Leader>ofs :%s/ it / xit <CR>''?xit<CR>x:w<CR>
@@ -147,7 +152,7 @@ map <Leader>rl :w<CR>:call RunLastSpec()<CR>
 map <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 
 "use spring for specs
-let g:rspec_command = "spring rspec {spec}"
+let g:rspec_command = "!spring rspec {spec}"
 
 "test::unit
 map <Leader>oft :%s/def test/def xtest<CR>''?xtest<CR>x:w<CR>
