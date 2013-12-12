@@ -19,6 +19,9 @@ Ctrl-o  - Move back through navigation history
 ,cy - yank to external file
 ,cp - paste from external file
 
+qaq - clear register a
+:global/^def/yank A - copy all lines beginning with 'def' and append to register a
+
 ,gs - Gstatus
 ,gc - Gcommit
 ,gw - Gwrite

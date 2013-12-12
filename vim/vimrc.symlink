@@ -139,7 +139,7 @@ map <Leader>a: :Tabularize /:\zs<CR>
 map <Leader>a, :Tabularize /,\zs<CR>
 map <Leader>a= :Tabularize /=<CR>
 map <Leader>af :Tabularize /=><CR>
-map <Leader>{ :Tabularize /{<CR>:Tabularize /}<CR>
+map <Leader>a{ :Tabularize /{<CR>:Tabularize /}<CR>
 
 "rspec
 map <Leader>ofs :%s/ it / xit <CR>''?xit<CR>x:w<CR>
@@ -151,8 +151,14 @@ map <Leader>rs :w<CR>:call RunNearestSpec()<CR>
 map <Leader>rl :w<CR>:call RunLastSpec()<CR>
 map <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 
+"default to normal rspec
+let g:rspec_command = "!rspec {spec}"
+
+"use normal rspec
+:command! Rspec let g:rspec_command = "!rspec {spec}"
+
 "use spring for specs
-let g:rspec_command = "!spring rspec {spec}"
+:command! SpringRspec let g:rspec_command = "!spring rspec {spec}"
 
 "test::unit
 map <Leader>oft :%s/def test/def xtest<CR>''?xtest<CR>x:w<CR>
@@ -193,7 +199,7 @@ highlight clear SignColumn
 " make ctrlp use the git project root as its starting directory
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\.(class)'
-let g:ctrlp_max_files = 10000
+let g:ctrlp_max_files = 5000
 " use git ls-files, if available (faster than find)
 let g:ctrlp_user_command = {
   \ 'types': { 1: ['.git/', 'cd %s && git ls-files'] },
@@ -209,3 +215,8 @@ map <Leader>se :e ~/.vimrc<CR>
 
 " run ctags
 :command! Ctags !ctags -R .
+
+" source .exrc or .vimrc in current folder, on launch
+set exrc
+" disable shell and filesystem operations from set exrc
+set secure
