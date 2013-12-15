@@ -84,6 +84,14 @@ function! s:directory_of_file()
   return shellescape(fnamemodify(s:file(), ':h'))
 endfunction
 
+function! s:has_unsaved_changes(file)
+  return getbufvar(a:file, "&mod")
+endfunction
+
+function! s:reset_hunk_summary()
+  let s:hunk_summary = [-1, -1, -1]
+endfunction
+
 " https://github.com/tpope/vim-dispatch/blob/9cdd05a87f8a47120335be03dfcd8358544221cd/autoload/dispatch/windows.vim#L8-L17
 function! s:escape(str)
   if &shellxquote ==# '"'
@@ -108,7 +116,7 @@ function! s:discard_stdout_and_stderr()
 endfunction
 
 function! s:command_in_directory_of_file(cmd)
-  let s:cmd_in_dir = 'pushd ' . s:directory_of_file() . ' && ' . a:cmd
+  let s:cmd_in_dir = 'cd ' . s:directory_of_file() . ' && ' . a:cmd
   return substitute(s:cmd_in_dir, "'", '"', 'g')
 endfunction
 
@@ -209,7 +217,8 @@ endfunction
 function! s:run_diff(realtime)
   if a:realtime
     let blob_name = ':./' . fnamemodify(s:file(),':t')
-    let cmd = 'diff -U0 ' . g:gitgutter_diff_args . ' <(git show '. blob_name .') - '
+    let blob_file = tempname()
+    let cmd = 'git show ' . blob_name . ' > ' . blob_file . ' && diff -U0 ' . g:gitgutter_diff_args . ' ' . blob_file . ' - '
   else
     let cmd = 'git diff --no-ext-diff --no-color -U0 ' . g:gitgutter_diff_args . ' ' . shellescape(s:file())
   endif
@@ -218,7 +227,14 @@ function! s:run_diff(realtime)
   endif
   let cmd = s:escape(cmd)
   if a:realtime
-    let buffer_contents = join(getline(1, '$'), "\n") . "\n"
+    if &fileformat ==# "dos"
+      let eol = "\r\n"
+    elseif &fileformat ==# "mac"
+      let eol = "\r"
+    else
+      let eol = "\n"
+    endif
+    let buffer_contents = join(getline(1, '$'), eol) . eol
     let diff = system(s:command_in_directory_of_file(cmd), buffer_contents)
   else
     let diff = system(s:command_in_directory_of_file(cmd))
@@ -447,7 +463,7 @@ function! GitGutter(file, ...)
   call s:set_file(a:file)
   if s:is_active()
     call s:init()
-    if a:0 == 1
+    if (a:0 == 1) || s:has_unsaved_changes(a:file)
       let diff = s:run_diff(1)
     else
       let diff = s:run_diff(0)
@@ -466,6 +482,8 @@ function! GitGutter(file, ...)
     call s:clear_signs(a:file)
     call s:find_other_signs(a:file)
     call s:show_signs(a:file, modified_lines)
+  else
+    call s:reset_hunk_summary()
   endif
 endfunction
 command GitGutter call GitGutter(s:current_file())
@@ -474,6 +492,7 @@ function! GitGutterDisable()
   let g:gitgutter_enabled = 0
   call s:clear_signs(s:file())
   call s:remove_dummy_sign()
+  call s:reset_hunk_summary()
 endfunction
 command GitGutterDisable call GitGutterDisable()
 

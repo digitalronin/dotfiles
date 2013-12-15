@@ -21,7 +21,7 @@ endif
 
 runtime! plugin/syntastic/*.vim
 
-let s:running_windows = has("win16") || has("win32")
+let s:running_windows = syntastic#util#isRunningWindows()
 
 for feature in ['autocmd', 'eval', 'modify_fname', 'quickfix', 'user_commands']
     if !has(feature)
@@ -115,7 +115,7 @@ function! s:CompleteCheckerName(argLead, cmdLine, cursorPos)
 endfunction
 
 command! SyntasticToggleMode call s:ToggleMode()
-command! -nargs=? -complete=custom,s:CompleteCheckerName SyntasticCheck
+command! -nargs=* -complete=custom,s:CompleteCheckerName SyntasticCheck
             \ call s:UpdateErrors(0, <f-args>) <bar>
             \ call syntastic#util#redraw(g:syntastic_full_redraws)
 command! Errors call s:ShowLocList()
@@ -198,11 +198,7 @@ function! s:UpdateErrors(auto_invoked, ...)
     call s:modemap.synch()
     let run_checks = !a:auto_invoked || s:modemap.allowsAutoChecking(&filetype)
     if run_checks
-        if a:0 >= 1
-            call s:CacheErrors(a:1)
-        else
-            call s:CacheErrors()
-        endif
+        call s:CacheErrors(a:000)
     endif
 
     let loclist = g:SyntasticLoclist.current()
@@ -215,6 +211,14 @@ function! s:UpdateErrors(auto_invoked, ...)
         if run_checks && g:syntastic_auto_jump && loclist.hasErrorsOrWarningsToDisplay()
             call syntastic#log#debug(g:SyntasticDebugNotifications, 'loclist: jump')
             silent! lrewind
+
+            " XXX: Vim doesn't call autocmd commands in a predictible
+            " order, which can lead to missing filetype when jumping
+            " to a new file; the following is a workaround for the
+            " resulting brain damage
+            if &filetype == ''
+                silent! filetype detect
+            endif
         endif
     endif
 
@@ -232,7 +236,7 @@ function! s:CurrentFiletypes()
 endfunction
 
 "detect and cache all syntax errors in this buffer
-function! s:CacheErrors(...)
+function! s:CacheErrors(checkers)
     call s:ClearCache()
     let newLoclist = g:SyntasticLoclist.New([])
 
@@ -251,14 +255,9 @@ function! s:CacheErrors(...)
             \ (exists('b:syntastic_id_checkers') ? b:syntastic_id_checkers : g:syntastic_id_checkers)
 
         for ft in s:CurrentFiletypes()
-            if a:0
-                let checker = s:registry.getChecker(ft, a:1)
-                let checkers = !empty(checker) ? [checker] : []
-            else
-                let checkers = s:registry.getActiveCheckers(ft)
-            endif
+            let clist = empty(a:checkers) ? s:registry.getActiveCheckers(ft) : s:registry.getCheckers(ft, a:checkers)
 
-            for checker in checkers
+            for checker in clist
                 let active_checkers += 1
                 call syntastic#log#debug(g:SyntasticDebugTrace, "CacheErrors: Invoking checker: " . checker.getName())
 
@@ -292,8 +291,12 @@ function! s:CacheErrors(...)
         endif
 
         if !active_checkers
-            if a:0
-                call syntastic#log#warn('checker ' . a:1 . ' is not active for filetype ' . &filetype)
+            if !empty(a:checkers)
+                if len(a:checkers) == 1
+                    call syntastic#log#warn('checker ' . a:checkers[0] . ' is not active for filetype ' . &filetype)
+                else
+                    call syntastic#log#warn('checkers ' . join(a:checkers, ', ') . ' are not active for filetype ' . &filetype)
+                endif
             else
                 call syntastic#log#debug(g:SyntasticDebugTrace, 'CacheErrors: no active checkers for filetype ' . &filetype)
             endif

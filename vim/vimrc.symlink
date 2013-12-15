@@ -153,12 +153,8 @@ map <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 
 "default to normal rspec
 let g:rspec_command = "!rspec {spec}"
-
-"use normal rspec
-:command! Rspec let g:rspec_command = "!rspec {spec}"
-
-"use spring for specs
-:command! SpringRspec let g:rspec_command = "!spring rspec {spec}"
+"override this with a local .vimrc file, if necessary (e.g. rails projects
+"that use spring"
 
 "test::unit
 map <Leader>oft :%s/def test/def xtest<CR>''?xtest<CR>x:w<CR>
