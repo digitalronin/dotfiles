@@ -217,3 +217,11 @@ map <Leader>se :e ~/.vimrc<CR>
 set exrc
 " disable shell and filesystem operations from set exrc
 set secure
+
+" Additional mappings for surround.vim
+" 100 [d]o ... end
+let g:surround_100 = "do \r\nend"
+" 101 [e]rb
+let g:surround_101 = "<%= \r %>"
+" 103 [g] for #{...}
+let g:surround_103 = "#{\r}"
