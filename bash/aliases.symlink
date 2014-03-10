@@ -33,3 +33,6 @@ alias ssh_hadoop='ssh -L 50031:localhost:50030 hdfs@hadoop1'
 
 alias tls='tmux list-sessions'
 alias ta='tmux attach -t'
+
+# Google BigQuery
+alias bq="~/google-cloud-sdk/bin/bq"
