@@ -158,6 +158,8 @@ nmap <Leader>t :Tmux
 nmap <Leader>zo :Tmux tmux resize-pane -U 30<CR>
 " 'Zoom back'
 nmap <Leader>zb :Tmux tmux resize-pane -D 30<CR>
+nmap <Leader>ct :Tmux ctags -R .<CR>
+
 nmap <C-c>r <Plug>SetTmuxVars
 
 "Use normal rspec (pushing vim to the background)
