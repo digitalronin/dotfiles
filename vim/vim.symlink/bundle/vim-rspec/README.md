@@ -37,12 +37,35 @@ let g:rspec_command = "!rspec --drb {spec}"
 ```
 
 This `g:rspec_command` variable can be used to support any number of test
-runners or pre-loaders. For example, you can use
-[Dispatch](https://github.com/tpope/vim-dispatch) and
-[Zeus](https://github.com/burke/zeus) together with the following:
+runners or pre-loaders. For example, to use
+[Dispatch](https://github.com/tpope/vim-dispatch):
 
 ```vim
-let g:rspec_command = "Dispatch zeus rspec {spec}"
+let g:rspec_command = "Dispatch rspec {spec}"
+```
+Or, [Dispatch](https://github.com/tpope/vim-dispatch) and
+[Zeus](https://github.com/burke/zeus) together:
+
+```vim
+let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
+```
+
+### Custom runners
+
+Overwrite the `g:rspec_runner` variable to set a custom launch script. At the
+moment there are two MacVim-specific runners, i.e. `os_x_terminal` and
+`os_x_iterm`. The default is `os_x_terminal`, but you can set this to anything
+you want, provided you include the appropriate script inside the plugin's
+`bin/` directory.
+
+#### iTerm instead of Terminal
+
+If you use iTerm, you can set `g:rspec_runner` to use the included iterm
+launching script. This will run the specs in the last session of the current
+terminal.
+
+```vim
+let g:rspec_runner = "os_x_iterm"
 ```
 
 Credits
@@ -59,7 +82,7 @@ Software](https://www.destroyallsoftware.com/screencasts) screencasts.
 
 ## License
 
-rspec.vim is copyright © 2013 thoughtbot. It is free software, and may be
+rspec.vim is copyright © 2014 thoughtbot. It is free software, and may be
 redistributed under the terms specified in the `LICENSE` file.
 
 The names and logos for thoughtbot are trademarks of thoughtbot, inc.
