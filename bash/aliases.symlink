@@ -11,7 +11,7 @@ alias pup='cd ${HOME}/admoda/configuration_management/puppet'
 alias sys='cd ${HOME}/admoda/AmodaSysadmin'
 alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
 alias vadserver='cd ~/Projects/vagrant_admoda/; vagrant ssh adserver'
-alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; bundle exec rails s -e production'
+alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; unicorn -E production'
 
 alias zr='zeus rspec'
 alias zrs='zeus rspec spec'
