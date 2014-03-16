@@ -44,20 +44,6 @@ unbind l
 bind l run-shell 'tmux-vim-select-pane -R'
 # bind -n "C-\\" run-shell 'tmux-vim-select-pane -l'
 
-# zoom pane to window so I can copy/paste
-# without worrying about pane boundaries
-#unbind +
-#bind + \
-#  new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read' \;\
-#  swap-pane -s tmux-zoom.0 \;\
-#  select-window -t tmux-zoom
-#
-#unbind -
-#bind - \
-#  last-window \;\
-#  swap-pane -s tmux-zoom.0 \;\
-#  kill-window -t tmux-zoom
-
 if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
 
 # use C-a v to paste the tmux buffer
@@ -86,4 +72,3 @@ set -g visual-activity on
 
 # display numbers in panes for longer
 set -g display-panes-time 3000
-
