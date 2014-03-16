@@ -154,6 +154,10 @@ nmap <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 "tslime mappings
 nmap <Leader>gx :Tmux gitx<CR>
 nmap <Leader>t :Tmux 
+" 'Zoom other pane'
+nmap <Leader>zo :Tmux tmux resize-pane -U 30<CR>
+" 'Zoom back'
+nmap <Leader>zb :Tmux tmux resize-pane -D 30<CR>
 
 "Use normal rspec (pushing vim to the background)
 "let g:rspec_command = "!rspec {spec}"
