@@ -134,8 +134,6 @@ map <Leader>gs :Gstatus<CR>
 map <Leader>gw :Gwrite<CR>
 map <Leader>gc :Gcommit<CR>
 
-map <Leader>gx :Tmux gitx<CR>
-
 "tabularize
 map <Leader>a: :Tabularize /:\zs<CR>
 map <Leader>a, :Tabularize /,\zs<CR>
@@ -144,14 +142,18 @@ map <Leader>af :Tabularize /=><CR>
 map <Leader>a{ :Tabularize /{<CR>:Tabularize /}<CR>
 
 "rspec
-map <Leader>ofs :%s/ it / xit <CR>''?xit<CR>x:w<CR>
-map <Leader>ons :%s/ xit / it /<CR>'':w<CR>
+nmap <Leader>ofs :%s/ it / xit <CR>''?xit<CR>x:w<CR>
+nmap <Leader>ons :%s/ xit / it /<CR>'':w<CR>
 
 "vim-rspec  https://github.com/thoughtbot/vim-rspec
-map <Leader>rf :w<CR>:call RunCurrentSpecFile()<CR>
-map <Leader>rs :w<CR>:call RunNearestSpec()<CR>
-map <Leader>rl :w<CR>:call RunLastSpec()<CR>
-map <Leader>ra :w<CR>:call RunAllSpecs()<CR>
+nmap <Leader>rf :w<CR>:call RunCurrentSpecFile()<CR>
+nmap <Leader>rs :w<CR>:call RunNearestSpec()<CR>
+nmap <Leader>rl :w<CR>:call RunLastSpec()<CR>
+nmap <Leader>ra :w<CR>:call RunAllSpecs()<CR>
+
+"tslime mappings
+nmap <Leader>gx :Tmux gitx<CR>
+nmap <Leader>t :Tmux 
 
 "Use normal rspec (pushing vim to the background)
 "let g:rspec_command = "!rspec {spec}"
@@ -159,6 +161,7 @@ map <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 let g:rspec_command = "Tmux rspec {spec}"
 "override this with a local .vimrc file, if necessary (e.g. rails projects
 "that use spring"
+
 
 "test::unit
 map <Leader>oft :%s/def test/def xtest<CR>''?xtest<CR>x:w<CR>
