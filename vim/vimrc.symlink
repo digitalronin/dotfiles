@@ -134,6 +134,8 @@ map <Leader>gs :Gstatus<CR>
 map <Leader>gw :Gwrite<CR>
 map <Leader>gc :Gcommit<CR>
 
+map <Leader>gx :Tmux gitx<CR>
+
 "tabularize
 map <Leader>a: :Tabularize /:\zs<CR>
 map <Leader>a, :Tabularize /,\zs<CR>
