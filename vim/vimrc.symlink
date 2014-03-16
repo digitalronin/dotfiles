@@ -151,8 +151,10 @@ map <Leader>rs :w<CR>:call RunNearestSpec()<CR>
 map <Leader>rl :w<CR>:call RunLastSpec()<CR>
 map <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 
-"default to normal rspec
-let g:rspec_command = "!rspec {spec}"
+"Use normal rspec (pushing vim to the background)
+"let g:rspec_command = "!rspec {spec}"
+"Use tslime
+let g:rspec_command = "Tmux rspec {spec}"
 "override this with a local .vimrc file, if necessary (e.g. rails projects
 "that use spring"
 
