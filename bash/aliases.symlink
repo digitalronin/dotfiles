@@ -1,6 +1,7 @@
 alias 755='chmod 755'
 alias vi='vim'
 alias be='bundle exec'
+alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 alias running='ps wwwaux | grep '
 alias v='cat ~/.vimbuffer'
 

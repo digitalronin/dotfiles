@@ -23,3 +23,10 @@ I used to handle these as git submodules, but that started to get painful. So, I
           fi
         )
       done
+
+Brewfile
+========
+
+http://robots.thoughtbot.com/brewfile-a-gemfile-but-for-homebrew
+
+
