@@ -14,6 +14,8 @@ alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
 alias vadserver='cd ~/Projects/vagrant_admoda/; vagrant ssh adserver'
 alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; unicorn -E production'
 
+alias amodayml='curl -s http://amodayml.admoda.com/8e41fd4918b146b2964de88c69de6a25/amoda.yml'
+
 alias zr='zeus rspec'
 alias zrs='zeus rspec spec'
 

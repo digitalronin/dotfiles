@@ -1,26 +1,33 @@
 Vim
 
+Ctrl-c r - reset tslime bindings
+,ct      - :Tmux
+
+,rs - run current spec      (possibly via tslime, depending on local project/.vimrc)
+,rf - run current specfile
+,ra - run all specs
+
 Ctrl-o  - Move back through navigation history
-,w      - write buffer
-,bo     - bufonly
-,bd     - bufdelete
+Ctrl-i  - Move forward through navigation history
 
 ,so - Add "save_and_open_file"
 ,vd - Add "var_dump();"
 ,br - Add "border: 2px solid red;"
 ,db - Add "debugger; 1"
+,pt - turn '// foo bar baz' into 'function test_foo_bar_baz() {'
 
 ,sv - source .vimrc
 ,se - edit .vimrc
 
 ,a: - align on :
+,a= - align on =
 ,af - align on =>
 
-,cy - yank to external file
-,cp - paste from external file
+,cy - yank to ~/.vimbuffer
+,cp - paste from ~/.vimbuffer
 
 qaq - clear register a
-:global/^def/yank A - copy all lines beginning with 'def' and append to register a
+:g(lobal)/^def/yank A - copy all lines beginning with 'def' and append to register a
 
 ,gs - Gstatus
 ,gc - Gcommit
@@ -36,8 +43,13 @@ Ctrl-w o                  - close all other splits
 
 Ctrl-l - =>
 Ctrl-k - ->
-Ctrl-h - #{
+Ctrl-g - #{
 Ctrl-y - <%=  %>
+Ctrl-t - $this->
+
+,w      - write buffer
+,bo     - bufonly
+,bd     - bufdelete
 
 ,__ - toggle comment
 
@@ -60,19 +72,27 @@ NERDTree
   o   - open file
   i   - open file in split
   s   - open file in vsplit
-  gs  - open file in vsplit but stay in NERDTree pane
+  gs  - open file in vsplit but stay in NERDTree pane (also gi, etc)
+  x   - close this node's parent
+  X   - close node and all children
+  O   - open node and all children
+  r   - refresh current node
+  R   - refresh node and all children
 
 Fugitive
   Gstatus
     - - stage/unstage
     o - open file
+    C - Commit
 
 Tmux
+  $     - rename session
   ,     - rename window
   {/}   - swap with pane left/right
   space - cycle pane arrangement
   p/n   - prev/next window
   c     - create window
+  q     - show pane numbers
 
 Slate
   Cmd-Alt-b - Chrome
