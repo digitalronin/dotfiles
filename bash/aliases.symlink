@@ -11,7 +11,6 @@ alias ads='cd ${HOME}/admoda/Adserver'
 alias pup='cd ${HOME}/admoda/configuration_management/puppet'
 alias sys='cd ${HOME}/admoda/AmodaSysadmin'
 alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
-alias vadserver='cd ~/Projects/vagrant_admoda/; vagrant ssh adserver'
 alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; unicorn -E production'
 
 alias amodayml='curl -s http://amodayml.admoda.com/8e41fd4918b146b2964de88c69de6a25/amoda.yml'
