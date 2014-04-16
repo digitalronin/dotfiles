@@ -13,7 +13,7 @@ alias sys='cd ${HOME}/admoda/AmodaSysadmin'
 alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
 alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; unicorn -E production'
 
-alias amodayml='curl -s http://amodayml.admoda.com/8e41fd4918b146b2964de88c69de6a25/amoda.yml'
+alias amodayml='curl -s http://amodayml.admoda.com:9999/8e41fd4918b146b2964de88c69de6a25/amoda.yml'
 
 alias zr='zeus rspec'
 alias zrs='zeus rspec spec'
@@ -31,6 +31,9 @@ alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
 
 alias resque_admoda='ssh -L 5678:localhost:5678 admodamgmt1'
 alias resque_adultmoda='ssh -L 5678:localhost:5678 adultmodamgmt2'
+
+alias rabbit_admoda='ssh -L 15672:localhost:15672 admodaharabbit1'
+
 alias ssh_hadoop='ssh -L 50031:localhost:50030 hdfs@hadoop1'
 
 alias tls='tmux list-sessions'
