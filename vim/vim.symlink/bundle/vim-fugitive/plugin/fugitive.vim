@@ -959,7 +959,7 @@ function! s:Commit(args) abort
       let command .= s:repo().git_command('commit').' '.a:args
       if &shell =~# 'csh'
         noautocmd silent execute '!('.command.' > '.outfile.') >& '.errorfile
-      elseif a:args =~# '\%(^\| \)--interactive\>'
+      elseif a:args =~# '\%(^\| \)-\%(-interactive\|p\|-patch\)\>'
         noautocmd execute '!'.command.' 2> '.errorfile
       else
         noautocmd silent execute '!'.command.' > '.outfile.' 2> '.errorfile
@@ -2164,6 +2164,7 @@ function! s:BufReadIndexFile()
       if &bufhidden ==# ''
         setlocal bufhidden=delete
       endif
+      setlocal noswapfile
     endtry
     return ''
   catch /^fugitive: rev-parse/
@@ -2226,7 +2227,7 @@ function! s:BufReadObject()
     endif
 
     let pos = getpos('.')
-    silent %delete
+    silent keepjumps %delete_
     setlocal endofline
 
     try
@@ -2250,23 +2251,24 @@ function! s:BufReadObject()
           call s:ReplaceCmd(s:repo().git_command('cat-file',b:fugitive_type,hash))
         else
           call s:ReplaceCmd(s:repo().git_command('show','--no-color','--pretty=format:tree %T%nparent %P%nauthor %an <%ae> %ad%ncommitter %cn <%ce> %cd%nencoding %e%n%n%s%n%n%b',hash))
-          call search('^parent ')
+          keepjumps call search('^parent ')
           if getline('.') ==# 'parent '
-            silent delete_
+            silent keepjumps delete_
           else
-            silent s/\%(^parent\)\@<! /\rparent /ge
+            silent keepjumps s/\%(^parent\)\@<! /\rparent /ge
           endif
-          if search('^encoding \%(<unknown>\)\=$','W',line('.')+3)
-            silent delete_
+          keepjumps let lnum = search('^encoding \%(<unknown>\)\=$','W',line('.')+3)
+          if lnum
+            silent keepjumps delete_
           end
-          1
+          keepjumps 1
         endif
       elseif b:fugitive_type ==# 'blob'
         call s:ReplaceCmd(s:repo().git_command('cat-file',b:fugitive_type,hash))
       endif
     finally
-      call setpos('.',pos)
-      setlocal ro noma nomod
+      keepjumps call setpos('.',pos)
+      setlocal ro noma nomod noswapfile
       if &bufhidden ==# ''
         setlocal bufhidden=delete
       endif

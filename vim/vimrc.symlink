@@ -66,14 +66,11 @@ vmap <Leader>cx :w! ~/.vimbuffer<CR>gvx
 map <Leader>cp :r ~/.vimbuffer<CR>
 
 "Abbreviations
-abbr doo do \|
 imap  ->
 imap  =>
 imap  #{
 imap  <%=  %><ESC>hhi
 imap  $this->
-abbr eend <% end -%>
-abbr vvd var_dump(
 
 " Tab navigation (cmd-shift-[/cmd-shift-] to go to prev/next tab)
 " THIS DOESN'T WORK IN TERMINAL VIM
@@ -180,8 +177,10 @@ map <Leader>onp :%s/function xtest/function test/<CR>'':w<CR>
 " turn a comment into a test method
 map <Leader>pt <<xxx:s/ /_/gI  function test_A() {}kkk
 map <Leader>vd Ovar_dump();<ESC>hi
+map <Leader>pl Oerror_log("msg\n", 3, "/tmp/php_errors.log");<ESC>
 
 map <Leader>db Odebugger; 1<CR><ESC>:w<CR>
+map <Leader>bp Obinding.pry<CR><ESC>:w<CR>
 map <Leader>so Osave_and_open_page<CR><ESC>:w<CR>
 map <Leader>br Oborder: 2px solid red;<CR><ESC>:w<CR>
 map <Leader>ex Oecho "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";<CR><ESC>:w<CR>
