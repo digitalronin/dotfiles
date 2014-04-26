@@ -163,6 +163,12 @@ nmap <Leader>ct :Tmux ctags -R .<CR>
 
 nmap <C-c>r <Plug>SetTmuxVars
 
+" Support different cursor in insert mode.
+if &term == "screen-256color"
+  let &t_SI = "\<Esc>[3 q"
+  let &t_EI = "\<Esc>[0 q"
+endif
+
 "Use normal rspec (pushing vim to the background)
 "let g:rspec_command = "!rspec {spec}"
 "Use tslime
