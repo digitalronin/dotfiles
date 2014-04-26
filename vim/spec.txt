@@ -1,0 +1,18 @@
+require 'spec_helper'
+
+describe qqq do
+  let(:qqq)    { qqq }
+  let(:params) {
+    {
+      foo: bar,
+    }
+  }
+
+  subject(:qqq) { described_class.new(params) }
+
+  context "qqq" do
+    it "qqq" do
+      expect(qqq).to eq(qqq)
+    end
+  end
+end
