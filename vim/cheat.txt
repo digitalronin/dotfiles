@@ -66,6 +66,15 @@ Ctrl-j - bubble down
 Folding
 :set foldmethod=indent
 
+Unimpaired
+con - Toggle line numbering
+
+Abolish
+crs - Coerce to snake case
+crc - Coerce to camel case
+cru - Coerce to upper case
+Subvert - Smart replace (e.g. :%Subvert/facilit{y,ies}/building{,s}/g)
+
 NERDTree
   ,nt - toggle NERDTree pane
   ,nf - find current file in NERDTree
