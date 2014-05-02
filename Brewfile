@@ -35,3 +35,5 @@ install wget
 install xz
 install zeromq22
 install gmvault
+install reattach-to-user-namespace
+install ag

@@ -45,6 +45,7 @@ bind l run-shell 'tmux-vim-select-pane -R'
 # bind -n "C-\\" run-shell 'tmux-vim-select-pane -l'
 
 if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
+# source ~/.tmux-osx.conf
 
 # use C-a v to paste the tmux buffer
 bind v paste-buffer
@@ -58,6 +59,11 @@ set-option -sg escape-time 50
 # easily toggle synchronization (mnemonic: e is for echo)
 bind e setw synchronize-panes on
 bind E setw synchronize-panes off
+
+# Make new panes open in the current working directory
+bind c new-window -c '#{pane_current_path}'
+bind "\"" split-window -c '#{pane_current_path}'
+bind "\%" split-window -h -c '#{pane_current_path}'
 
 # appearance
 set-option -g pane-active-border-fg red

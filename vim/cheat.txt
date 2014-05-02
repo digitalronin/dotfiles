@@ -63,6 +63,11 @@ Ctrl-j - bubble down
 >> - indent more
 << - indent less
 
+Git Gutter
+:GitGutterDisable
+:GitGutterEnable
+:GitGutterToggle
+
 Folding
 :set foldmethod=indent
 

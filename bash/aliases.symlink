@@ -32,7 +32,7 @@ alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
 alias resque_admoda='ssh -L 5678:localhost:5678 admodamgmt1'
 alias resque_adultmoda='ssh -L 5678:localhost:5678 adultmodamgmt2'
 
-alias rabbit_admoda='ssh -L 15672:localhost:15672 admodaharabbit1'
+alias rabbit_admoda='ssh -L 15672:localhost:15672 admodaharabbit3'
 
 alias ssh_hadoop='ssh -L 50031:localhost:50030 hdfs@hadoop1'
 
