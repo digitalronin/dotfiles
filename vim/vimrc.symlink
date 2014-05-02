@@ -172,6 +172,8 @@ nmap <Leader>zo :Tmux tmux resize-pane -U 30<CR>
 " 'Zoom back'
 nmap <Leader>zb :Tmux tmux resize-pane -D 30<CR>
 nmap <Leader>ct :Tmux ctags -R .<CR>
+" run ctags
+:command! Ctags !ctags -R .
 
 nmap <C-c>r <Plug>SetTmuxVars
 
@@ -247,10 +249,6 @@ map <Leader>se :e ~/.vimrc<CR>
 
 " Ghetto version of snippets/projections
 :command! Spec :r ~/.dotfiles/vim/spec.txt
-
-" run ctags
-:command! Ctags !ctags -R .
-
 " source .exrc or .vimrc in current folder, on launch
 set exrc
 " disable shell and filesystem operations from set exrc
