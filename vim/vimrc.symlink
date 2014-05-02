@@ -35,7 +35,7 @@ set shiftwidth=2
 
 " use the system clipboard as the default register
 " for all yank/cut/put operations
-set clipboard=unnamed
+" set clipboard=unnamed
 
 "Press F2 to paste in text without indenting
 set pastetoggle=<F2>
