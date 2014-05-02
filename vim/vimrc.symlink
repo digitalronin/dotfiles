@@ -240,6 +240,17 @@ let g:ctrlp_max_files = 10000
 "   \ 'fallback': 'find %s -type f | head -' . g:ctrlp_max_files
 "   \ }
 
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+" Ag
+" http://robots.thoughtbot.com/faster-grepping-in-vim/
+" Use ag over grep
+set grepprg=ag\ --nogroup\ --nocolor
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
+
 " .vimrc
 map <Leader>sv :source ~/.vimrc<CR>''
 map <Leader>se :e ~/.vimrc<CR>
