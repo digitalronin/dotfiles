@@ -270,3 +270,32 @@ let g:surround_100 = "do \r\nend"
 let g:surround_101 = "<%= \r %>"
 " 103 [g] for #{...}
 let g:surround_103 = "#{\r}"
+
+
+"Insert mode ctrl key mappings
+" a   tmux
+" b   UltiSnips trigger
+" c   cancel
+" d   awkward
+" e   awkward
+" f   awkward
+" g   #{
+" h   delete
+" i   tab
+" j   return
+" k   ->
+" l   =>
+" m   return
+" n   go down (in lists)
+" o   vim (one normal mode command)
+" p   auto-complete
+" q   awkward
+" r   awkward
+" s   awkward
+" t   awkward
+" u   goes through UltiSnips list options?
+" v   vim (literal)
+" w   awkward
+" x   awkward
+" y   <%=  %>
+" z   bg
