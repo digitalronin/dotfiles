@@ -247,8 +247,6 @@ map <Leader>se :e ~/.vimrc<CR>
 " cheat.txt
 :command! Cheat sp ~/.dotfiles/vim/cheat.txt
 
-" Ghetto version of snippets/projections
-:command! Spec :r ~/.dotfiles/vim/spec.txt
 " source .exrc or .vimrc in current folder, on launch
 set exrc
 " disable shell and filesystem operations from set exrc
