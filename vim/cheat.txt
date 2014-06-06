@@ -68,9 +68,6 @@ Git Gutter
 :GitGutterEnable
 :GitGutterToggle
 
-Folding
-:set foldmethod=indent
-
 Unimpaired
 con - Toggle line numbering
 
