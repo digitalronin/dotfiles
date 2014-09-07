@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 if exists('g:loaded_gitgutter') || !executable('git') || !has('signs') || &cp
   finish
 endif
@@ -34,10 +36,12 @@ call s:set('g:gitgutter_eager',                 1)
 call s:set('g:gitgutter_sign_added',            '+')
 call s:set('g:gitgutter_sign_modified',         '~')
 call s:set('g:gitgutter_sign_removed',          '_')
+call s:set('g:gitgutter_sign_removed_first_line', '‾')
 call s:set('g:gitgutter_sign_modified_removed', '~_')
 call s:set('g:gitgutter_diff_args',             '')
 call s:set('g:gitgutter_escape_grep',           0)
 call s:set('g:gitgutter_map_keys',              1)
+call s:set('g:gitgutter_avoid_cmd_prompt_on_windows', 1)
 
 call highlight#define_sign_column_highlight()
 call highlight#define_highlights()

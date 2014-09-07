@@ -97,7 +97,7 @@ endfunction
 
 function! s:define_commands()
   for [command, concede] in s:commands
-    if !concede || !exists('g:loaded_projectile')
+    if !concede || !exists('g:loaded_projectionist')
       exe 'command! -buffer '.command
     endif
   endfor
@@ -165,7 +165,7 @@ augroup rake
 augroup END
 
 " }}}1
-" Projectile {{{
+" Projectionist {{{
 
 let s:projections = {
       \ '*': {},
@@ -197,8 +197,8 @@ function! s:binstub(root, cmd) abort
   endif
 endfunction
 
-function! s:ProjectileDetect() abort
-  call s:Detect(g:projectile_file)
+function! s:ProjectionistDetect() abort
+  call s:Detect(get(g:, 'projectionist_file', ''))
   if exists('b:rake_root')
     let projections = deepcopy(s:projections)
     if isdirectory(b:rake_root.'/test')
@@ -208,22 +208,27 @@ function! s:ProjectileDetect() abort
       let spec = 1
     endif
     let projections['*'].make = split(s:project().makeprg())
+    let projections['Rakefile'].dispatch = projections['*'].make
+    let projections['rakelib/*.rake'].dispatch = projections['*'].make + ['{}']
     let projections['test/*.rb'] = {'dispatch': s:binstub(b:rake_root, 'ruby') + ['-Itest', '{file}']}
     let projections['spec/*_spec.rb'].dispatch = s:binstub(b:rake_root, 'rspec') + ['{file}']
     call filter(projections['lib/*.rb'].alternate, 'exists(v:val[0:3])')
     call filter(projections, 'v:key[4] !=# "/" || exists(v:key[0:3])')
     let gemspec = fnamemodify(get(split(glob(b:rake_root.'/*.gemspec'), "\n"), 0, 'Gemfile'), ':t')
     let projections[gemspec] = {'command': 'lib'}
-    call projectile#append(b:rake_root, projections)
-    call projectile#append(b:rake_root, {
+    if gemspec !=# 'Gemfile'
+      let projections[gemspec].dispatch = ['gem', 'build', '{file}']
+    endif
+    call projectionist#append(b:rake_root, projections)
+    call projectionist#append(b:rake_root, {
           \ 'test/*_test.rb': {'command': 'spec'},
           \ 'spec/*_spec.rb': {'command': 'test'}})
   endif
 endfunction
 
-augroup rake_projectile
+augroup rake_projectionist
   autocmd!
-  autocmd User ProjectileDetect call s:ProjectileDetect()
+  autocmd User ProjectionistDetect call s:ProjectionistDetect()
 augroup END
 
 " }}}1
@@ -347,35 +352,12 @@ call s:add_methods('buffer',['getvar','setvar','getline','project','name','path'
 " }}}1
 " Rake {{{1
 
-function! s:push_chdir(...)
-  if !exists("s:command_stack") | let s:command_stack = [] | endif
-  let chdir = exists("*haslocaldir") && haslocaldir() ? "lchdir " : "chdir "
-  call add(s:command_stack,chdir.s:fnameescape(getcwd()))
-  exe chdir.'`=s:project().path()`'
-endfunction
-
-function! s:pop_command()
-  if exists("s:command_stack") && len(s:command_stack) > 0
-    exe remove(s:command_stack,-1)
-  endif
-endfunction
-
-let g:rake#errorformat = '%D(in\ %f),'
-      \.'%\\s%#from\ %f:%l:%m,'
-      \.'%\\s%#from\ %f:%l:,'
-      \.'%\\s%##\ %f:%l:%m,'
-      \.'%\\s%##\ %f:%l,'
-      \.'%\\s%#[%f:%l:\ %#%m,'
-      \.'%\\s%#%f:%l:\ %#%m,'
-      \.'%\\s%#%f:%l:,'
-      \.'%m\ [%f:%l]:'
-
-function! s:project_makeprg()
-  if executable(s:project().path('bin/rake'))
+function! s:project_makeprg() dict abort
+  if executable(self.path('bin/rake'))
     return 'bin/rake'
-  elseif filereadable(s:project().path('bin/rake'))
+  elseif filereadable(self.path('bin/rake'))
     return 'ruby bin/rake'
-  elseif filereadable(s:project().path('Gemfile'))
+  elseif filereadable(self.path('Gemfile'))
     return 'bundle exec rake'
   else
     return 'rake'
@@ -384,15 +366,21 @@ endfunction
 
 call s:add_methods('project', ['makeprg'])
 
-function! s:Rake(bang,arg)
+function! s:Rake(bang, arg) abort
   let old_makeprg = &l:makeprg
   let old_errorformat = &l:errorformat
   let old_compiler = get(b:, 'current_compiler', '')
-  call s:push_chdir()
+  let cd = exists('*haslocaldir') && haslocaldir() ? 'lcd' : 'cd'
+  let cwd = getcwd()
   try
+    execute cd fnameescape(s:project().path())
+    if !empty(findfile('compiler/rake.vim', escape(&rtp, ' ')))
+      compiler rake
+    else
+      let &l:errorformat = '%+I%.%#'
+      let b:current_compiler = 'rake'
+    endif
     let &l:makeprg = s:project().makeprg()
-    let &l:errorformat = g:rake#errorformat
-    let b:current_compiler = 'rake'
     if exists(':Make') == 2
       execute 'Make'.a:bang.' '.a:arg
     else
@@ -409,20 +397,40 @@ function! s:Rake(bang,arg)
     if empty(old_compiler)
       unlet! b:current_compiler
     endif
-    call s:pop_command()
+    execute cd fnameescape(cwd)
   endtry
 endfunction
 
-function! s:RakeComplete(A,L,P)
-  return s:completion_filter(s:project().tasks(),a:A)
+function! s:RakeComplete(A, L, P, ...) abort
+  let project = a:0 ? a:1 : s:project()
+  if exists('*projectionist#completion_filter')
+    return projectionist#completion_filter(project.tasks(), a:A, ':')
+  else
+    return s:completion_filter(project.tasks(), a:A)
+  endif
 endfunction
 
-function! s:project_tasks()
-  call s:push_chdir()
+function! CompilerComplete_rake(A, L, P)
+  let path = findfile('Rakefile', escape(getcwd(), ' ,;').';')
+  if empty(path)
+    return []
+  endif
+  let path = fnamemodify(path, ':p:h')
+  if path ==# get(b:, 'rails_root', 'x') && exists('*rails#complete_rake')
+    return rails#complete_rake(a:A, a:L, a:P)
+  else
+    return s:RakeComplete(a:A, a:L, a:P, s:project(path))
+  endif
+endfunction
+
+function! s:project_tasks() dict abort
+  let cd = exists('*haslocaldir') && haslocaldir() ? 'lcd' : 'cd'
+  let cwd = getcwd()
   try
-    let lines = split(system('rake -T'),"\n")
+    execute cd fnameescape(self.path())
+    let lines = split(system(self.makeprg() . ' -T'), "\n")
   finally
-    call s:pop_command()
+    execute cd fnameescape(cwd)
   endtry
   if v:shell_error != 0
     return []
@@ -432,7 +440,7 @@ function! s:project_tasks()
   return lines
 endfunction
 
-call s:add_methods('project',['tasks'])
+call s:add_methods('project', ['tasks'])
 
 call s:command("-bar -bang -nargs=? -complete=customlist,s:RakeComplete Rake :execute s:Rake('<bang>',<q-args>)")
 
@@ -562,7 +570,7 @@ else
   call s:command("-bar -bang -nargs=? -complete=customlist,s:RComplete RD echoerr ':RD is deprecated. Use :A or let g:rake_legacy = 1 in vimrc'")
 endif
 
-if !exists('g:loaded_projectile')
+if !exists('g:loaded_projectionist')
   call s:command("-bar -bang -nargs=? -complete=customlist,s:RComplete A  :execute s:R('E','<bang>',<f-args>)", 1)
   call s:command("-bar -bang -nargs=? -complete=customlist,s:RComplete AE :execute s:R('E','<bang>',<f-args>)", 1)
   call s:command("-bar -bang -nargs=? -complete=customlist,s:RComplete AS :execute s:R('S','<bang>',<f-args>)", 1)
@@ -577,7 +585,7 @@ endif
 
 function! s:navcommand(name) abort
   for type in ['E', 'S', 'V', 'T', 'D']
-    if !exists('g:loaded_projectile')
+    if !exists('g:loaded_projectionist')
       call s:command("-bar -bang -nargs=? -complete=customlist,s:R".a:name."Complete ".type.a:name." :execute s:Edit('".type."','<bang>',s:R".a:name."(matchstr(<q-args>,'[^:#]*')).matchstr(<q-args>,'[:#].*'))", 1)
     endif
     if exists('g:rake_legacy')

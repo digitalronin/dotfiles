@@ -31,12 +31,12 @@ function! diff#run_diff(realtime, use_external_grep)
   let cmd .= '))'
 
   if a:realtime
-    let diff = system(utility#command_in_directory_of_file(cmd), utility#buffer_contents())
+    let diff = utility#system(utility#command_in_directory_of_file(cmd), utility#buffer_contents())
   else
-    let diff = system(utility#command_in_directory_of_file(cmd))
+    let diff = utility#system(utility#command_in_directory_of_file(cmd))
   endif
 
-  if v:shell_error
+  if utility#shell_error()
     " A shell error indicates the file is not tracked by git (unless something
     " bizarre is going on).
     throw 'diff failed'
@@ -142,7 +142,11 @@ function! diff#process_added(modifications, from_count, to_count, to_line)
 endfunction
 
 function! diff#process_removed(modifications, from_count, to_count, to_line)
-  call add(a:modifications, [a:to_line, 'removed'])
+  if a:to_line == 0
+    call add(a:modifications, [1, 'removed_first_line'])
+  else
+    call add(a:modifications, [a:to_line, 'removed'])
+  endif
 endfunction
 
 function! diff#process_modified(modifications, from_count, to_count, to_line)

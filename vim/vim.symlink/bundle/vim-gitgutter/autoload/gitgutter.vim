@@ -23,7 +23,7 @@ function! gitgutter#process_buffer(file, realtime)
         call hunk#set_hunks(diff#parse_diff(diff))
         let modified_lines = diff#process_hunks(hunk#hunks())
 
-        if g:gitgutter_signs
+        if g:gitgutter_signs || g:gitgutter_highlight_lines
           call sign#update_signs(a:file, modified_lines)
         endif
 
@@ -77,19 +77,34 @@ endfunction
 function! gitgutter#line_highlights_disable()
   let g:gitgutter_highlight_lines = 0
   call highlight#define_sign_line_highlights()
+
+  if !g:gitgutter_signs
+    call sign#clear_signs(utility#file())
+    call sign#remove_dummy_sign(0)
+  endif
+
   redraw!
 endfunction
 
 function! gitgutter#line_highlights_enable()
+  let old_highlight_lines = g:gitgutter_highlight_lines
+
   let g:gitgutter_highlight_lines = 1
   call highlight#define_sign_line_highlights()
+
+  if !old_highlight_lines && !g:gitgutter_signs
+    call gitgutter#all()
+  endif
+
   redraw!
 endfunction
 
 function! gitgutter#line_highlights_toggle()
-  let g:gitgutter_highlight_lines = !g:gitgutter_highlight_lines
-  call highlight#define_sign_line_highlights()
-  redraw!
+  if g:gitgutter_highlight_lines
+    call gitgutter#line_highlights_disable()
+  else
+    call gitgutter#line_highlights_enable()
+  endif
 endfunction
 
 " }}}
@@ -97,14 +112,24 @@ endfunction
 " Signs {{{
 
 function! gitgutter#signs_enable()
+  let old_signs = g:gitgutter_signs
+
   let g:gitgutter_signs = 1
-  call gitgutter#all()
+  call highlight#define_sign_text_highlights()
+
+  if !old_signs && !g:gitgutter_highlight_lines
+    call gitgutter#all()
+  endif
 endfunction
 
 function! gitgutter#signs_disable()
   let g:gitgutter_signs = 0
-  call sign#clear_signs(utility#file())
-  call sign#remove_dummy_sign(0)
+  call highlight#define_sign_text_highlights()
+
+  if !g:gitgutter_highlight_lines
+    call sign#clear_signs(utility#file())
+    call sign#remove_dummy_sign(0)
+  endif
 endfunction
 
 function! gitgutter#signs_toggle()
@@ -135,7 +160,7 @@ function! gitgutter#stage_hunk()
     let diff_for_hunk = diff#generate_diff_for_hunk(current_hunk, 1)
 
     " apply the diff
-    call system(utility#command_in_directory_of_file('git apply --cached --unidiff-zero - '), diff_for_hunk)
+    call utility#system(utility#command_in_directory_of_file('git apply --cached --unidiff-zero - '), diff_for_hunk)
 
     " refresh gitgutter's view of buffer
     silent execute "GitGutter"
@@ -158,7 +183,7 @@ function! gitgutter#revert_hunk()
     let diff_for_hunk = diff#generate_diff_for_hunk(current_hunk, 1)
 
     " apply the diff
-    call system(utility#command_in_directory_of_file('git apply --reverse --unidiff-zero - '), diff_for_hunk)
+    call utility#system(utility#command_in_directory_of_file('git apply --reverse --unidiff-zero - '), diff_for_hunk)
 
     " reload file
     silent edit

@@ -9,6 +9,8 @@ if !exists("g:rspec_command")
 
   if has("gui_running") && has("gui_macvim")
     let g:rspec_command = "silent !" . s:plugin_path . "/bin/" . g:rspec_runner . " '" . s:cmd . "'"
+  elseif has("win32") && fnamemodify(&shell, ':t') ==? "cmd.exe"
+    let g:rspec_command = "!cls && echo " . s:cmd . " && " . s:cmd
   else
     let g:rspec_command = "!clear && echo " . s:cmd . " && " . s:cmd
   endif
@@ -47,7 +49,7 @@ function! RunLastSpec()
 endfunction
 
 function! InSpecFile()
-  return match(expand("%"), "_spec.rb$") != -1 || match(expand("%"), ".feature$") != -1
+  return match(expand("%"), "_spec.rb$") != -1
 endfunction
 
 function! SetLastSpecCommand(spec)

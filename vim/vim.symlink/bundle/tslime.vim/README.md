@@ -9,7 +9,7 @@ but use tmux instead of screen. However, compared to tmux, screen doesn't
 have the notion of panes. So, the script was adapted to take panes into
 account.
 
-**Note:** If you use version of tmux ealier than 1.3, you should use the stable
+**Note:** If you use version of tmux earlier than 1.3, you should use the stable
 branch. The version available in that branch isn't aware of panes so it
 will paste to pane 0 of the window.
 

@@ -58,6 +58,7 @@ set ttyfast
 set ttymouse=xterm2
 
 set expandtab
+set tabstop=2
 
 " Make splits open in sensible directions
 set splitbelow
@@ -126,13 +127,9 @@ vmap <C-j> ]egv
 vmap > >gv
 vmap < <gv
 
-"Save
-map <Leader>w :w<CR>
-
 "NERDTree
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
-
 
 " Better tab completion of vim commands
 set wildmenu
@@ -303,19 +300,18 @@ set undodir=~/.vim/tmp/undo/
 set backupdir=~/.vim/tmp/backup/
 set directory=~/.vim/tmp/swap/
 
+" DOESN'T WORK
 " make those directories if they don't already exist:
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-  endif
-  if !isdirectory(expand(&backupdir))
-      call mkdir(expand(&backupdir), "p")
-    endif
-    if !isdirectory(expand(&directory))
-        call mkdir(expand(&directory), "p")
-      endif
-    endif
-  endif
-endif
+" if !isdirectory(expand(&undodir))
+"   call mkdir(expand(&undodir), "p")
+" endif
+" if !isdirectory(expand(&backupdir))
+"   call mkdir(expand(&backupdir), "p")
+" endif
+" if !isdirectory(expand(&directory))
+"   call mkdir(expand(&directory), "p")
+" endif
+
 
 "Insert mode ctrl key mappings
 " a   tmux
