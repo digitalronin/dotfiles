@@ -7,11 +7,16 @@ alias v='cat ~/.vimbuffer'
 
 alias main='cd ${HOME}/admoda/RailsAdmin'
 alias r32='cd ${HOME}/admoda/amoda_rails32'
+alias ips='cd ${HOME}/admoda/ip_exceptions'
 alias ads='cd ${HOME}/admoda/Adserver'
+alias yml='cd ${HOME}/admoda/AmodaYmlServer'
 alias pup='cd ${HOME}/admoda/configuration_management/puppet'
 alias sys='cd ${HOME}/admoda/AmodaSysadmin'
 alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
-alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; unicorn -E production'
+
+alias pages='cd ${HOME}/Projects/affiliate_marketing/landing-pages/; guard'
+
+alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; unicorn -p 8000 -E production'
 
 alias amoda-yml='curl -s http://amodayml.admoda.com:9999/8e41fd4918b146b2964de88c69de6a25/amoda.yml'
 
