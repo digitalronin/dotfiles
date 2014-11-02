@@ -89,7 +89,7 @@ alias app-editor   'MacVim'
 alias app-evernote 'Evernote'
 alias app-finder   'Finder'
 alias app-terminal 'iTerm'
-alias app-chat     'HipChat'
+alias app-chat     'Slack'
 alias app-git      'GitX'
 bind b:alt;cmd focus ${app-browser}
 bind e:alt;cmd focus ${app-evernote}
