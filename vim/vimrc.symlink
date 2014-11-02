@@ -34,8 +34,8 @@ set shiftwidth=2
 "set foldmethod=indent
 set nofoldenable
 
-" Highlight search matches
-set hlsearch
+" Don't highlight search matches
+set nohlsearch
 " Highlight search matches as you type
 set incsearch
 
@@ -153,9 +153,6 @@ let g:UltiSnipsJumpForwardTrigger="<C-b>"
 map <leader>ls :echo UltiSnips_ListSnippets()<CR>
 map <leader>us :UltiSnipsEdit<CR>
 
-"Taglist
-map <Leader>tt :TlistToggle<CR>
-
 "Goto file in new tab
 map <Leader>gf <C-w>gf<CR>
 "New tab
@@ -195,6 +192,9 @@ nmap <Leader>ct :Tmux ctags -R .<CR>
 :command! Ctags !ctags -R .
 
 nmap <C-c>r <Plug>SetTmuxVars
+
+"write current buffer
+nmap <Leader>ww :w<CR>
 
 " Support different cursor in insert mode.
 if &term == "screen-256color"
@@ -275,7 +275,7 @@ set grepprg=ag\ --nogroup\ --nocolor
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
 
-" .vimrc
+" edit (e) & source (v) .vimrc
 map <Leader>sv :source ~/.vimrc<CR>''
 map <Leader>se :e ~/.vimrc<CR>
 
@@ -299,6 +299,9 @@ let g:surround_103 = "#{\r}"
 set undodir=~/.vim/tmp/undo/
 set backupdir=~/.vim/tmp/backup/
 set directory=~/.vim/tmp/swap/
+
+" filenames like *.xml, *.html, *.xhtml, ...
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.xml"
 
 " DOESN'T WORK
 " make those directories if they don't already exist:
