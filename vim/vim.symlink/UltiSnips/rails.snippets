@@ -1,0 +1,15 @@
+snippet expectb "expect <block> to ..."
+expect {
+	${1:block}
+}.to $0
+endsnippet
+
+snippet change "change(...).from(...).to(...)"
+change(${1:value}).from(${2:pre}).to(${0:post})
+endsnippet
+
+snippet context "context <block> do ..."
+context "${1:value}" do
+	${0:# TODO}
+end
+endsnippet
