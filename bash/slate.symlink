@@ -103,6 +103,9 @@ bind x:alt;cmd focus ${app-git}
 # Window Hints
 bind e:cmd hint
 
+# Relaunch with new config
+bind r:${hotkey} relaunch
+
 bind space:${hotkey} ${full}
 # 2 monitor layouts
 layout 2default ${app-evernote}:REPEAT ${laptop-full}
