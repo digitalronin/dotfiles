@@ -22,7 +22,7 @@ alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; unicorn -p 8000 -E producti
 alias amoda-yml='curl -s http://amodayml.admoda.com:9999/8e41fd4918b146b2964de88c69de6a25/amoda.yml'
 
 alias sr='spring rspec'
-alias srs='spring rspec spec'
+alias srs='spring rake RAILS_ENV=test db:reset; spring rake db:test:prepare; spring rspec spec'
 
 alias ss='mongrel_rails start'
 alias sc='script/console'
