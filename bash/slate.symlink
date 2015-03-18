@@ -14,6 +14,7 @@ config windowHintsSpread              true
 
 
 # Screen positions and sizes
+alias full  move screenOriginX;screenOriginY  screenSizeX;screenSizeY
 alias laptop-full  throw 0 resize
 alias second-full  throw 1 resize
 
@@ -102,6 +103,7 @@ bind x:alt;cmd focus ${app-git}
 # Window Hints
 bind e:cmd hint
 
+bind space:${hotkey} ${full}
 # 2 monitor layouts
 layout 2default ${app-evernote}:REPEAT ${laptop-full}
 layout 2default ${app-browser}:REPEAT  ${laptop-full}
