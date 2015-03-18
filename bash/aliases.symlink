@@ -41,10 +41,10 @@ alias rabbit_admoda='ssh -L 15672:localhost:15672 admodaharabbit3'
 
 alias ssh_hadoop='ssh -L 50031:localhost:50030 hdfs@hadoop1'
 
-alias oldest_admoda_adserver='ssh -p 64389 adserver@`oldest_admoda_adserver_ip `'
-alias oldest_adultmoda_adserver='ssh -p 64389 adserver@`oldest_adultmoda_adserver_ip `'
-alias newest_admoda_adserver='ssh -p 64389 adserver@`newest_admoda_adserver_ip `'
-alias newest_adultmoda_adserver='ssh -p 64389 adserver@`newest_adultmoda_adserver_ip `'
+alias oldest_admoda_adserver='ssh -p 64389 root@`oldest_admoda_adserver_ip `'
+alias oldest_adultmoda_adserver='ssh -p 64389 root@`oldest_adultmoda_adserver_ip `'
+alias newest_admoda_adserver='ssh -p 64389 root@`newest_admoda_adserver_ip `'
+alias newest_adultmoda_adserver='ssh -p 64389 root@`newest_adultmoda_adserver_ip `'
 
 alias tls='tmux list-sessions'
 alias ta='tmux attach -t'
