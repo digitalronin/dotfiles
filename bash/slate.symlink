@@ -74,12 +74,12 @@ bind up:${hotkey}    throw up    resize
 bind down:${hotkey}  throw down  resize
 
 # Focus Bindings
-#bind right:cmd    focus right
-#bind left:cmd     focus left
+bind right:cmd;alt  focus right
+bind left:cmd;alt   focus left
 #bind up:cmd       focus up
 #bind down:cmd     focus down
-#bind up:cmd;alt   focus behind
-#bind down:cmd;alt focus behind
+bind up:cmd;alt   focus behind
+bind down:cmd;alt focus behind
 
 # Grid
 bind g:${hotkey} grid padding:5 0:6,3 1:12,6
