@@ -12,6 +12,7 @@ alias ads='cd ${HOME}/admoda/Adserver'
 alias yml='cd ${HOME}/admoda/AmodaYmlServer'
 alias pup='cd ${HOME}/admoda/configuration_management/puppet'
 alias sys='cd ${HOME}/admoda/AmodaSysadmin'
+alias cond='cd ${HOME}/admoda/conductor'
 alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
 
 alias pages='cd ${HOME}/Projects/affiliate_marketing/landing-pages/; guard'
