@@ -51,3 +51,6 @@ alias ta='tmux attach -t'
 
 # Google BigQuery
 alias bq="~/google-cloud-sdk/bin/bq"
+
+# Docker
+alias dstop='docker stop $(docker ps -q)'
