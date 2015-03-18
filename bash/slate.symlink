@@ -2,7 +2,7 @@
 # If no ~/.slate file exists this is the file that will be used.
 
 # master key combo for most actions
-alias hotkey cmd;alt;ctrl;s
+alias hotkey space,ctrl
 
 config defaultToCurrentScreen true
 config nudgePercentOf         screenSize
