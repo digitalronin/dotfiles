@@ -31,6 +31,7 @@ alias ls='ls -G'
 alias ls='ls -l'
 alias agp='ag --pager "less -R"'
 
+alias pbd='pwd | pbcopy'
 alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
 
 alias resque_admoda='ssh -L 5678:localhost:5678 admodamgmt1'
