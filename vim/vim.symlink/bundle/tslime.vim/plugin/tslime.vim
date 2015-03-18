@@ -13,7 +13,7 @@ let g:loaded_tslime = 1
 function! Send_keys_to_Tmux(keys)
   if !exists("g:tslime")
     call <SID>Tmux_Vars()
-  end
+  endif
 
   call system("tmux send-keys -t " . s:tmux_target() . " " . a:keys)
 endfunction
@@ -23,12 +23,11 @@ endfunction
 function! Send_to_Tmux(text)
   if !exists("g:tslime")
     call <SID>Tmux_Vars()
-  end
+  endif
 
-  let oldbuffer = system(shellescape("tmux show-buffer"))
   call <SID>set_tmux_buffer(a:text)
   call system("tmux paste-buffer -t " . s:tmux_target())
-  call <SID>set_tmux_buffer(oldbuffer)
+  call system("tmux delete-buffer")
 endfunction
 
 function! s:tmux_target()

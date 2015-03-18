@@ -4,9 +4,6 @@ set nocompatible
 execute pathogen#infect()
 execute pathogen#helptags()
 
-" Linux
-"set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
-
 syntax enable
 
 if has('gui_running')
@@ -21,26 +18,17 @@ else
   "colorscheme SolarizedDark_modified
   colorscheme twilight256
 endif
-"set background=dark
-
-"let g:solarized_contrast   = "high"
-"let g:solarized_visibility = "high"
-"let g:solarized_bold       = 0
 
 set antialias
 set wrap
 set ruler
 set shiftwidth=2
-"set foldmethod=indent
 set nofoldenable
 
 " Don't highlight search matches
 set nohlsearch
 " Highlight search matches as you type
 set incsearch
-
-" Searches are case-insensitive unless search term includes capitals
-set smartcase
 
 " Enable backspacing over everything
 set backspace=indent,eol,start
@@ -64,23 +52,10 @@ set tabstop=2
 set splitbelow
 set splitright
 
-" Stop Netrw from doing weird shit on double-click. Instead,
-" double-click to select a word, triple-click to select a line
-map <2-LeftMouse> bve
-map <3-LeftMouse> 0V
-
 " Show git branch in the status line
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 let mapleader = ","
-
-" copy to ~/.vimbuffer
-vmap <Leader>cy :w! ~/.vimbuffer<CR>
-nmap <Leader>cy :.w! ~/vimbuffer<CR>
-" cut to ~/.vimbuffer
-vmap <Leader>cx :w! ~/.vimbuffer<CR>gvx
-" paste from ~/.vimbuffer
-map <Leader>cp :r ~/.vimbuffer<CR>
 
 "Abbreviations
 imap  ->
@@ -88,25 +63,6 @@ imap  =>
 imap  #{
 imap  <%=  %><ESC>hhi
 imap  $this->
-
-" Tab navigation (cmd-shift-[/cmd-shift-] to go to prev/next tab)
-" THIS DOESN'T WORK IN TERMINAL VIM
-" nmap <D-S-]> :tabn<CR>
-" nmap <D-S-[> :tabp<CR>
-" " cmd-N to go to tab N
-" map <D-1> 1gt
-" map <D-2> 2gt
-" map <D-3> 3gt
-" map <D-4> 4gt
-" map <D-5> 5gt
-" map <D-6> 6gt
-" map <D-7> 7gt
-" map <D-8> 8gt
-" map <D-9> 9gt
-" map <D-0> :tablast<CR>
-
-" open method definition in a new tab
-nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
 
 " Instead of moving the cursor up one line, use -
 " to set the current word as the search pattern
@@ -141,20 +97,13 @@ set scrolloff=3
 let NERDTreeIgnore=['\.class$']
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class
 
-"YouCompleteMe
-let g:ycm_min_num_of_chars_for_completion     = 2
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax        = 1
-
 "UltiSnips
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger="<C-b>"
-let g:UltiSnipsJumpForwardTrigger="<C-b>"
+" let g:UltiSnipsJumpForwardTrigger="<C-b>"
 map <leader>ls :echo UltiSnips_ListSnippets()<CR>
 map <leader>us :UltiSnipsEdit<CR>
 
-"Goto file in new tab
-map <Leader>gf <C-w>gf<CR>
 "New tab
 map <Leader>tn :tabnew<CR>
 
@@ -165,6 +114,7 @@ map <Leader>gc :Gcommit<CR>
 
 "tabularize
 map <Leader>a: :Tabularize /:\zs<CR>
+map <Leader>ac  [ :Tabularize /:\zs<CR>kdd
 map <Leader>a, :Tabularize /,\zs<CR>
 map <Leader>a= :Tabularize /=<CR>
 map <Leader>af :Tabularize /=><CR>
@@ -183,15 +133,11 @@ nmap <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 "tslime mappings
 nmap <Leader>gx :Tmux gitx<CR>
 nmap <Leader>t :Tmux 
-" 'Zoom other pane'
-nmap <Leader>zo :Tmux tmux resize-pane -U 30<CR>
-" 'Zoom back'
-nmap <Leader>zb :Tmux tmux resize-pane -D 30<CR>
 nmap <Leader>ct :Tmux ctags -R .<CR>
 " run ctags
 :command! Ctags !ctags -R .
 
-nmap <C-c>r <Plug>SetTmuxVars
+nmap <C-c>t <Plug>SetTmuxVars
 
 "write current buffer
 nmap <Leader>ww :w<CR>
@@ -202,13 +148,10 @@ if &term == "screen-256color"
   let &t_EI = "\<Esc>[0 q"
 endif
 
-"Use normal rspec (pushing vim to the background)
-"let g:rspec_command = "!rspec {spec}"
 "Use tslime
 let g:rspec_command = "Tmux rspec {spec}"
 "override this with a local .vimrc file, if necessary (e.g. rails projects
 "that use spring"
-
 
 "test::unit
 map <Leader>oft :%s/def test/def xtest<CR>''?xtest<CR>x:w<CR>
@@ -217,13 +160,17 @@ map <Leader>ont :%s/def xtest/def test/<CR>'':w<CR>
 "php unit test
 map <Leader>ofp :%s/function test/function xtest<CR>''?xtest<CR>x:w<CR>
 map <Leader>onp :%s/function xtest/function test/<CR>'':w<CR>
-" turn a comment into a test method
+
+" turn a comment into a php test method
 map <Leader>pt <<xxx:s/ /_/gI  function test_A() {}kkk
+
 map <Leader>vd Ovar_dump();<ESC>hi
 map <Leader>pl Oerror_log("msg\n", 3, "/tmp/php_errors.log");<ESC>
 
+"Debugging
 map <Leader>db Odebugger; 1<CR><ESC>:w<CR>
-map <Leader>bp Obinding.pry<CR><ESC>:w<CR>
+map <Leader>bb Obyebug; 1<CR><ESC>:w<CR>
+map <Leader>bp Obinding.pry ; 1<CR><ESC>:w<CR>
 map <Leader>so Osave_and_open_page<CR><ESC>:w<CR>
 map <Leader>br Oborder: 2px solid red;<CR><ESC>:w<CR>
 map <Leader>ex Oecho "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";<CR><ESC>:w<CR>
@@ -242,8 +189,9 @@ autocmd BufReadPost *
 "Load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
 
-" *.md files are Markdown, not Modula2
-au BufRead,BufNewFile *.md set filetype=markdown
+" *.md files are Markdown, not Modula2, but I hate the highlighting,
+" so open them without syntax highlighting
+au BufRead,BufNewFile *.md set filetype=
 
 " Load matchit (% to bounce from do to end, etc.)
 runtime! macros/matchit.vim
@@ -256,14 +204,7 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_custom_ignore = '\.(class)'
 let g:ctrlp_max_files = 10000
-" use git ls-files, if available (faster than find)
-" let g:ctrlp_user_command = {
-"   \ 'types': { 1: ['.git/', 'cd %s && git ls-files'] },
-"   \ 'fallback': 'find %s -type f | head -' . g:ctrlp_max_files
-"   \ }
 
-" Use ag for grep
-set grepprg=ag\ --nogroup\ --nocolor
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
@@ -288,10 +229,6 @@ set exrc
 set secure
 
 " Additional mappings for surround.vim
-" 100 [d]o ... end
-let g:surround_100 = "do \r\nend"
-" 101 [e]rb
-let g:surround_101 = "<%= \r %>"
 " 103 [g] for #{...}
 let g:surround_103 = "#{\r}"
 
@@ -300,46 +237,30 @@ set undodir=~/.vim/tmp/undo/
 set backupdir=~/.vim/tmp/backup/
 set directory=~/.vim/tmp/swap/
 
-" filenames like *.xml, *.html, *.xhtml, ...
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.xml"
-
-" DOESN'T WORK
-" make those directories if they don't already exist:
-" if !isdirectory(expand(&undodir))
-"   call mkdir(expand(&undodir), "p")
-" endif
-" if !isdirectory(expand(&backupdir))
-"   call mkdir(expand(&backupdir), "p")
-" endif
-" if !isdirectory(expand(&directory))
-"   call mkdir(expand(&directory), "p")
-" endif
-
-
 "Insert mode ctrl key mappings
-" a   tmux
+" a   tmux command prefix
 " b   UltiSnips trigger
-" c   cancel
-" d   awkward
-" e   awkward
-" f   awkward
+" c   cancel (same as ESC)
+" d   
+" e   
+" f   
 " g   #{
 " h   delete
 " i   tab
-" j   return
+" j   return (same as Ctrl-m ?)
 " k   ->
 " l   =>
-" m   return
+" m   carriage return
 " n   go down (in lists)
 " o   vim (one normal mode command)
 " p   auto-complete
-" q   awkward
-" r   awkward
-" s   awkward
-" t   awkward
-" u   goes through UltiSnips list options?
+" q   
+" r   insert from register prefix
+" s   
+" t   $this->
+" u   delete to start of line
 " v   vim (literal)
-" w   awkward
-" x   awkward
+" w   delete word backwards
+" x   magic insert mode prefix
 " y   <%=  %>
 " z   bg
