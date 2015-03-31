@@ -63,6 +63,16 @@ Ctrl-j - bubble down
 >> - indent more
 << - indent less
 
+Completion
+Ctrl-P          - complete via backwards lookup
+Ctrl-N          - complete via forwards lookup
+Ctrl-X Ctrl-P/N - Context-aware word completion
+Ctrl-X Ctrl-L   - Context-aware line completion
+Ctrl-X Ctrl-O   - Language-aware word completion
+Ctrl-X Ctrl-F   - Filename completion
+Ctrl-X Ctrl-]   - completion from ctags
+
+
 Git Gutter
 :GitGutterDisable
 :GitGutterEnable
