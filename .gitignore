@@ -1,2 +1,4 @@
+.DS_Store
 bash/private.symlink
 vim/vim.symlink/.netrwhist
+vim/vim.symlink/tmp/
