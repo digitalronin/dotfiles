@@ -133,9 +133,9 @@ nmap <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 "tslime mappings
 nmap <Leader>gx :Tmux gitx<CR>
 nmap <Leader>t :Tmux 
-nmap <Leader>ct :Tmux ctags -R .<CR>
+nmap <Leader>ct :Tmux ctags -R --exclude=@.ctags_exclude .<CR>
 " run ctags
-:command! Ctags !ctags -R .
+:command! Ctags !ctags -R --exclude=@.ctags_exclude .
 
 nmap <C-c>t <Plug>SetTmuxVars
 
