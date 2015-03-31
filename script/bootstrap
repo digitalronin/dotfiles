@@ -103,22 +103,26 @@ install_dotfiles () {
   done
 }
 
+link_private_file() {
+  local src=$1
+  local target=$2
+
+  if [ -f $target ]
+  then
+    info "${target} exists, moving to ${target}.bak"
+    mv $target ${target}.bak
+  fi
+  ln -s $src $target
+
+  success "linked $src to $target"
+}
+
 echo $1
 
 install_dotfiles $1
 
-# Symlink private ssh config
-src=~/.private/ssh_config
-target=~/.ssh/config
-
-if [ -f $target ]
-then
-  mv $target ${target}.bak
-fi
-ln -s $src $target
-
-# backup ssh config
-cp $src ~/Dropbox
+link_private_file ~/.private/ssh_config ~/.ssh/config
+link_private_file ~/.private/s3cfg ~/.s3cfg
 
 echo ''
 echo '  All installed!'
