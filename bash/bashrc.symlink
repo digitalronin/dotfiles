@@ -35,7 +35,7 @@ export GOROOT=/usr/local/opt/go/libexec
 
 # TODO: source any .*_env.sh files that exist
 
-export PATH="$HOME/.rvm/bin:$HOME/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.rvm/bin:$HOME/bin:./.bundle/bin:/usr/local/bin:$PATH"
 
 # boot2docker
 export DOCKER_TLS_VERIFY=1
