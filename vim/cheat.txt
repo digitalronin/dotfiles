@@ -63,6 +63,9 @@ Ctrl-j - bubble down
 >> - indent more
 << - indent less
 
+Command history
+q:
+
 Completion
 Ctrl-P          - complete via backwards lookup
 Ctrl-N          - complete via forwards lookup
@@ -81,12 +84,6 @@ Git Gutter
 Unimpaired
 con - Toggle line numbering
 
-Abolish
-crs - Coerce to snake case
-crc - Coerce to camel case
-cru - Coerce to upper case
-Subvert - Smart replace (e.g. :%Subvert/facilit{y,ies}/building{,s}/g)
-
 NERDTree
   ,nt - toggle NERDTree pane
   ,nf - find current file in NERDTree
@@ -99,6 +96,7 @@ NERDTree
   O   - open node and all children
   r   - refresh current node
   R   - refresh node and all children
+  Vd  - visual line mode, delete all files
 
 Fugitive
   Gstatus
@@ -118,5 +116,3 @@ Tmux
 Slate
   Cmd-Alt-b - Chrome
   Cmd-Alt-i - iTerm2
-
-
