@@ -14,8 +14,13 @@ if has('gui_running')
   set background=dark
   colorscheme solarized
 else
+  "use light background
   "set background=light
+
+  "this colorscheme is missing
   "colorscheme SolarizedDark_modified
+
+  "use dark background
   colorscheme twilight256
 endif
 
