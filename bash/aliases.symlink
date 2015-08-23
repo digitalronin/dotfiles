@@ -5,24 +5,21 @@ alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 alias running='ps wwwaux | grep '
 alias v='cat ~/.vimbuffer'
 
-alias main='cd ${HOME}/admoda/RailsAdmin'
 alias r32='cd ${HOME}/admoda/amoda_rails32'
-alias ips='cd ${HOME}/admoda/ip_exceptions'
+alias log='cd ${HOME}/admoda/process-json-logs'
 alias ads='cd ${HOME}/admoda/Adserver'
-alias yml='cd ${HOME}/admoda/AmodaYmlServer'
 alias pup='cd ${HOME}/admoda/configuration_management/puppet'
 alias sys='cd ${HOME}/admoda/AmodaSysadmin'
 alias cond='cd ${HOME}/admoda/conductor'
 alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
+alias dock='cd ${HOME}/admoda/docker-adserver'
 
 alias pages='cd ${HOME}/Projects/affiliate_marketing/landing-pages/; guard'
 
-alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; unicorn -p 8000 -E production'
-
-alias amoda-yml='curl -s http://amodayml.admoda.com:9999/8e41fd4918b146b2964de88c69de6a25/amoda.yml'
+alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; rails s -p 8000 -e production'
 
 alias sr='spring rspec'
-alias srs='spring rake RAILS_ENV=test db:reset; spring rake db:test:prepare; spring rspec spec'
+alias srs='spring stop; spring rake RAILS_ENV=test db:reset; spring rake db:test:prepare; spring rspec spec'
 
 alias ss='mongrel_rails start'
 alias sc='script/console'
@@ -34,23 +31,29 @@ alias agp='ag --pager "less -R"'
 alias pbd='pwd | pbcopy'
 alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
 
-alias resque_admoda='ssh -L 5678:localhost:5678 admodamgmt1'
-alias resque_adultmoda='ssh -L 5678:localhost:5678 adultmodamgmt2'
-
 alias rabbit_admoda='ssh -L 15672:localhost:15672 admodaharabbit3'
+alias consul-port-forward='ssh -L 8500:localhost:8500 amodaconsul1'
 
-alias ssh_hadoop='ssh -L 50031:localhost:50030 hdfs@hadoop1'
-
-alias oldest_admoda_adserver='ssh -p 64389 root@`oldest_admoda_adserver_ip `'
-alias oldest_adultmoda_adserver='ssh -p 64389 root@`oldest_adultmoda_adserver_ip `'
-alias newest_admoda_adserver='ssh -p 64389 root@`newest_admoda_adserver_ip `'
-alias newest_adultmoda_adserver='ssh -p 64389 root@`newest_adultmoda_adserver_ip `'
+alias oldest_admoda_adserver='ip=`oldest_adserver_ip admoda`; ssh-keygen -R "[${ip}]:64389" >/dev/null 2>&1; ssh -p 64389 root@${ip}'
+alias oldest_adultmoda_adserver='ip=`oldest_adserver_ip adultmoda`; ssh-keygen -R "[${ip}]:64389" >/dev/null 2>&1; ssh -p 64389 root@${ip}'
+alias newest_admoda_adserver='ip=`newest_adserver_ip admoda`; ssh-keygen -R "[${ip}]:64389" >/dev/null 2>&1; ssh -p 64389 root@${ip}'
+alias newest_adultmoda_adserver='ip=`newest_adserver_ip adultmoda`; ssh-keygen -R "[${ip}]:64389" >/dev/null 2>&1; ssh -p 64389 root@${ip}'
 
 alias tls='tmux list-sessions'
 alias ta='tmux attach -t'
+alias myexternalip='dig +short myip.opendns.com @resolver1.opendns.com'
+
+# Ctags
+alias ctx='ctags --exclude=@.ctags_exclude -R .'
 
 # Google BigQuery
 alias bq="~/google-cloud-sdk/bin/bq"
 
 # Docker
 alias dstop='docker stop $(docker ps -q)'
+alias docker_bash='docker run -it -v $(pwd):/opt/src -w /opt/src phusion/baseimage:0.9.15 /bin/bash'
+
+alias cacert='curl curl.haxx.se/ca/cacert.pem > ~/.dotfiles/cacert.pem'
+
+alias nodeshell='docker run --rm -it -v $(pwd):/opt/src -w /opt/src google/nodejs /bin/bash'
+
