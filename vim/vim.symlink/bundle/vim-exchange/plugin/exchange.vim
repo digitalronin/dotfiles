@@ -8,22 +8,41 @@ function! s:exchange(x, y, reverse, expand)
 	let selection = &selection
 	set selection=inclusive
 
-	call setpos("'[", a:y[2])
-	call setpos("']", a:y[3])
-	call setreg('z', a:x[0], a:x[1])
-	silent exe "normal! `[" . a:y[1] . "`]\"zp"
+	" Compare using =~ because "'==' != 0" returns 0
+	let indent = s:get_setting('exchange_indent', 1) !~ 0 && a:x.type ==# 'V' && a:y.type ==# 'V'
 
-	if !a:expand
-		call setpos("'[", a:x[2])
-		call setpos("']", a:x[3])
-		call setreg('z', a:y[0], a:y[1])
-		silent exe "normal! `[" . a:x[1] . "`]\"zp"
+	if indent
+		let xindent = matchstr(getline(nextnonblank(a:y.start.line)), '^\s*')
+		let yindent = matchstr(getline(nextnonblank(a:x.start.line)), '^\s*')
 	endif
 
-	if a:reverse
-		call cursor(a:x[2][1], a:x[2][2])
-	else
-		call cursor(a:y[2][1], a:y[2][2])
+	let view = winsaveview()
+
+	call s:setpos("'[", a:y.start)
+	call s:setpos("']", a:y.end)
+	call setreg('z', a:x.text, a:x.type)
+	silent execute "normal! `[" . a:y.type . "`]\"zp"
+
+	if !a:expand
+		call s:setpos("'[", a:x.start)
+		call s:setpos("']", a:x.end)
+		call setreg('z', a:y.text, a:y.type)
+		silent execute "normal! `[" . a:x.type . "`]\"zp"
+	endif
+
+	if indent
+		let xlines = 1 + a:x.end.line - a:x.start.line
+		let ylines = a:expand ? xlines : 1 + a:y.end.line - a:y.start.line
+		if !a:expand
+			call s:reindent(a:x.start.line, ylines, yindent)
+		endif
+		call s:reindent(a:y.start.line - xlines + ylines, xlines, xindent)
+	endif
+
+	call winrestview(view)
+
+	if !a:expand
+		call s:fix_cursor(a:x, a:y, a:reverse)
 	endif
 
 	let &selection = selection
@@ -31,6 +50,57 @@ function! s:exchange(x, y, reverse, expand)
 	call s:restore_reg('"', reg_unnamed)
 	call s:restore_reg('*', reg_star)
 	call s:restore_reg('+', reg_plus)
+endfunction
+
+function! s:fix_cursor(x, y, reverse)
+	if a:reverse
+		call cursor(a:x.start.line, a:x.start.column)
+	else
+		if a:x.start.line == a:y.start.line
+			let horizontal_offset = a:x.end.column - a:y.end.column
+			call cursor(a:x.start.line, a:x.start.column - horizontal_offset)
+		else
+			let vertical_offset = a:x.end.line - a:y.end.line
+			call cursor(a:x.start.line - vertical_offset, a:x.start.column)
+		endif
+	endif
+endfunction
+
+function! s:reindent(start, lines, new_indent)
+	if s:get_setting('exchange_indent', 1) == '=='
+		let lnum = nextnonblank(a:start)
+		if lnum == 0 || lnum > a:start + a:lines - 1
+			return
+		endif
+		let line = getline(lnum)
+		execute "silent normal! " . lnum . "G=="
+		let new_indent = matchstr(getline(lnum), '^\s*')
+		call setline(a:start, line)
+	else
+		let new_indent = a:new_indent
+	endif
+	let indent = matchstr(getline(nextnonblank(a:start)), '^\s*')
+	if strdisplaywidth(new_indent) > strdisplaywidth(indent)
+		for lnum in range(a:start, a:start + a:lines - 1)
+			if lnum =~ '\S'
+				call setline(lnum, new_indent . getline(lnum)[len(indent):])
+			endif
+		endfor
+	elseif strdisplaywidth(new_indent) < strdisplaywidth(indent)
+		let can_dedent = 1
+		for lnum in range(a:start, a:start + a:lines - 1)
+			if stridx(getline(lnum), new_indent) != 0 && nextnonblank(lnum) == lnum
+				let can_dedent = 0
+			endif
+		endfor
+		if can_dedent
+			for lnum in range(a:start, a:start + a:lines - 1)
+				if stridx(getline(lnum), new_indent) == 0
+					call setline(lnum, new_indent . getline(lnum)[len(indent):])
+				endif
+			endfor
+		endif
+	endif
 endfunction
 
 function! s:exchange_get(type, vis)
@@ -42,7 +112,7 @@ function! s:exchange_get(type, vis)
 		let [start, end] = s:store_pos("'<", "'>")
 		silent normal! gvy
 		if &selection ==# 'exclusive' && start != end
-			let end[2] -= len(matchstr(@@, '\_.$'))
+			let end.column -= len(matchstr(@@, '\_.$'))
 		endif
 	else
 		let selection = &selection
@@ -50,15 +120,15 @@ function! s:exchange_get(type, vis)
 		if a:type == 'line'
 			let type = 'V'
 			let [start, end] = s:store_pos("'[", "']")
-			silent exe "normal! '[V']y"
+			silent execute "normal! '[V']y"
 		elseif a:type == 'block'
 			let type = "\<C-V>"
 			let [start, end] = s:store_pos("'[", "']")
-			silent exe "normal! `[\<C-V>`]y"
+			silent execute "normal! `[\<C-V>`]y"
 		else
 			let type = 'v'
 			let [start, end] = s:store_pos("'[", "']")
-			silent exe "normal! `[v`]y"
+			silent execute "normal! `[v`]y"
 		endif
 		let &selection = selection
 	endif
@@ -66,7 +136,12 @@ function! s:exchange_get(type, vis)
 	call s:restore_reg('"', reg)
 	call s:restore_reg('*', reg_star)
 	call s:restore_reg('+', reg_plus)
-	return [text, type, start, end]
+	return {
+	\	'text': text,
+	\	'type': type,
+	\	'start': start,
+	\	'end': s:apply_type(end, type)
+	\ }
 endfunction
 
 function! s:exchange_set(type, ...)
@@ -100,19 +175,20 @@ function! s:exchange_set(type, ...)
 	endif
 endfunction
 
-function! s:exchange_clear(...)
+function! s:exchange_clear()
 	unlet! b:exchange
 	if exists('b:exchange_matches')
 		call s:highlight_clear(b:exchange_matches)
 		unlet b:exchange_matches
 	endif
-	if a:0
-		echohl WarningMsg | echo ":ExchangeClear will be deprecated in favor of :XchangeClear" | echohl None
-	endif
 endfunction
 
 function! s:save_reg(name)
-	return [getreg(a:name), getregtype(a:name)]
+	try
+		return [getreg(a:name), getregtype(a:name)]
+	catch /.*/
+		return ['', '']
+	endtry
 endfunction
 
 function! s:restore_reg(name, reg)
@@ -120,23 +196,22 @@ function! s:restore_reg(name, reg)
 endfunction
 
 function! s:highlight(exchange)
-	let [text, type, start, end] = a:exchange
 	let regions = []
-	if type == "\<C-V>"
-		let blockstartcol = virtcol([start[1], start[2]])
-		let blockendcol = virtcol([end[1], end[2]])
+	if a:exchange.type == "\<C-V>"
+		let blockstartcol = virtcol([a:exchange.start.line, a:exchange.start.column])
+		let blockendcol = virtcol([a:exchange.end.line, a:exchange.end.column])
 		if blockstartcol > blockendcol
 			let [blockstartcol, blockendcol] = [blockendcol, blockstartcol]
 		endif
-		let regions += map(range(start[1], end[1]), '[v:val, blockstartcol, v:val, blockendcol]')
+		let regions += map(range(a:exchange.start.line, a:exchange.end.line), '[v:val, blockstartcol, v:val, blockendcol]')
 	else
-		let [startline, endline] = [start[1], end[1]]
-		if type ==# 'v'
-			let startcol = virtcol([startline, start[2]])
-			let endcol = virtcol([endline, end[2]])
-		elseif type ==# 'V'
+		let [startline, endline] = [a:exchange.start.line, a:exchange.end.line]
+		if a:exchange.type ==# 'v'
+			let startcol = virtcol([a:exchange.start.line, a:exchange.start.column])
+			let endcol = virtcol([a:exchange.end.line, a:exchange.end.column])
+		elseif a:exchange.type ==# 'V'
 			let startcol = 1
-			let endcol = virtcol([end[1], '$'])
+			let endcol = virtcol([a:exchange.end.line, '$'])
 		endif
 		let regions += [[startline, startcol, endline, endcol]]
 	endif
@@ -167,16 +242,12 @@ endfunction
 "        = 0 if x and y overlap in buffer,
 "        > 0 if x comes after y in buffer
 function! s:compare(x, y)
-	let [xs, xe, xm, ys, ye, ym] = [a:x[2], a:x[3], a:x[1], a:y[2], a:y[3], a:y[1]]
-	let xe = s:apply_mode(xe, xm)
-	let ye = s:apply_mode(ye, ym)
-
 	" Compare two blockwise regions.
-	if xm == "\<C-V>" && ym == "\<C-V>"
-		if s:intersects(xs, xe, ys, ye)
+	if a:x.type == "\<C-V>" && a:y.type == "\<C-V>"
+		if s:intersects(a:x, a:y)
 			return 'overlap'
 		endif
-		let cmp = xs[2] - ys[2]
+		let cmp = a:x.start.column - a:y.start.column
 		return cmp <= 0 ? 'lt' : 'gt'
 	endif
 
@@ -185,45 +256,62 @@ function! s:compare(x, y)
 	"       When the characterwise region spans only one line, it is like blockwise.
 
 	" Compare two linewise or characterwise regions.
-	if s:compare_pos(xs, ys) <= 0 && s:compare_pos(xe, ye) >= 0
+	if s:compare_pos(a:x.start, a:y.start) <= 0 && s:compare_pos(a:x.end, a:y.end) >= 0
 		return 'outer'
-	elseif s:compare_pos(ys, xs) <= 0 && s:compare_pos(ye, xe) >= 0
+	elseif s:compare_pos(a:y.start, a:x.start) <= 0 && s:compare_pos(a:y.end, a:x.end) >= 0
 		return 'inner'
-	elseif (s:compare_pos(xs, ye) <= 0 && s:compare_pos(ys, xe) <= 0) || (s:compare_pos(ys, xe) <= 0 && s:compare_pos(xs, ye) <= 0)
+	elseif (s:compare_pos(a:x.start, a:y.end) <= 0 && s:compare_pos(a:y.start, a:x.end) <= 0)
+	\	|| (s:compare_pos(a:y.start, a:x.end) <= 0 && s:compare_pos(a:x.start, a:y.end) <= 0)
 		" x and y overlap in buffer.
 		return 'overlap'
 	endif
 
-	let cmp = s:compare_pos(xs, ys)
+	let cmp = s:compare_pos(a:x.start, a:y.start)
 	return cmp == 0 ? 'overlap' : cmp < 0 ? 'lt' : 'gt'
 endfunction
 
 function! s:compare_pos(x, y)
-	if a:x[1] == a:y[1]
-		return a:x[2] - a:y[2]
+	if a:x.line == a:y.line
+		return a:x.column - a:y.column
 	else
-		return a:x[1] - a:y[1]
+		return a:x.line - a:y.line
 	endif
 endfunction
 
-function! s:intersects(xs, xe, ys, ye)
-	if a:xe[2] < a:ys[2] || a:xe[1] < a:ys[1] || a:xs[2] > a:ye[2] || a:xs[1] > a:ye[1]
+function! s:intersects(x, y)
+	if a:x.end.column < a:y.start.column || a:x.end.line < a:y.start.line
+	\	|| a:x.start.column > a:y.end.column || a:x.start.line > a:y.end.line
 		return 0
 	else
 		return 1
 	endif
 endfunction
 
-function! s:apply_mode(pos, mode)
+function! s:apply_type(pos, type)
 	let pos = a:pos
-	if a:mode ==# 'V'
-		let pos[2] = col([pos[1], '$'])
+	if a:type ==# 'V'
+		let pos.column = col([pos.line, '$'])
 	endif
 	return pos
 endfunction
 
 function! s:store_pos(start, end)
-	return [getpos(a:start), getpos(a:end)]
+	return [s:getpos(a:start), s:getpos(a:end)]
+endfunction
+
+function! s:getpos(mark)
+	let pos = getpos(a:mark)
+	let result = {}
+	return {
+	\	'buffer': pos[0],
+	\	'line': pos[1],
+	\	'column': pos[2],
+	\	'offset': pos[3]
+	\ }
+endfunction
+
+function! s:setpos(mark, pos)
+	call setpos(a:mark, [a:pos.buffer, a:pos.line, a:pos.column, a:pos.offset])
 endfunction
 
 function! s:create_map(mode, lhs, rhs)
@@ -232,12 +320,16 @@ function! s:create_map(mode, lhs, rhs)
 	endif
 endfunction
 
+function! s:get_setting(setting, default)
+	return get(b:, a:setting, get(g:, a:setting, a:default))
+endfunction
+
 highlight default link ExchangeRegion IncSearch
 
-nnoremap <silent> <Plug>(Exchange) :<C-u>set opfunc=<SID>exchange_set<CR>g@
+nnoremap <silent> <Plug>(Exchange) :<C-u>set operatorfunc=<SID>exchange_set<CR>g@
 vnoremap <silent> <Plug>(Exchange) :<C-u>call <SID>exchange_set(visualmode(), 1)<CR>
 nnoremap <silent> <Plug>(ExchangeClear) :<C-u>call <SID>exchange_clear()<CR>
-nnoremap <silent> <Plug>(ExchangeLine) :<C-u>set opfunc=<SID>exchange_set<CR>g@_
+nnoremap <silent> <Plug>(ExchangeLine) :<C-u>set operatorfunc=<SID>exchange_set<CR>g@_
 
 command! XchangeHighlightToggle call s:highlight_toggle()
 command! XchangeHighlightEnable call s:highlight_toggle(1)
@@ -245,7 +337,6 @@ command! XchangeHighlightDisable call s:highlight_toggle(0)
 
 XchangeHighlightEnable
 
-command! ExchangeClear call s:exchange_clear(1)
 command! XchangeClear call s:exchange_clear()
 
 if exists('g:exchange_no_mappings')
