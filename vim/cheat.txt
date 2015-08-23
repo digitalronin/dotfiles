@@ -1,20 +1,36 @@
-Vim
+# Tmux/Tslime
+Ctrl-c t - (re)set tslime bindings
+,t - alias for :Tmux
+,ct - run ctags in tslime target pane
+,gx - open gitx (via tslime target pane)
 
-Ctrl-c r - reset tslime bindings
-,ct      - :Tmux
-
+# Rspec
 ,rs - run current spec      (possibly via tslime, depending on local project/.vimrc)
 ,rf - run current specfile
 ,ra - run all specs
 
+# Ruby
+var - visually select enclosing ruby block
+vir - visually select contents of the enclosing ruby block
+ar - (in visual mode) expand selection to include enclosing ruby block
+ir - (in visual mode) expand selection to include contents of enclosing ruby block
+
+# Navigation
 Ctrl-o  - Move back through navigation history
 Ctrl-i  - Move forward through navigation history
+K - grep for the word under the cursor
 
 ,so - Add "save_and_open_file"
-,vd - Add "var_dump();"
 ,br - Add "border: 2px solid red;"
 ,db - Add "debugger; 1"
+,bb - Add "byebug; 1"
+
+# PHP
+,vd - Add "var_dump();"
 ,pt - turn '// foo bar baz' into 'function test_foo_bar_baz() {'
+,ofp - turn off all tests but the one at the cursor position
+,onp - turn on all tests in the current file
+,ex - insert 'echo "xxxxxxxxxxxxxx\n";
 
 ,sv - source .vimrc
 ,se - edit .vimrc
@@ -23,8 +39,8 @@ Ctrl-i  - Move forward through navigation history
 ,a= - align on =
 ,af - align on =>
 
-,cy - yank to ~/.vimbuffer
-,cp - paste from ~/.vimbuffer
+# ctags
+:Ctags - run ctags -R --exclude=@.ctags_exclude
 
 qaq - clear register a
 :g(lobal)/^def/yank A - copy all lines beginning with 'def' and append to register a
@@ -43,11 +59,11 @@ Ctrl-w o                  - close all other splits
 
 Ctrl-l - =>
 Ctrl-k - ->
-Ctrl-g - #{
+Ctrl-g - #{  # Use 'g' with surround.vim, e.g.  fOo cswg -> #{foo}
 Ctrl-y - <%=  %>
 Ctrl-t - $this->
 
-,w      - write buffer
+,ww     - write buffer
 ,bo     - bufonly
 ,bd     - bufdelete
 
