@@ -240,6 +240,9 @@ set undodir=~/.vim/tmp/undo/
 set backupdir=~/.vim/tmp/backup/
 set directory=~/.vim/tmp/swap/
 
+" Syntastic
+let g:syntastic_javascript_checkers = ['jsxhint']
+
 "Insert mode ctrl key mappings
 " a   tmux command prefix
 " b   UltiSnips trigger
