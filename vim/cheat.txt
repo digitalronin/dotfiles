@@ -1,3 +1,17 @@
+# Splits
+Ctrl-w | - maximise width of current split
+Ctrl-w _ - maximise height of current split
+Ctrl-w = - normalise splits
+Ctrl-w H/J/K/L - move current split to the left/bottom/top/right
+Ctrl-w T - turn the current split into a tab
+Ctrl-w R - swap splits (horizontally or vertically)
+Ctrl-w o - close all other splits ("window only")
+Ctrl-w c - close current window ("window close")
+Ctrl-w s - split current window (same as :sp)
+Ctrl-w n - create a new (empty) window
+[count] Ctrl-w -/+ - change height of current window by N lines
+[count] Ctrl-w </> - change width of current window by N lines
+
 # Tmux/Tslime
 Ctrl-c t - (re)set tslime bindings
 ,t - alias for :Tmux
@@ -82,7 +96,7 @@ Ctrl-j - bubble down
 Command history
 q:
 
-Completion
+# Text Completion
 Ctrl-P          - complete via backwards lookup
 Ctrl-N          - complete via forwards lookup
 Ctrl-X Ctrl-P/N - Context-aware word completion
@@ -99,6 +113,7 @@ Git Gutter
 
 Unimpaired
 con - Toggle line numbering
+cor - Toggle relative line numbering
 
 NERDTree
   ,nt - toggle NERDTree pane
