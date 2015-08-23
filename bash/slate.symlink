@@ -71,6 +71,7 @@ bind right:${hotkey} throw right resize
 bind left:${hotkey}  throw left  resize
 bind up:${hotkey}    throw up    resize
 bind down:${hotkey}  throw down  resize
+bind q:${hotkey}     shell /Users/davidsalgado/bin/quit_slate.sh
 
 # Focus Bindings
 bind right:cmd;alt  focus right
