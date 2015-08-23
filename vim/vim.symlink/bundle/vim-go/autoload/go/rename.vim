@@ -5,8 +5,9 @@ endif
 function! go#rename#Rename(...)
     let to = ""
     if a:0 == 0
-        let ask = printf("vim-go: rename '%s' to: ",  expand("<cword>"))
-        let to = input(ask)
+        let from = expand("<cword>")
+        let ask = printf("vim-go: rename '%s' to: ", from)
+        let to = input(ask, from)
         redraw
     else
         let to = a:1
@@ -19,7 +20,7 @@ function! go#rename#Rename(...)
         return 
     endif
 
-    let fname = resolve(expand('%:p:t'))
+    let fname = expand('%:p')
     let pos = s:getpos(line('.'), col('.'))
     let cmd = printf('%s -offset %s -to %s', shellescape(bin_path), shellescape(printf('%s:#%d', fname, pos)), shellescape(to))
 

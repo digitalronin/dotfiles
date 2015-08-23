@@ -2,6 +2,10 @@ if !exists("g:go_jump_to_error")
     let g:go_jump_to_error = 1
 endif
 
+if !exists("g:go_dispatch_enabled")
+    let g:go_dispatch_enabled = 0
+endif
+
 function! go#cmd#Run(bang, ...)
     let goFiles = '"' . join(go#tool#Files(), '" "') . '"'
 
@@ -23,7 +27,11 @@ function! go#cmd#Run(bang, ...)
         let &makeprg = "go run " . expand(a:1)
     endif
 
-    exe 'make!'
+    if g:go_dispatch_enabled && exists(':Make') == 2
+        silent! exe 'Make!'
+    else
+        exe 'make!'
+    endif
     if !a:bang
         cwindow
         let errors = getqflist()
@@ -64,7 +72,11 @@ function! go#cmd#Build(bang, ...)
     endif
 
     echon "vim-go: " | echohl Identifier | echon "building ..."| echohl None
-    silent! exe 'make!'
+    if g:go_dispatch_enabled && exists(':Make') == 2
+        silent! exe 'Make'
+    else
+        silent! exe 'make!'
+    endif
     redraw!
     if !a:bang
         cwindow
@@ -92,6 +104,10 @@ function! go#cmd#Test(compile, ...)
 
     if len(a:000)
         let command .= expand(a:1)
+    endif
+
+    if len(a:000) == 2
+        let command .= a:2
     endif
 
     if a:compile
@@ -122,6 +138,37 @@ function! go#cmd#Test(compile, ...)
             echon "vim-go: " | echohl Function | echon "[test] PASS" | echohl None
         endif
     endif
+endfunction
+
+function! go#cmd#TestFunc(...)
+    " search flags legend (used only)
+    " 'b' search backward instead of forward
+    " 'c' accept a match at the cursor position
+    " 'n' do Not move the cursor
+    " 'W' don't wrap around the end of the file
+    "
+    " for the full list
+    " :help search
+    let test = search("func Test", "bcnW")
+
+    if test == 0
+        echo "vim-go: [test] no test found immediate to cursor"
+        return
+    end
+
+    let line = getline(test)
+    let name = split(split(line, " ")[1], "(")[0]
+    let flag = "-run \"" . name . "$\""
+
+    let a1 = ""
+    if len(a:000)
+        let a1 = a:1
+
+        " add extra space
+        let flag = " " . flag
+    endif
+
+    call go#cmd#Test(0, a1, flag)
 endfunction
 
 function! go#cmd#Coverage(...)
