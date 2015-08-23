@@ -202,7 +202,10 @@ highlight clear SignColumn
 " make ctrlp use the git project root as its starting directory
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_custom_ignore = '\.(class)'
+let g:ctrlp_custom_ignore = {
+  \ 'file': '\.(class)',
+  \ 'dir': '^(.bundle|dot-bundle)'
+  \ }
 let g:ctrlp_max_files = 10000
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
