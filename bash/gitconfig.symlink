@@ -1,6 +1,6 @@
 [core]
   editor       = /usr/local/bin/vim
-  excludesfile = /Users/david/.gitignore_global
+  excludesfile = /Users/davidsalgado/.gitignore_global
   pager        = less -FRX
 [color]
   diff   = auto
