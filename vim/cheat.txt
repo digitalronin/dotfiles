@@ -1,3 +1,12 @@
+# Movement
+
+zt - scroll current line to (near) top of screen
+zt - scroll current line to (near) middle of screen
+zb - scroll current line to (near) bottom of screen
+H - cursor to top of screen
+M - cursor to middle of screen
+L - cursor to bottom of screen
+
 # Splits
 Ctrl-w | - maximise width of current split
 Ctrl-w _ - maximise height of current split
@@ -17,6 +26,9 @@ Ctrl-c t - (re)set tslime bindings
 ,t - alias for :Tmux
 ,ct - run ctags in tslime target pane
 ,gx - open gitx (via tslime target pane)
+
+# Pattern matching
+:g/^\s*$/d  - delete all blank lines (use g! to delete lines which *don't* match the pattern)
 
 # Rspec
 ,rs - run current spec      (possibly via tslime, depending on local project/.vimrc)
@@ -84,8 +96,10 @@ Ctrl-t - $this->
 ,__ - toggle comment
 
 ][c - next/prev git diff
+][n - next/prev git merge conflict
 ][q - cnext/cprev
 ][Q - cfirst/clast
+:lnext/:lprev - Syntastic Locations (may need :SyntasticSetLoclist first)
 
 Ctrl-k - bubble up
 Ctrl-j - bubble down
@@ -101,6 +115,8 @@ Ctrl-P          - complete via backwards lookup
 Ctrl-N          - complete via forwards lookup
 Ctrl-X Ctrl-P/N - Context-aware word completion
 Ctrl-X Ctrl-L   - Context-aware line completion
+Ctrl-X Ctrl-K   - Dictionary-based word completion
+Ctrl-X Ctrl-T   - Show alternates from Thesaurus (bit crap)
 Ctrl-X Ctrl-O   - Language-aware word completion
 Ctrl-X Ctrl-F   - Filename completion
 Ctrl-X Ctrl-]   - completion from ctags
@@ -118,9 +134,13 @@ cor - Toggle relative line numbering
 NERDTree
   ,nt - toggle NERDTree pane
   ,nf - find current file in NERDTree
+  ,na - zoom the NERDTree pane
+  ,nn - unzoom the NERDTree pane
+  ,nr - refresh the NERDTree pane
   o   - open file
   i   - open file in split
   s   - open file in vsplit
+  t   - open file in tab
   gs  - open file in vsplit but stay in NERDTree pane (also gi, etc)
   x   - close this node's parent
   X   - close node and all children
