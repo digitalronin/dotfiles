@@ -93,3 +93,5 @@ set -g visual-activity on
 
 # display numbers in panes for longer
 set -g display-panes-time 3000
+
+set -g history-limit 3000
