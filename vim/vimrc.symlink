@@ -91,6 +91,13 @@ vmap < <gv
 "NERDTree
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
+" Refresh NERDTree pane
+"
+nmap <leader>nr :NERDTreeFocus<cr> \| R \| <c-w><c-p>
+" Zoom the NERDTree pane
+nmap <leader>na :NERDTree<cr>A<c-w><c-p>
+" Unzoom the NERDTree pane
+nmap <leader>nn :NERDTree<cr><c-w><c-p>
 
 " Better tab completion of vim commands
 set wildmenu
@@ -137,7 +144,7 @@ nmap <Leader>ra :w<CR>:call RunAllSpecs()<CR>
 
 "tslime mappings
 nmap <Leader>gx :Tmux gitx<CR>
-nmap <Leader>t :Tmux 
+nmap <Leader>t :Tmux
 nmap <Leader>ct :Tmux ctags -R --exclude=@.ctags_exclude .<CR>
 " run ctags
 :command! Ctags !ctags -R --exclude=@.ctags_exclude .
@@ -166,6 +173,7 @@ map <Leader>onp :%s/function xtest/function test/<CR>'':w<CR>
 map <Leader>pt <<xxx:s/ /_/gI  function test_A() {}kkk
 
 map <Leader>vd Ovar_dump();<ESC>hi
+map <Leader>el Oerror_log(print_r(x, true));<ESC>Fxxi
 
 "Debugging
 map <Leader>db Odebugger; 1<CR><ESC>:w<CR>
@@ -188,6 +196,10 @@ autocmd BufReadPost *
 
 "Load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
+
+set dictionary+=/usr/share/dict/words
+set thesaurus+=/Users/davidsalgado/Documents/mthesaur.txt
+au FileType text setlocal complete+=k
 
 " *.md files are Markdown, not Modula2, but I hate the highlighting,
 " so open them without syntax highlighting
@@ -238,6 +250,7 @@ let g:surround_103 = "#{\r}"
 
 " Put tmp files under .vim/tmp
 set undodir=~/.vim/tmp/undo/
+set undofile
 set backupdir=~/.vim/tmp/backup/
 set directory=~/.vim/tmp/swap/
 
@@ -248,9 +261,9 @@ let g:syntastic_javascript_checkers = ['jsxhint']
 " a   tmux command prefix
 " b   UltiSnips trigger
 " c   cancel (same as ESC)
-" d   
-" e   
-" f   
+" d
+" e
+" f
 " g   #{
 " h   delete
 " i   tab
@@ -261,9 +274,9 @@ let g:syntastic_javascript_checkers = ['jsxhint']
 " n   go down (in lists)
 " o   vim (one normal mode command)
 " p   auto-complete
-" q   
+" q
 " r   insert from register prefix
-" s   
+" s
 " t   $this->
 " u   delete to start of line
 " v   vim (literal)

@@ -37,7 +37,7 @@ hi def link     goRawString         String
 
 " Characters; their contents
 syn cluster     goCharacterGroup    contains=goEscapeOctal,goEscapeC,goEscapeX,goEscapeU,goEscapeBigU
-syn region      goCharacter         start=+'+ skip=+\\\\\|\\'+ end=+'+ contains=@goCharacterGroup
+syn region      goCharacter         contained start=+'+ skip=+\\\\\|\\'+ end=+'+ contains=@goCharacterGroup
 
 hi def link     goCharacter         Character
 
@@ -66,7 +66,7 @@ syn cluster     gotplLiteral     contains=goString,goRawString,goCharacter,@goIn
 syn keyword     gotplControl     contained   if else end range with template
 syn keyword     gotplFunctions   contained   and html index js len not or print printf println urlquery eq ne lt le gt ge
 syn match       gotplVariable    contained   /\$[^ ]*\>/
-syn match       goTplIdentifier  contained   /\.[^ ]*\>/
+syn match       goTplIdentifier  contained   /\.[^\s}]*\>/
 
 hi def link     gotplControl        Keyword
 hi def link     gotplFunctions      Function
