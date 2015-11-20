@@ -6,6 +6,7 @@ alias running='ps wwwaux | grep '
 alias v='cat ~/.vimbuffer'
 
 alias r32='cd ${HOME}/admoda/amoda_rails32'
+alias r32d='cd ${HOME}/admoda/amoda_rails32_deploy'
 alias log='cd ${HOME}/admoda/process-json-logs'
 alias ads='cd ${HOME}/admoda/Adserver'
 alias pup='cd ${HOME}/admoda/configuration_management/puppet'
@@ -19,7 +20,7 @@ alias pages='cd ${HOME}/Projects/affiliate_marketing/landing-pages/; guard'
 alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; rails s -p 8000 -e production'
 
 alias sr='spring rspec'
-alias srs='spring stop; spring rake RAILS_ENV=test db:reset; spring rake db:test:prepare; spring rspec spec'
+alias srs='spring stop; spring rake RAILS_ENV=test db:reset; spring rake db:test:prepare; spring rspec spec; spring rake teaspoon'
 
 alias ss='mongrel_rails start'
 alias sc='script/console'
@@ -31,7 +32,7 @@ alias agp='ag --pager "less -R"'
 alias pbd='pwd | pbcopy'
 alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
 
-alias rabbit_admoda='ssh -L 15672:localhost:15672 admodaharabbit3'
+alias rabbit_admoda='ssh -L 15672:localhost:15672 amodaharabbit1'
 alias consul-port-forward='ssh -L 8500:localhost:8500 amodaconsul1'
 
 alias oldest_admoda_adserver='ip=`oldest_adserver_ip admoda`; ssh-keygen -R "[${ip}]:64389" >/dev/null 2>&1; ssh -p 64389 root@${ip}'
@@ -57,3 +58,5 @@ alias cacert='curl curl.haxx.se/ca/cacert.pem > ~/.dotfiles/cacert.pem'
 
 alias nodeshell='docker run --rm -it -v $(pwd):/opt/src -w /opt/src google/nodejs /bin/bash'
 
+# IP lookups
+alias lookup='cat ranges | iplist | iplookup | cut -d, -f2,3,4 | uniqr'
