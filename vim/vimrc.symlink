@@ -91,8 +91,13 @@ vmap < <gv
 "NERDTree
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
+
 " Refresh NERDTree pane
 "
+" ensure NrrwRgn doesn't map ,nr
+" https://github.com/chrisbra/NrrwRgn/issues/52
+let g:nrrw_rgn_nomap_nr = 1
+
 nmap <leader>nr :NERDTreeFocus<cr> \| R \| <c-w><c-p>
 " Zoom the NERDTree pane
 nmap <leader>na :NERDTree<cr>A<c-w><c-p>
