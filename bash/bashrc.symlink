@@ -14,7 +14,11 @@ export EDITOR=vim
 
 . ~/.aliases
 . ~/.git_aliases
+
+# Auto-completion
+. ~/.make_completion
 . ~/.git_completion
+. ~/.ssh_completion
 
 # Prompt
 # PS1="[\u@\h \W]$ "
