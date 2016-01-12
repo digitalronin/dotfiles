@@ -208,7 +208,7 @@ au FileType text setlocal complete+=k
 
 " *.md files are Markdown, not Modula2, but I hate the highlighting,
 " so open them without syntax highlighting
-au BufRead,BufNewFile *.md set filetype=
+" au BufRead,BufNewFile *.md set filetype=
 
 " Load matchit (% to bounce from do to end, etc.)
 runtime! macros/matchit.vim
