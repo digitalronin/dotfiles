@@ -9,3 +9,4 @@ alias gm='git merge'
 alias gs='git status'
 alias gis='git status'
 alias gm_deploy='git checkout deploy; git merge master; git checkout master; git push'
+alias git-modified="git status --porcelain | grep '^ M ' | sed 's/^ M //'"
