@@ -243,6 +243,14 @@ map <Leader>se :e ~/.vimrc<CR>
 " cheat.txt
 :command! Cheat sp ~/.dotfiles/vim/cheat.txt
 
+function ProseMode()
+  set wrap
+  set linebreak
+  set nolist
+  autocmd TextChanged,TextChangedI <buffer> silent write
+endfunction
+:command! Prose :call ProseMode()
+
 " source .exrc or .vimrc in current folder, on launch
 set exrc
 " disable shell and filesystem operations from set exrc
