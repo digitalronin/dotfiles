@@ -67,7 +67,6 @@ let mapleader = ","
 imap  ->
 imap  =>
 imap  #{
-imap  <%=  %><ESC>hhi
 imap  $this->
 
 " Instead of moving the cursor up one line, use -
