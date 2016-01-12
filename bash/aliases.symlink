@@ -10,10 +10,9 @@ alias r32d='cd ${HOME}/admoda/amoda_rails32_deploy'
 alias log='cd ${HOME}/admoda/process-json-logs'
 alias ads='cd ${HOME}/admoda/Adserver'
 alias pup='cd ${HOME}/admoda/configuration_management/puppet'
-alias sys='cd ${HOME}/admoda/AmodaSysadmin'
-alias cond='cd ${HOME}/admoda/conductor'
-alias cnf='cd ${HOME}/admoda/AmodaSystemConfigs'
-alias dock='cd ${HOME}/admoda/docker-adserver'
+alias cond='cd ${HOME}/admoda/adservers'
+alias dock='cd ${HOME}/admoda/adservers'
+alias look='cd ${HOME}/admoda/amoda_lookup'
 
 alias pages='cd ${HOME}/Projects/affiliate_marketing/landing-pages/; guard'
 
@@ -34,6 +33,7 @@ alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
 
 alias rabbit_admoda='ssh -L 15672:localhost:15672 amodaharabbit1'
 alias consul-port-forward='ssh -L 8500:localhost:8500 amodaconsul1'
+alias graphite-port-forward='ssh -L 9999:localhost:80 graphite'
 
 alias oldest_admoda_adserver='ip=`oldest_adserver_ip admoda`; ssh-keygen -R "[${ip}]:64389" >/dev/null 2>&1; ssh -p 64389 root@${ip}'
 alias oldest_adultmoda_adserver='ip=`oldest_adserver_ip adultmoda`; ssh-keygen -R "[${ip}]:64389" >/dev/null 2>&1; ssh -p 64389 root@${ip}'
@@ -51,8 +51,11 @@ alias ctx='ctags --exclude=@.ctags_exclude -R .'
 alias bq="~/google-cloud-sdk/bin/bq"
 
 # Docker
+alias docker-fix-time='docker-machine ssh default "sudo ntpclient -s -h pool.ntp.org"'
 alias dstop='docker stop $(docker ps -q)'
 alias docker_bash='docker run -it -v $(pwd):/opt/src -w /opt/src phusion/baseimage:0.9.15 /bin/bash'
+alias elixir1_1='docker run --rm -it --name elixir1.0 -v $(pwd):/app -w /app msaraiva/elixir-dev:1.1.1 sh'
+alias elixir1_2='docker run --rm -it --name elixir1.0 -v $(pwd):/app -w /app msaraiva/elixir-dev:1.2.0 sh'
 
 alias cacert='curl curl.haxx.se/ca/cacert.pem > ~/.dotfiles/cacert.pem'
 
