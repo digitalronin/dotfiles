@@ -320,6 +320,8 @@ function! s:repo_translate(spec) dict abort
     return 'fugitive://'.self.dir().'//'.ref
   elseif a:spec =~# '^:'
     return 'fugitive://'.self.dir().'//0/'.a:spec[1:-1]
+  elseif a:spec ==# '@'
+    return self.dir('HEAD')
   elseif a:spec =~# 'HEAD\|^refs/' && a:spec !~ ':' && filereadable(self.dir(a:spec))
     return self.dir(a:spec)
   elseif filereadable(self.dir('refs/'.a:spec))
@@ -1258,7 +1260,7 @@ function! s:Grep(cmd,bang,arg) abort
   try
     execute cd.'`=s:repo().tree()`'
     let &grepprg = s:repo().git_command('--no-pager', 'grep', '-n', '--no-color')
-    let &grepformat = '%f:%l:%m,%f'
+    let &grepformat = '%f:%l:%m,%m %f match%ts,%f'
     exe a:cmd.'! '.escape(matchstr(a:arg,'\v\C.{-}%($|[''" ]\@=\|)@='),'|')
     let list = a:cmd =~# '^l' ? getloclist(0) : getqflist()
     for entry in list
@@ -1406,6 +1408,9 @@ function! s:Edit(cmd,bang,...) abort
   catch /^fugitive:/
     return 'echoerr v:errmsg'
   endtry
+  if file !~# '^fugitive:'
+    let file = s:sub(file, '/$', '')
+  endif
   if a:cmd ==# 'read'
     return 'silent %delete_|read '.s:fnameescape(file).'|silent 1delete_|diffupdate|'.line('.')
   else
@@ -2175,7 +2180,7 @@ call s:command("-bar -bang -range -nargs=* -complete=customlist,s:EditComplete G
 
 function! s:Browse(bang,line1,count,...) abort
   try
-    let rev = a:0 ? substitute(join(a:000, ' '),'@[[:alnum:]_-]*\%(://.\{-\}\)\=$','','') : ''
+    let rev = a:0 ? substitute(join(a:000, ' '),'@[[:alnum:]_-]\w\+\%(://.\{-\}\)\=$','','') : ''
     if rev ==# ''
       let expanded = s:buffer().rev()
     elseif rev ==# ':'
@@ -2186,7 +2191,7 @@ function! s:Browse(bang,line1,count,...) abort
     let full = s:repo().translate(expanded)
     let commit = ''
     if full =~# '^fugitive://'
-      let commit = matchstr(full,'://.*//\zs\w\+')
+      let commit = matchstr(full,'://.*//\zs\w\w\+')
       let path = matchstr(full,'://.*//\w\+\zs/.*')
       if commit =~ '..'
         let type = s:repo().git_chomp('cat-file','-t',commit.s:sub(path,'^/',':'))
@@ -2207,6 +2212,12 @@ function! s:Browse(bang,line1,count,...) abort
         let type = 'blob'
       endif
     endif
+    if type ==# 'tree' && !empty(path)
+      let path = s:sub(path, '/\=$', '/')
+    endif
+    if empty(commit) && path !~# '^\.git/'
+      let commit = s:repo().rev_parse('HEAD')
+    endif
     if path =~# '^\.git/.*HEAD' && filereadable(s:repo().dir(path[5:-1]))
       let body = readfile(s:repo().dir(path[5:-1]))[0]
       if body =~# '^\x\{40\}$'
@@ -2218,7 +2229,7 @@ function! s:Browse(bang,line1,count,...) abort
       endif
     endif
 
-    if a:0 && join(a:000, ' ') =~# '@[[:alnum:]_-]*\%(://.\{-\}\)\=$'
+    if a:0 && join(a:000, ' ') =~# '@[[:alnum:]_-]\+\%(://.\{-\}\)\=$'
       let remote = matchstr(join(a:000, ' '),'@\zs[[:alnum:]_-]\+\%(://.\{-\}\)\=$')
     elseif path =~# '^\.git/refs/remotes/.'
       let remote = matchstr(path,'^\.git/refs/remotes/\zs[^/]\+')
@@ -2270,6 +2281,7 @@ function! s:Browse(bang,line1,count,...) abort
       call s:throw("Instaweb failed to start and '".remote."' is not a supported remote")
     endif
 
+    let url = s:gsub(url, '[ <>]', '\="%".printf("%02X",char2nr(submatch(0)))')
     if a:bang
       if has('clipboard')
         let @* = url
@@ -2305,7 +2317,7 @@ function! s:github_url(opts, ...) abort
   if repo ==# ''
     return ''
   endif
-  let path = a:opts.path
+  let path = substitute(a:opts.path, '^/', '', '')
   if index(domains, 'http://' . matchstr(repo, '^[^:/]*')) >= 0
     let root = 'http://' . s:sub(repo,':','/')
   else
@@ -2318,36 +2330,29 @@ function! s:github_url(opts, ...) abort
     else
       return root . '/commits/' . branch
     endif
-  elseif path =~# '^\.git/refs/.'
-    return root . '/commits/' . matchstr(path,'[^/]\+$')
+  elseif path =~# '^\.git/refs/tags/'
+    return root . '/releases/tag/' . path[15:-1]
+  elseif path =~# '^\.git/refs/remotes/[^/]\+/.'
+    return root . '/commits/' . matchstr(path,'remotes/[^/]\+/\zs.*')
   elseif path =~# '.git/\%(config$\|hooks\>\)'
     return root . '/admin'
   elseif path =~# '^\.git\>'
     return root
   endif
-  if a:opts.revision =~# '^[[:alnum:]._-]\+:'
-    let commit = matchstr(a:opts.revision,'^[^:]*')
-  elseif a:opts.commit =~# '^\d\=$'
-    let local = matchstr(a:opts.repo.head_ref(),'\<refs/heads/\zs.*')
-    let commit = a:opts.repo.git_chomp('config','branch.'.local.'.merge')[11:-1]
-    if commit ==# ''
-      let commit = local
-    endif
+  if a:opts.commit =~# '^\d\=$'
+    let commit = a:opts.repo.rev_parse('HEAD')
   else
     let commit = a:opts.commit
   endif
-  if a:opts.type == 'tree'
-    let url = s:sub(root . '/tree/' . commit . '/' . path,'/$','')
-  elseif a:opts.type == 'blob'
+  if get(a:opts, 'type', '') ==# 'tree' || a:opts.path =~# '/$'
+    let url = substitute(root . '/tree/' . commit . '/' . path, '/$', '', 'g')
+  elseif get(a:opts, 'type', '') ==# 'blob' || a:opts.path =~# '[^/]$'
     let url = root . '/blob/' . commit . '/' . path
     if get(a:opts, 'line2') && a:opts.line1 == a:opts.line2
       let url .= '#L' . a:opts.line1
     elseif get(a:opts, 'line2')
       let url .= '#L' . a:opts.line1 . '-L' . a:opts.line2
     endif
-  elseif a:opts.type == 'tag'
-    let commit = matchstr(getline(3),'^tag \zs.*')
-    let url = root . '/tree/' . commit
   else
     let url = root . '/commit/' . commit
   endif
@@ -2373,10 +2378,8 @@ function! s:instaweb_url(opts) abort
     endif
     let url .= ';h=' . a:opts.repo.rev_parse(a:opts.commit . (a:opts.path == '' ? '' : ':' . a:opts.path))
   else
-    if a:opts.type ==# 'blob'
-      let tmp = tempname()
-      silent execute 'write !'.a:opts.repo.git_command('hash-object','-w','--stdin').' > '.tmp
-      let url .= ';h=' . readfile(tmp)[0]
+    if a:opts.type ==# 'blob' && empty(a:opts.commit)
+      let url .= ';h='.a:opts.repo.git_chomp('hash-object', '-w', a:opts.path)
     else
       try
         let url .= ';h=' . a:opts.repo.rev_parse((a:opts.commit == '' ? 'HEAD' : ':' . a:opts.commit) . ':' . a:opts.path)
@@ -2470,16 +2473,13 @@ function! s:BufReadIndex() abort
     else
       let cd = exists('*haslocaldir') && haslocaldir() ? 'lcd ' : 'cd '
       let dir = getcwd()
-      if fugitive#git_version() =~# '^0\|^1\.[1-3]\.'
+      if fugitive#git_version() =~# '^0\|^1\.[1-7]\.'
         let cmd = s:repo().git_command('status')
-      elseif fugitive#git_version() =~# '^1\.[4-7]\.'
-        let cmd = s:repo().git_command('status', '-u')
       else
         let cmd = s:repo().git_command(
               \ '-c', 'status.displayCommentPrefix=true',
               \ '-c', 'color.status=false',
               \ '-c', 'status.short=false',
-              \ '-c', 'status.showUntrackedFiles=all',
               \ 'status')
       endif
       try
@@ -2859,7 +2859,7 @@ function! s:cfile() abort
       elseif getline('.') =~# '^[+-]' && search('^@@ -\d\+,\d\+ +\d\+,','bnW')
         let type = getline('.')[0]
         let lnum = line('.') - 1
-        let offset = -1
+        let offset = 0
         while getline(lnum) !~# '^@@ -\d\+,\d\+ +\d\+,'
           if getline(lnum) =~# '^[ '.type.']'
             let offset += 1
