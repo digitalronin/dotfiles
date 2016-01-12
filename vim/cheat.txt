@@ -1,3 +1,17 @@
+# Syntax Highlighting
+
+:setf sh - shell-script
+
+# Numbers
+Ctrl-a a - increment the next number (extra a for Tmux)
+Ctrl-x - decrement the next number
+Ctrl-r = - expression register. Result of typed computation will be inserted on Enter
+
+
+# Character codes
+ga - show info about char under cursor
+Ctrl-v {numbers} - insert char with decimal code (number). use u{numbers} for hex codes, inc. unicode
+
 # Movement
 
 zt - scroll current line to (near) top of screen
@@ -6,6 +20,9 @@ zb - scroll current line to (near) bottom of screen
 H - cursor to top of screen
 M - cursor to middle of screen
 L - cursor to bottom of screen
+
+# Selection
+o - (in visual mode) swap the movable 'end' of the selection
 
 # Splits
 Ctrl-w | - maximise width of current split
@@ -18,6 +35,8 @@ Ctrl-w o - close all other splits ("window only")
 Ctrl-w c - close current window ("window close")
 Ctrl-w s - split current window (same as :sp)
 Ctrl-w n - create a new (empty) window
+Ctrl-w H - make current window (of 2) full-height left
+Ctrl-w K - make current window (of 2) full-width top
 [count] Ctrl-w -/+ - change height of current window by N lines
 [count] Ctrl-w </> - change width of current window by N lines
 
