@@ -137,16 +137,6 @@ map <Leader>a= :Tabularize /=<CR>
 map <Leader>af :Tabularize /=><CR>
 map <Leader>a{ :Tabularize /{<CR>:Tabularize /}<CR>
 
-"rspec
-nmap <Leader>ofs :%s/ it / xit <CR>''?xit<CR>x:w<CR>
-nmap <Leader>ons :%s/ xit / it /<CR>'':w<CR>
-
-"vim-rspec  https://github.com/thoughtbot/vim-rspec
-nmap <Leader>rf :w<CR>:call RunCurrentSpecFile()<CR>
-nmap <Leader>rs :w<CR>:call RunNearestSpec()<CR>
-nmap <Leader>rl :w<CR>:call RunLastSpec()<CR>
-nmap <Leader>ra :w<CR>:call RunAllSpecs()<CR>
-
 "tslime mappings
 nmap <Leader>gx :Tmux gitx<CR>
 nmap <Leader>t :Tmux
@@ -164,11 +154,6 @@ if &term == "screen-256color"
   let &t_SI = "\<Esc>[3 q"
   let &t_EI = "\<Esc>[0 q"
 endif
-
-"Use tslime
-let g:rspec_command = "Tmux rspec {spec}"
-"override this with a local .vimrc file, if necessary (e.g. rails projects
-"that use spring"
 
 "php unit test
 map <Leader>ofp :%s/function test/function xtest<CR>''?xtest<CR>x:w<CR>
@@ -274,6 +259,7 @@ set nrformats=
 let g:syntastic_javascript_checkers = ['jsxhint']
 
 source ~/.vim/scripts/debug.vim
+source ~/.vim/scripts/testrunner.vim
 
 "Insert mode ctrl key mappings
 " a   tmux command prefix
