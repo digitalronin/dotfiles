@@ -267,6 +267,9 @@ set undofile
 set backupdir=~/.vim/tmp/backup/
 set directory=~/.vim/tmp/swap/
 
+" Treat all numbers as decimal, even if they have leading zeros
+set nrformats=
+
 " Syntastic
 let g:syntastic_javascript_checkers = ['jsxhint']
 
