@@ -4,7 +4,7 @@ $0
 endsnippet
 
 snippet allow "allow(obj).to receive"
-allow(${1:obj}).to receive(${2:method}) { ${0:result} }
+allow(${1:name}).to receive(${2:method}) { ${0:result} }
 endsnippet
 
 snippet if "if <condition> ... end"
@@ -23,6 +23,9 @@ else
 end
 endsnippet
 
+snippet var
+#{${1:name}\}${2}
+endsnippet
 
 
 snippet "\b(de)?f" "def <name>..."
@@ -65,7 +68,7 @@ end
 endsnippet
 
 snippet let
-let(:${1:object}) { ${0} }
+let(:${1:name}) { ${0} }
 endsnippet
 
 snippet letp
@@ -77,11 +80,11 @@ let(:params) { super().merge(${0}) }
 endsnippet
 
 snippet let!
-let!(:${1:object}) { ${0} }
+let!(:${1:name}) { ${0} }
 endsnippet
 
 snippet subj
-subject(:${1:obj}) { described_class.new(${0:params}) }
+subject(:${1:name}) { described_class.new(${0:params}) }
 endsnippet
 
 snippet it
