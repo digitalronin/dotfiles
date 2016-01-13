@@ -273,6 +273,8 @@ set nrformats=
 " Syntastic
 let g:syntastic_javascript_checkers = ['jsxhint']
 
+source ~/.vim/scripts/debug.vim
+
 "Insert mode ctrl key mappings
 " a   tmux command prefix
 " b   UltiSnips trigger
