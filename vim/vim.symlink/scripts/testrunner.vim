@@ -20,9 +20,9 @@ function MyRunNearestSpec()
   exec ":write"
 
   if (&filetype == "elixir")
-    call RunNearestTestFile()
+    call RunNearestTest()
   else
-    call RunNearestSpecFile()
+    call RunNearestSpec()
   endif
 endfunction
 
@@ -30,9 +30,9 @@ function MyRunLastSpec()
   exec ":write"
 
   if (&filetype == "elixir")
-    call RunLastTestFile()
+    call RunLastTest()
   else
-    call RunLastSpecFile()
+    call RunLastSpec()
   endif
 endfunction
 
