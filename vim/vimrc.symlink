@@ -70,7 +70,7 @@ let mapleader = " "
 "Abbreviations
 imap  ->
 imap  =>
-imap  #{
+" imap  #{
 imap  $this->
 
 " Instead of moving the cursor up one line, use -
