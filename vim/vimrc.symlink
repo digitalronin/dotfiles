@@ -61,7 +61,11 @@ set splitright
 " Show git branch in the status line
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-let mapleader = ","
+let mapleader = " "
+"let mapleader = ","
+"By default ',' is the complement of ';' (repeat last f{char}). So, use a
+"different key for that function.
+"noremap [ ,
 
 "Abbreviations
 imap  ->
