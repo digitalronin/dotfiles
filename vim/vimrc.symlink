@@ -229,6 +229,9 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR><CR>
 map <Leader>sv :source ~/.vimrc<CR>''
 map <Leader>se :e ~/.vimrc<CR>
 
+" Strip trailing whitespace
+map <Leader>fw :FixWhitespace<CR>
+
 " cheat.txt
 :command! Cheat sp ~/.dotfiles/vim/cheat.txt
 
@@ -266,6 +269,7 @@ let g:syntastic_javascript_checkers = ['jsxhint']
 
 source ~/.vim/scripts/debug.vim
 source ~/.vim/scripts/testrunner.vim
+source ~/.vim/scripts/remove_trailing_whitespace.vim
 
 "Insert mode ctrl key mappings
 " a   tmux command prefix
