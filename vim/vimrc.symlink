@@ -237,6 +237,8 @@ function ProseMode()
   set linebreak
   set nolist
   autocmd TextChanged,TextChangedI <buffer> silent write
+  nmap k gk
+  nmap j gj
 endfunction
 :command! Prose :call ProseMode()
 
