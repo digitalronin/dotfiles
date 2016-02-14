@@ -1,0 +1,15 @@
+#!/bin/bash
+
+CONFIG=~/.ssh/config
+
+_complete_ssh() {
+  if [ -f ${CONFIG} ]; then
+    targets=$(grep '^Host ' ${CONFIG} | sed 's/Host //')
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=( $(compgen -W "${targets}" -- ${cur}) )
+  fi
+}
+
+complete -F _complete_ssh ssh
+complete -F _complete_ssh scp
+

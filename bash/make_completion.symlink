@@ -1,0 +1,12 @@
+#!/bin/bash
+
+_complete_make() {
+  if [ -f Makefile ]; then
+    targets=$(grep '^[a-z-]*:$' Makefile | sed 's/://')
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=( $(compgen -W "${targets}" -- ${cur}) )
+  fi
+}
+
+complete -F _complete_make make
+
