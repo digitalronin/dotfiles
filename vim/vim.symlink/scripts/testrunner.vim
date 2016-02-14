@@ -7,7 +7,7 @@ let g:rspec_command = "Tmux rspec {spec}"
 let g:ex_test_command = "Tmux MIX_ENV=test mix test {test}"
 
 function MyRunCurrentSpecFile()
-  exec ":write"
+  exec ":up"
 
   if (&filetype == "elixir")
     call RunCurrentTestFile()
@@ -17,7 +17,7 @@ function MyRunCurrentSpecFile()
 endfunction
 
 function MyRunNearestSpec()
-  exec ":write"
+  exec ":up"
 
   if (&filetype == "elixir")
     call RunNearestTest()
@@ -27,7 +27,7 @@ function MyRunNearestSpec()
 endfunction
 
 function MyRunLastSpec()
-  exec ":write"
+  exec ":up"
 
   if (&filetype == "elixir")
     call RunLastTest()
@@ -37,7 +37,7 @@ function MyRunLastSpec()
 endfunction
 
 function MyRunAllSpecs()
-  exec ":write"
+  exec ":up"
 
   if (&filetype == "elixir")
     call RunAllTests()

@@ -2,21 +2,32 @@ if !exists("g:go_gorename_bin")
     let g:go_gorename_bin = "gorename"
 endif
 
+if !exists("g:go_gorename_prefill")
+    let g:go_gorename_prefill = 1
+endif
+
 function! go#rename#Rename(bang, ...)
     let to = ""
     if a:0 == 0
         let from = expand("<cword>")
         let ask = printf("vim-go: rename '%s' to: ", from)
-        let to = input(ask, from)
-        redraw
+        if g:go_gorename_prefill
+            let to = input(ask, from)
+        else
+            let to = input(ask)
+        endif
+        redraw!
+        if empty(to)
+            return
+        endif
     else
         let to = a:1
     endif
 
     "return with a warning if the bin doesn't exist
-    let bin_path = go#path#CheckBinPath(g:go_gorename_bin) 
-    if empty(bin_path) 
-        return 
+    let bin_path = go#path#CheckBinPath(g:go_gorename_bin)
+    if empty(bin_path)
+        return
     endif
 
     let fname = expand('%:p')
@@ -35,6 +46,9 @@ function! go#rename#Rename(bang, ...)
         call go#list#Window(len(errors))
         if !empty(errors) && !a:bang
             call go#list#JumpToFirst()
+        elseif empty(errors)
+            " failed to parse errors, output the original content
+            call go#util#EchoError(out)
         endif
         return
     else

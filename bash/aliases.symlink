@@ -14,7 +14,7 @@ alias cond='tmux rename-window dock   ; cd ${HOME}/admoda/adservers'
 alias dock='tmux rename-window dock   ; cd ${HOME}/admoda/adservers'
 alias look='tmux rename-window elixir ; cd ${HOME}/admoda/amoda_lookup'
 alias int='tmux rename-window int     ; cd ${HOME}/admoda/adserver-integration-tests'
-alias uf='tmux rename-window write    ; cd ${HOME}/Dropbox/Kindle/In\ Progress/urban\ fantasy'
+alias uf='tmux rename-window write    ; cd ${HOME}/Dropbox/Kindle/In\ Progress/urban\ fantasy/demon-marked'
 
 alias pages='cd ${HOME}/Projects/affiliate_marketing/landing-pages/; guard'
 

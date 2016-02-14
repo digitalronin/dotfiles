@@ -20,7 +20,7 @@ augroup endwise " {{{1
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'do,fn' |
         \ let b:endwise_pattern = '.*[^.:@$]\zs\<\%(do\(:\)\@!\|fn\)\>\ze\%(.*[^.:@$]\<end\>\)\@!' |
-        \ let b:endwise_syngroups = 'elixirKeyword'
+        \ let b:endwise_syngroups = 'elixirBlockDefinition'
   autocmd FileType ruby
         \ let b:endwise_addition = 'end' |
         \ let b:endwise_words = 'module,class,def,if,unless,case,while,until,begin,do' |
@@ -45,7 +45,7 @@ augroup endwise " {{{1
         \ let b:endwise_addition = '\=submatch(0)=="augroup" ? submatch(0) . " END" : "end" . submatch(0)' |
         \ let b:endwise_words = 'fu,fun,func,function,wh,while,if,for,try,au,augroup' |
         \ let b:endwise_syngroups = 'vimFuncKey,vimNotFunc,vimCommand,vimAugroupKey'
-  autocmd FileType c,cpp,xdefaults
+  autocmd FileType c,cpp,xdefaults,haskell
         \ let b:endwise_addition = '#endif' |
         \ let b:endwise_words = 'if,ifdef,ifndef' |
         \ let b:endwise_pattern = '^\s*#\%(if\|ifdef\|ifndef\)\>' |

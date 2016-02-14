@@ -233,6 +233,13 @@ map <Leader>se :e ~/.vimrc<CR>
 vmap <Leader>cc "+y
 nmap <Leader>cv "+p
 
+" Visually select the last yank into this buffer
+nmap <Leader>sp '[V']$
+
+" Goto next/previous file from Gstatus pane (assuming only two open panes)
+nmap <Leader>gn gg]c
+nmap <Leader>gp G[c
+
 " cheat.txt
 :command! Cheat sp ~/.dotfiles/vim/cheat.txt
 

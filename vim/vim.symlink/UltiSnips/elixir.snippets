@@ -11,7 +11,7 @@ endsnippet
 
 snippet test
 test "${1:desc}" do
-	raise "not implemented"
+	${0}raise "not implemented"
 end
 
 endsnippet
@@ -29,7 +29,7 @@ defp ${1:name}(${2: ${3:*args}}), do: ${0:body}
 endsnippet
 
 
-snippet mod
+snippet defm
 defmodule ${1:name} do
 	${2:# TODO}
 end
@@ -50,4 +50,8 @@ endsnippet
 
 snippet var
 #{${1:name}}${0}
+endsnippet
+
+snippet p
+|> ${0}
 endsnippet
