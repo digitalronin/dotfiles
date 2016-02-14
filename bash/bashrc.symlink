@@ -1,50 +1,84 @@
 # .bashrc
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
+main() {
+  source_global_definitions
+  enable_nerdtree_arrows
+  load_aliases
+  setup_completions
+  set_prompt
+  set_env_vars
+}
 
-# These lines allow NERDTreeDirArrows to work
-# on Linux
-export LC_ALL=en_US.utf-8
-export LANG="$LC_ALL"
+source_global_definitions() {
+  # Source global definitions
+  if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+  fi
+}
 
-export EDITOR=vim
+enable_nerdtree_arrows() {
+  # These lines allow NERDTreeDirArrows to work
+  # on Linux
+  export LC_ALL=en_US.utf-8
+  export LANG="$LC_ALL"
+}
 
-. ~/.aliases
-. ~/.git_aliases
+load_aliases() {
+  . ~/.aliases
+  . ~/.git_aliases
+}
 
-# Auto-completion
-. ~/.make_completion
-. ~/.git_completion
-. ~/.ssh_completion
+setup_completions() {
+  # Auto-completion
+  . ~/.make_completion
+  . ~/.git_completion
+  . ~/.ssh_completion
+}
 
-# Prompt
-# PS1="[\u@\h \W]$ "
-C1="\[\033[01;32m\]"
-C2="\[\033[01;34m\]"
-C3="\[\033[00m\]"
-PS1='['${C1}'\u@\h '${C2}'\W'${C3}'] '
+set_prompt() {
+  # Prompt
+  # PS1="[\u@\h \W]$ "
+  C1="\[\033[01;32m\]"
+  C2="\[\033[01;34m\]"
+  C3="\[\033[00m\]"
+  PS1='['${C1}'\u@\h '${C2}'\W'${C3}'] '
+}
 
-DISPLAY=:0.0
+set_env_vars() {
+  # Any files in the private.symlink directory will end up
+  # being accessible via ~/.private
+  # private.symlink is in .gitignore, so that private
+  # information is not published to github
 
-# export GOPATH="$HOME/david/Projects/go"
-export GOROOT=/usr/local/opt/go/libexec
+  # TODO: source any .*_env.sh files that exist
 
-# Any files in the private.symlink directory will end up
-# being accessible via ~/.private
-# private.symlink is in .gitignore, so that private
-# information is not published to github
+  use_ssh_agent
 
-# TODO: source any .*_env.sh files that exist
+  export PATH="$HOME/.rvm/bin:$HOME/bin:./.bundle/bin:/usr/local/bin:$PATH"
 
-export PATH="$HOME/.rvm/bin:$HOME/bin:./.bundle/bin:/usr/local/bin:$PATH"
+  if [[ -d /Users/davidsalgado ]]; then
+    set_docker_vars
 
-export DOCKER_TLS_VERIFY="1"
-export DOCKER_HOST="tcp://192.168.99.100:2376"
-export DOCKER_CERT_PATH="/Users/davidsalgado/.docker/machine/machines/default"
-export DOCKER_MACHINE_NAME="default"
+    # Fix ruby SSL problems
+    export SSL_CERT_FILE=/Users/davidsalgado/.dotfiles/cacert.pem
+  fi
 
-# Fix ruby SSL problems
-export SSL_CERT_FILE=/Users/davidsalgado/.dotfiles/cacert.pem
+  EDITOR=vim
+  DISPLAY=:0.0
+}
+
+use_ssh_agent() {
+  if [[ -f ${HOME}/.ssh/agent ]]; then
+    . ${HOME}/.ssh/agent > /dev/null
+  fi
+}
+
+set_docker_vars() {
+  export DOCKER_TLS_VERIFY="1"
+  export DOCKER_HOST="tcp://192.168.99.100:2376"
+  export DOCKER_CERT_PATH="/Users/davidsalgado/.docker/machine/machines/default"
+  export DOCKER_MACHINE_NAME="default"
+}
+
+
+main
