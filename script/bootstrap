@@ -1,5 +1,5 @@
-#!/usr/bin/env bash -x
-#
+#!/usr/bin/env bash
+
 # bootstrap installs things.
 
 DOTFILES_ROOT="`pwd`"
@@ -104,7 +104,6 @@ link_private_file() {
 
   success "linked $src to $target"
 }
-
 
 info () {
   printf "  [ \033[00;34m..\033[0m ] $1"
