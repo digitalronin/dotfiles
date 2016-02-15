@@ -3,19 +3,6 @@ set-option -g prefix C-a
 # allow Ctrl-a a to move cursor to beginning of line
 bind a send-prefix
 
-#set-option -g mode-mouse on
-# from: https://wincent.com/blog/tweaking-command-t-and-vim-for-use-in-the-terminal-and-tmux
-# mouse can be used to select panes
-set-option -g mouse-select-pane on
-# mouse can be used to select windows (by clicking in the status bar)
-set-option -g mouse-select-window on
-# mouse can be used to resize panes (by dragging dividers)
-set-option -g mouse-resize-pane on
-# not really sure what this does, but with it, the scrollwheel works inside Vim
-set-option -g mouse-utf8 on
-# allow mouse to enter copy mode and initiate selection
-set-window-option -g mode-mouse on
-
 # VI movement keys
 set-window-option -g mode-keys vi
 
@@ -51,10 +38,6 @@ if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
 bind v paste-buffer
 # use C-a y to copy the tmux buffer to the system clipboard
 # bind y run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-
-# Copy-paste integration
-# http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/
-set-option -g default-command "reattach-to-user-namespace -l bash"
 
 # Setup 'v' to begin selection as in Vim
 bind-key -t vi-copy v begin-selection
