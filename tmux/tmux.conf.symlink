@@ -33,6 +33,12 @@ unbind l
 bind l run-shell 'tmux-vim-select-pane -R'
 # bind -n "C-\\" run-shell 'tmux-vim-select-pane -l'
 
+# Enable mouse in tmux
+set-option -g mode-mouse on
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+set-option -g mouse-resize-pane on
+
 if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
 # source ~/.tmux-osx.conf
 
