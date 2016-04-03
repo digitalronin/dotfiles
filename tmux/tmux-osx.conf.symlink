@@ -13,8 +13,18 @@ set-window-option -g mode-mouse on
 
 set-option -g default-terminal "screen-256color"
 
+# use C-a y to copy the tmux buffer to the system clipboard
+# bind y run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+
 # pbcopy/pbpaste workaround
 # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
 # set-option -g default-command "reattach-to-user-namespace -l bash"
 # Updated version https://github.com/New-Bamboo/Hermes/blob/master/hermes/tmux.conf
 set-option -g default-command "reattach-to-user-namespace -l $SHELL; cd ."
+
+bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+
+# Bind ']' to use pbpaste
+bind ] run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+
