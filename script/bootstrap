@@ -15,8 +15,14 @@ main() {
   link_private_file ~/.private/ssh_config ~/.ssh/config
   link_private_file ~/.private/s3cfg ~/.s3cfg
 
+  create_bin_scripts
+
   echo ''
   echo '  All installed!'
+}
+
+create_bin_scripts() {
+  ln -s bin ~/bin
 }
 
 install_dotfiles () {
