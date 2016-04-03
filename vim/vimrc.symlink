@@ -88,6 +88,9 @@ vmap <C-j> ]egv
 vmap > >gv
 vmap < <gv
 
+"Suppress Syntastic whining (in JS ES6 source code)
+map <Leader>st :SyntasticToggleMode<CR>
+
 "NERDTree
 map <Leader>nt :NERDTreeToggle<CR>
 map <Leader>nf :NERDTreeFind<CR>
@@ -142,7 +145,7 @@ nmap <Leader>gx :Tmux gitx<CR>
 nmap <Leader>t :Tmux
 nmap <Leader>ct :Tmux ctags -R --exclude=@.ctags_exclude .<CR>
 " run ctags
-:command! Ctags !ctags -R --exclude=@.ctags_exclude .
+:command! Ctags !touch .ctags_exclude && ctags -R --exclude=@.ctags_exclude .
 
 nmap <C-c>t <Plug>SetTmuxVars
 
@@ -247,6 +250,7 @@ function ProseMode()
   set wrap
   set linebreak
   set nolist
+  set mouse=""
   autocmd TextChanged,TextChangedI <buffer> silent write
   nmap k gk
   nmap j gj

@@ -10,6 +10,8 @@ set-window-option -g mode-keys vi
 set -g base-index 1
 set -g pane-base-index 1
 
+# prefix q to display pane numbers, temporarily
+
 # vi keys for pane-to-pane movement
 #bind h select-pane -L
 #bind j select-pane -D

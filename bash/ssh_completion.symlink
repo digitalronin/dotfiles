@@ -11,5 +11,5 @@ _complete_ssh() {
 }
 
 complete -F _complete_ssh ssh
-complete -F _complete_ssh scp
+# complete -F _complete_ssh scp
 

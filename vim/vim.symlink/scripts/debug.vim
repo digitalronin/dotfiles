@@ -2,6 +2,10 @@
 function InsertDebugStatement()
   let debug = "debugger; 1"  | " default because it works for ruby & javascript
 
+  if (&filetype == "ruby")
+    let debug = "binding.pry"
+  endif
+
   if (&filetype == "elixir")
     let debug = "TestHelper.enable_debug_logging"
   endif

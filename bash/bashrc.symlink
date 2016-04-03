@@ -6,6 +6,7 @@ main() {
   load_aliases
   setup_completions
   set_prompt
+  set_editor
   set_env_vars
 }
 
@@ -42,6 +43,10 @@ set_prompt() {
   C2="\[\033[01;34m\]"
   C3="\[\033[00m\]"
   PS1='['${C1}'\u@\h '${C2}'\W'${C3}'] '
+}
+
+set_editor() {
+  EDITOR=vi
 }
 
 set_env_vars() {
