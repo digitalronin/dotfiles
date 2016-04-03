@@ -73,8 +73,10 @@ set_env_vars() {
 }
 
 use_ssh_agent() {
-  if [[ -f ${HOME}/.ssh/agent ]]; then
-    . ${HOME}/.ssh/agent > /dev/null
+  local readonly file=/tmp/env-ssh-agent
+
+  if [[ -f ${file} ]]; then
+    . ${file} > /dev/null
   fi
 }
 
