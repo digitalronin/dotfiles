@@ -31,7 +31,7 @@ function! go#rename#Rename(bang, ...)
     endif
 
     let fname = expand('%:p')
-    let pos = s:getpos(line('.'), col('.'))
+    let pos = go#util#OffsetCursor()
     let cmd = printf('%s -offset %s -to %s', shellescape(bin_path), shellescape(printf('%s:#%d', fname, pos)), shellescape(to))
 
     let out = go#tool#ExecuteInDir(cmd)
@@ -40,20 +40,21 @@ function! go#rename#Rename(bang, ...)
     " will trigger the 'Hit ENTER to continue' prompt
     let clean = split(out, '\n')
 
-    if v:shell_error
+    let l:listtype = "quickfix"
+    if go#util#ShellError() != 0
         let errors = go#tool#ParseErrors(split(out, '\n'))
-        call go#list#Populate(errors)
-        call go#list#Window(len(errors))
+        call go#list#Populate(l:listtype, errors)
+        call go#list#Window(l:listtype, len(errors))
         if !empty(errors) && !a:bang
-            call go#list#JumpToFirst()
+            call go#list#JumpToFirst(l:listtype)
         elseif empty(errors)
             " failed to parse errors, output the original content
             call go#util#EchoError(out)
         endif
         return
     else
-        call go#list#Clean()
-        call go#list#Window()
+        call go#list#Clean(l:listtype)
+        call go#list#Window(l:listtype)
         redraw | echon "vim-go: " | echohl Function | echon clean[0] | echohl None
     endif
 
@@ -63,15 +64,6 @@ function! go#rename#Rename(bang, ...)
     " change.
     silent execute ":e"
 endfunction
-
-func! s:getpos(l, c)
-    if &encoding != 'utf-8'
-        let buf = a:l == 1 ? '' : (join(getline(1, a:l-1), "\n") . "\n")
-        let buf .= a:c == 1 ? '' : getline('.')[:a:c-2]
-        return len(iconv(buf, &encoding, 'utf-8'))
-    endif
-    return line2byte(a:l) + (a:c-2)
-endfun
 
 " vim:ts=4:sw=4:et
 "
