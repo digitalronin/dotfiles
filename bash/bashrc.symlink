@@ -35,6 +35,7 @@ setup_completions() {
   . ~/.make_completion
   . ~/.git_completion
   . ~/.ssh_completion
+  . ~/.mix_completion
 }
 
 set_prompt() {

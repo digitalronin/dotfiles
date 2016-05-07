@@ -1,0 +1,11 @@
+#!/bin/bash
+
+_complete_mix() {
+  if [ -f ${CONFIG} ]; then
+    targets=$(mix help | grep ^mix\ [a-z] | cut -d' ' -f2)
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=( $(compgen -W "${targets}" -- ${cur}) )
+  fi
+}
+
+complete -F _complete_mix mix
