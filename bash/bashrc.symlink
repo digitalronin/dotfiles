@@ -8,6 +8,7 @@ main() {
   set_prompt
   set_editor
   set_env_vars
+  load_functions
 }
 
 source_global_definitions() {
@@ -47,6 +48,10 @@ set_prompt() {
 
 set_editor() {
   EDITOR=vi
+}
+
+load_functions() {
+  source ~/.functions.sh
 }
 
 set_env_vars() {

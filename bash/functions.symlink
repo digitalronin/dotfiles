@@ -1,0 +1,6 @@
+
+read() {
+  local readonly file=$1
+  fold -w 100 -s "${file}" | less
+}
+
