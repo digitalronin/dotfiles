@@ -291,6 +291,7 @@ let g:syntastic_javascript_checkers = ['jsxhint']
 source ~/.vim/scripts/debug.vim
 source ~/.vim/scripts/testrunner.vim
 source ~/.vim/scripts/remove_trailing_whitespace.vim
+source ~/.vim/scripts/ctrlp.vim
 
 "Insert mode ctrl key mappings
 " a   tmux command prefix
