@@ -95,3 +95,6 @@ set_docker_vars() {
 
 
 main
+
+# added by travis gem
+[ -f /Users/davidsalgado/.travis/travis.sh ] && source /Users/davidsalgado/.travis/travis.sh
