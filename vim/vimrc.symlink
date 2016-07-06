@@ -288,10 +288,19 @@ set nrformats=
 " Syntastic
 let g:syntastic_javascript_checkers = ['jsxhint']
 
+" Enable abbreviations in vim-mustache-handlebars
+let g:mustache_abbreviations = 1
+
 source ~/.vim/scripts/debug.vim
 source ~/.vim/scripts/testrunner.vim
 source ~/.vim/scripts/remove_trailing_whitespace.vim
 source ~/.vim/scripts/ctrlp.vim
+
+"vim-orgmode
+let g:org_heading_shade_leading_stars = 1
+
+"vim-visual-increment
+set nrformats=alpha
 
 "Insert mode ctrl key mappings
 " a   tmux command prefix
