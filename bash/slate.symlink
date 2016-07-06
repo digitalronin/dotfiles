@@ -95,7 +95,7 @@ alias app-git      'GitX'
 bind b:alt;cmd focus ${app-browser}
 bind e:alt;cmd focus ${app-evernote}
 bind f:alt;cmd focus ${app-finder}
-bind i:alt;cmd focus ${app-terminal}
+bind t:alt;cmd focus ${app-terminal}
 bind v:alt;cmd focus ${app-editor}
 bind c:alt;cmd focus ${app-chat}
 bind x:alt;cmd focus ${app-git}
