@@ -3,8 +3,6 @@ alias vi='vim'
 alias be='bundle exec'
 alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 alias cdg='. cd-gem'
-alias running='ps wwwaux | grep '
-alias v='cat ~/.vimbuffer'
 
 alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
 alias r32d='tmux rename-window deploy ; cd ${HOME}/admoda/amoda_rails32_deploy'
@@ -17,9 +15,6 @@ alias look='tmux rename-window elixir ; cd ${HOME}/admoda/amoda_lookup'
 alias int='tmux rename-window int     ; cd ${HOME}/admoda/adserver-integration-tests'
 alias dev='tmux rename-window dev     ; cd ${HOME}/admoda/adserver-development'
 alias elix='tmux rename-window elix   ; cd ${HOME}/admoda/elixir-adserver'
-alias uf='tmux rename-window write    ; cd ${HOME}/Dropbox/Kindle/In\ Progress/urban\ fantasy/demon-marked'
-
-alias pages='cd ${HOME}/Projects/affiliate_marketing/landing-pages/; guard'
 
 alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; make server-production'
 
@@ -35,15 +30,6 @@ alias agp='ag --pager "less -R"'
 
 alias pbd='pwd | pbcopy'
 alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
-
-alias rabbit_admoda='ssh -L 15672:localhost:15672 amodaharabbit1'
-alias consul-port-forward='ssh -L 8500:localhost:8500 amodaconsul1'
-alias graphite-port-forward='ssh -L 9999:localhost:80 graphite'
-
-alias oldest_admoda_adserver='adserver_timestamps admoda | head -1'
-alias oldest_adultmoda_adserver='adserver_timestamps adultmoda | head -1'
-alias newest_admoda_adserver='adserver_timestamps admoda | tail -1'
-alias newest_adultmoda_adserver='adserver_timestamps adultmoda | tail -1'
 
 alias tls='tmux list-sessions'
 alias ta='tmux attach -t'
