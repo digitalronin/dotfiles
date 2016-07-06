@@ -68,3 +68,6 @@ alias nodeshell='docker run --rm -it -v $(pwd):/opt/src -w /opt/src google/nodej
 
 # IP lookups
 alias lookup='cat ranges | iplist | iplookup | cut -d, -f2,3,4 | uniqr'
+
+# Serve current directory as a web page
+alias webserver='python -m SimpleHTTPServer 8888'
