@@ -17,7 +17,9 @@
       =g:org_prefer_insert_mode= to 0. (closes issue #211)
     - Add export as LaTeX beamer slides (merges PR #206)
     - Keybinding to create plainlist item directly. (closes issue #190)
+    - Make % jump between < and >. (closes issue #250)
 *** Changed
+    - Changed default value for =g:org_indent= from =1= to =0=. (issue #243)
     - Revamped TODO keyword cycling rules. (PR #237)
     - In [[syntax/org.vim][syntax/org.vim]], changed `\@<=' with computational faster `\zs'
     - Using =<localleader>c[n/N]= to create new plainlist item following
@@ -28,7 +30,9 @@
 *** Removed
     - Removed the requirement for TODO state keywords to be upper-case.
 *** Fixed
-    - Tree promoting/demoting no longer destroy list/checkbox structure. (closes #217)
+    - Fixed python3 compatible issue within =CalendarAction=. (merges #242, closes #241)
+    - Tree promoting/demoting no longer destroy list and checkbox structure.
+      (closes #217)
     - Fixed bug when promote/demote headings when it contain lists. (merges
       #239, partly fixed #217)
     - Silenced =W18= warning when non-ASCII coded TODO keywords are used. (merges #236)

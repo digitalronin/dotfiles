@@ -43,6 +43,16 @@ function! go#tool#Imports()
   return imports
 endfunction
 
+function! go#tool#PackageName()
+  let command = "go list -f \"{{.Name}}\""
+  let out = go#tool#ExecuteInDir(command)
+  if go#util#ShellError() != 0
+      return -1
+  endif
+
+  return split(out, '\n')[0]
+endfunction
+
 function! go#tool#ParseErrors(lines)
   let errors = []
 
@@ -111,7 +121,9 @@ endfunction
 
 function! go#tool#ExecuteInDir(cmd) abort
   let old_gopath = $GOPATH
+  let old_goroot = $GOROOT
   let $GOPATH = go#path#Detect()
+  let $GOROOT = go#util#env("goroot")
 
   let cd = exists('*haslocaldir') && haslocaldir() ? 'lcd ' : 'cd '
   let dir = getcwd()
@@ -122,6 +134,7 @@ function! go#tool#ExecuteInDir(cmd) abort
     execute cd . fnameescape(dir)
   endtry
 
+  let $GOROOT = old_goroot
   let $GOPATH = old_gopath
   return out
 endfunction
