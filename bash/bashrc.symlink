@@ -68,8 +68,6 @@ set_env_vars() {
   export PATH="$HOME/.rvm/bin:$HOME/bin:./.bundle/bin:/usr/local/bin:$PATH"
 
   if [[ -d /Users/davidsalgado ]]; then
-    set_docker_vars
-
     # Fix ruby SSL problems
     export SSL_CERT_FILE=/Users/davidsalgado/.dotfiles/cacert.pem
   fi
@@ -85,14 +83,6 @@ use_ssh_agent() {
     . ${file} > /dev/null
   fi
 }
-
-set_docker_vars() {
-  export DOCKER_TLS_VERIFY="1"
-  export DOCKER_HOST="tcp://192.168.99.100:2376"
-  export DOCKER_CERT_PATH="/Users/davidsalgado/.docker/machine/machines/default"
-  export DOCKER_MACHINE_NAME="default"
-}
-
 
 main
 
