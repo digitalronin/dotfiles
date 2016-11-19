@@ -1,9 +1,5 @@
 set nocompatible
 
-" Load all plugins
-execute pathogen#infect()
-execute pathogen#helptags()
-
 syntax enable
 
 if has('gui_running')
