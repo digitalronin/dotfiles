@@ -12,6 +12,7 @@ main() {
 
   install_dotfiles $1
 
+  mkdir ~/.ssh 2>/dev/null
   link_private_file ~/.private/ssh_config ~/.ssh/config
   link_private_file ~/.private/s3cfg ~/.s3cfg
   link_private_file ~/.private/gitconfig.symlink ~/.gitconfig
