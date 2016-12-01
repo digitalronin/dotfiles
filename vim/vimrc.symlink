@@ -2,23 +2,12 @@ set nocompatible
 
 syntax enable
 
-if has('gui_running')
-  " set the screen width and height
-  "set guifont=Andale_Mono:h18
-  set guifont=Menlo:h14
-
-  set background=dark
-  colorscheme solarized
-else
-  "use light background
-  "set background=light
-
-  "this colorscheme is missing
-  "colorscheme SolarizedDark_modified
-
-  "use dark background
-  colorscheme twilight256
-endif
+" Colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"  " Fixes tmux 24-bit color issues
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"  " Fixes tmux 24-bit color issues
+set termguicolors                       " Enable 24-bit color
+set background=dark
+colorscheme twilight256
 
 set antialias
 set wrap
