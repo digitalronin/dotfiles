@@ -47,6 +47,7 @@ alias dstop='docker stop $(docker ps -q)'
 alias docker_bash='docker run -it -v $(pwd):/opt/src -w /opt/src phusion/baseimage:0.9.15 /bin/bash'
 alias elixir1_1='docker run --rm -it --name elixir1.0 -v $(pwd):/app -w /app msaraiva/elixir-dev:1.1.1 sh'
 alias elixir1_2='docker run --rm -it --name elixir1.0 -v $(pwd):/app -w /app msaraiva/elixir-dev:1.2.0 sh'
+alias docker-killall='docker ps | grep -v CONTAINER | awk '"'"'{print $1}'"'"' | xargs -n 1 docker kill'
 
 alias cacert='curl curl.haxx.se/ca/cacert.pem > ~/.dotfiles/cacert.pem'
 
