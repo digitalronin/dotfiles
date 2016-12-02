@@ -1,17 +1,5 @@
-#set-option -g mode-mouse on
-# from: https://wincent.com/blog/tweaking-command-t-and-vim-for-use-in-the-terminal-and-tmux
-# mouse can be used to select panes
-set-option -g mouse-select-pane on
-# mouse can be used to select windows (by clicking in the status bar)
-set-option -g mouse-select-window on
-# mouse can be used to resize panes (by dragging dividers)
-set-option -g mouse-resize-pane on
-# not really sure what this does, but with it, the scrollwheel works inside Vim
-set-option -g mouse-utf8 on
-# allow mouse to enter copy mode and initiate selection
-set-window-option -g mode-mouse on
-
 set-option -g default-terminal "screen-256color"
+set-option -ga terminal-overrides ",*256col*:Tc"
 
 # use C-a y to copy the tmux buffer to the system clipboard
 # bind y run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"
@@ -27,4 +15,3 @@ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 
 # Bind ']' to use pbpaste
 bind ] run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
-
