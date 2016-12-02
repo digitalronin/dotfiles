@@ -7,7 +7,20 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"  " Fixes tmux 24-bit color issues
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"  " Fixes tmux 24-bit color issues
 set termguicolors                       " Enable 24-bit color
 set background=dark
-colorscheme twilight256
+colorscheme gruvbox
+
+" Airline
+let g:airline_theme='one'
+"   - Don't use powerline font separator symbols
+"   - Set up some sensible symbols
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+" let g:airline_symbols.branch = '⌥'
+" let g:airline_symbols.readonly = '⛔'
+" let g:airline_symbols.linenr = '🔢'
 
 set antialias
 set wrap
