@@ -5,8 +5,6 @@ excellent text editor). **One** supports *true colors* and falls back
 gracefully and automatically if your environment does not support this
 feature.
 
-![Vim One Screenshot][screenshot_global]
-
 ## Vim Airline theme
 
 Add the following line to your `~/.vimrc` or `~/.config/nvim/init.vim`
@@ -16,17 +14,6 @@ let g:airline_theme='one'
 ```
 
 As for the colorscheme, this theme comes with light and dark flavors.
-
-
-![Vim Airline Normal Dark][screenshot_normal_dark]
-![Vim Airline Insert Dark][screenshot_insert_dark]
-![Vim Airline Visual Dark][screenshot_visual_dark]
-![Vim Airline Replace Dark][screenshot_replace_dark]
-
-![Vim Airline Normal Light][screenshot_normal_light]
-![Vim Airline Insert Light][screenshot_insert_light]
-![Vim Airline Visual Light][screenshot_visual_light]
-![Vim Airline Replace Light][screenshot_replace_light]
 
 ## List of enhanced language support
 
@@ -55,6 +42,8 @@ scheme.
 * Jade
 * PHP
 * Python
+* Switch to estilo in progress, not stable at all and does not reflect all the
+  capabilities of the current mainstream version
 
 
 ## Installation
@@ -63,13 +52,17 @@ You can use your preferred Vim Package Manager to install **One**.
 
 ## Usage
 
-**One** comes in two flavors: light and dark, make sure to properly set your `background` before setting the colorscheme.
+**One** comes in two flavors: light and dark.
 
 ```vim
+colorscheme one
 set background=dark " for the dark version
 " set background=light " for the light version
-colorscheme one
 ```
+
+`set background` has to be called after setting the colorscheme, this explains
+the issue [#21][issue_21] where Vim tries to determine the best background when `ctermbg`
+for the `Normal` highlight is defined.
 
 ### Italic support
 
@@ -90,6 +83,7 @@ Make sure to read the update if you are using tmux version 2.1 or above.
 To benefit from the **true color** support make sure to add the following lines in your `.vimrc` or `.config/nvim/init.vim`
 
 ```vim
+"Credit joshdick
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
@@ -147,15 +141,7 @@ A special thank you to the following people
 * [Arthur Xavier](https://github.com/arthur-xavier): PureScript support
 * [keremc](https://github.com/keremc): Tip Vim true color support inside tmux
 
-[logo]: screenshots/logo.png
-[screenshot_global]: screenshots/one.png
-[screenshot_normal_dark]: screenshots/normal-dark.png
-[screenshot_insert_dark]: screenshots/insert-dark.png
-[screenshot_visual_dark]: screenshots/visual-dark.png
-[screenshot_replace_dark]: screenshots/replace-dark.png
-[screenshot_normal_light]: screenshots/normal-light.png
-[screenshot_insert_light]: screenshots/insert-light.png
-[screenshot_visual_light]: screenshots/visual-light.png
-[screenshot_replace_light]: screenshots/replace-light.png
+[logo]: screenshots/new-logo.png
 
 [issue_3]: https://github.com/rakr/vim-one/issues/3
+[issue_21]: https://github.com/rakr/vim-one/issues/21
