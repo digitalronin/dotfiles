@@ -67,10 +67,12 @@ set_env_vars() {
 
   export PATH="$HOME/.rvm/bin:$HOME/bin:./.bundle/bin:/usr/local/bin:$PATH"
 
-  if [[ -d /Users/davidsalgado ]]; then
-    # Fix ruby SSL problems
-    export SSL_CERT_FILE=/Users/davidsalgado/.dotfiles/cacert.pem
-  fi
+  # if [[ -d /Users/davidsalgado ]]; then
+  #   # Fix ruby SSL problems
+  #   export SSL_CERT_FILE=/Users/davidsalgado/.dotfiles/cacert.pem
+  # fi
+  # ^^ removed because it causes cert problems with homebrew
+  # https://stackoverflow.com/questions/38737490/curl-certificate-verification-failed-on-mac
 
   EDITOR=vim
   DISPLAY=:0.0
