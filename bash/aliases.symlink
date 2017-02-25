@@ -5,16 +5,9 @@ alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 alias cdg='. cd-gem'
 
 alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
-alias r32d='tmux rename-window deploy ; cd ${HOME}/admoda/amoda_rails32_deploy'
-alias log='tmux rename-window logs    ; cd ${HOME}/admoda/process-json-logs'
 alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'
 alias pup='tmux rename-window pup     ; cd ${HOME}/admoda/configuration_management/puppet'
-alias cond='tmux rename-window dock   ; cd ${HOME}/admoda/adservers'
-alias dock='tmux rename-window dock   ; cd ${HOME}/admoda/adservers'
-alias look='tmux rename-window elixir ; cd ${HOME}/admoda/amoda_lookup'
-alias int='tmux rename-window int     ; cd ${HOME}/admoda/adserver-integration-tests'
-alias dev='tmux rename-window dev     ; cd ${HOME}/admoda/adserver-development'
-alias elix='tmux rename-window elix   ; cd ${HOME}/admoda/elixir-adserver'
+alias blog='tmux rename-window blog   ; cd ${HOME}/Projects/blog'
 
 alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; make server-production'
 
