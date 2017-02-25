@@ -39,12 +39,16 @@ setup_completions() {
 }
 
 set_prompt() {
-  # Prompt
+  # Prompt (deprecated)
   # PS1="[\u@\h \W]$ "
-  C1="\[\033[01;32m\]"
-  C2="\[\033[01;34m\]"
-  C3="\[\033[00m\]"
-  PS1='['${C1}'\u@\h '${C2}'\W'${C3}'] '
+
+  # Before I started using bash-powerline
+  # C1="\[\033[01;32m\]"
+  # C2="\[\033[01;34m\]"
+  # C3="\[\033[00m\]"
+  # PS1='['${C1}'\u@\h '${C2}'\W'${C3}'] '
+
+  source ~/bin/bash-powerline.sh
 }
 
 set_editor() {
