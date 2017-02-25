@@ -2,5 +2,5 @@
 *.swp
 *.swo
 .vagrant
-.bundle
+.bundle/
 tags
