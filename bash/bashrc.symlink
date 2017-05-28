@@ -80,6 +80,9 @@ set_env_vars() {
 
   EDITOR=vim
   DISPLAY=:0.0
+
+  # Only store unique commands in history, & disregard leading spaces
+  export HISTCONTROL=ignoreboth:erasedups
 }
 
 use_ssh_agent() {
