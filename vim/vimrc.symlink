@@ -238,6 +238,8 @@ map <Leader>se :e ~/.vimrc<CR>
 vmap <Leader>cc "+y
 " Insert system clipboard to document
 nmap <Leader>cv "+p
+" Replace the entire document with the contents of the system clipboard
+nmap <Leader>cr ggdG"+p
 
 " Visually select the last yank into this buffer
 nmap <Leader>sp '[V']$
