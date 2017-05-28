@@ -28,6 +28,7 @@ enable_nerdtree_arrows() {
 load_aliases() {
   . ~/.aliases
   . ~/.git_aliases
+  . ~/.private/aliases
 }
 
 setup_completions() {
