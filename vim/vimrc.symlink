@@ -236,6 +236,7 @@ map <Leader>se :e ~/.vimrc<CR>
 " Copy to/Paste from system clipboard
 " Copy line to system clipboard
 vmap <Leader>cc "+y
+" Insert system clipboard to document
 nmap <Leader>cv "+p
 
 " Visually select the last yank into this buffer
