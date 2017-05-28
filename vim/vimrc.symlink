@@ -234,6 +234,7 @@ map <Leader>se :e ~/.vimrc<CR>
 " set clipboard=unnamed
 
 " Copy to/Paste from system clipboard
+" Copy line to system clipboard
 vmap <Leader>cc "+y
 nmap <Leader>cv "+p
 
