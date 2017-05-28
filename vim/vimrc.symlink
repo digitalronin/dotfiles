@@ -276,7 +276,6 @@ source ~/.vim/scripts/debug.vim
 source ~/.vim/scripts/testrunner.vim
 source ~/.vim/scripts/remove_trailing_whitespace.vim
 source ~/.vim/scripts/ctrlp.vim
-source ~/.vim/scripts/qfdo.vim
 source ~/.vim/scripts/prose.vim
 
 "vim-orgmode
