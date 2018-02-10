@@ -14,10 +14,10 @@ main() {
   install_dotfiles $1
 
   mkdir ~/.ssh 2>/dev/null || true
-  link_private_file ${KEYBASE_PRIVATE_DIR} ~/.private
-  link_private_file ~/.private/ssh_config ~/.ssh/config
-  link_private_file ~/.private/s3cfg ~/.s3cfg
-  link_private_file ~/.private/gitconfig.symlink ~/.gitconfig
+  safe_symlink ${KEYBASE_PRIVATE_DIR} ~/.private
+  safe_symlink ~/.private/ssh_config ~/.ssh/config
+  safe_symlink ~/.private/s3cfg ~/.s3cfg
+  safe_symlink ~/.private/gitconfig.symlink ~/.gitconfig
 
   create_bin_scripts
 
@@ -26,7 +26,7 @@ main() {
 }
 
 create_bin_scripts() {
-  link_private_file $(pwd)/bin ~/bin
+  safe_symlink $(pwd)/bin ~/bin
 }
 
 install_dotfiles () {
@@ -101,7 +101,7 @@ install_dotfiles () {
   done
 }
 
-link_private_file() {
+safe_symlink() {
   local src=$1
   local target=$2
 
