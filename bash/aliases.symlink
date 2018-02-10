@@ -51,3 +51,12 @@ alias lookup='cat ranges | iplist | iplookup | cut -d, -f2,3,4 | uniqr'
 
 # Serve current directory as a web page
 alias webserver='python -m SimpleHTTPServer 8888'
+
+# Crypto wallets (running under Wine)
+alias cw=crypto_wallets
+alias report='cd ~/p/masternodes/; ./report.rb output.html'
+alias socialsend='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine send-qt.exe'
+alias magnet='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine magnet-qt.exe'
+alias sparks='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine Sparks-qt.exe'
+alias goacoin='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine goacoin-qt.exe'
+alias cerberus='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine cerberus-qt.exe'
