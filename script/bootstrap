@@ -16,7 +16,6 @@ main() {
   mkdir ~/.ssh 2>/dev/null || true
   safe_symlink ${KEYBASE_PRIVATE_DIR}/private_dotfiles ~/.private
   safe_symlink ${KEYBASE_PRIVATE_DIR}/ssh_dir ~/.ssh
-  safe_symlink ~/.private/ssh_config ~/.ssh/config
   safe_symlink ~/.private/s3cfg ~/.s3cfg
   safe_symlink ~/.private/gitconfig.symlink ~/.gitconfig
 
