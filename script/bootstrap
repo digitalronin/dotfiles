@@ -3,6 +3,7 @@
 # bootstrap installs things.
 
 DOTFILES_ROOT="`pwd`"
+KEYBASE_PRIVATE_DIR="/keybase/private/digitalronin/private_dotfiles"
 
 set -e
 
@@ -13,6 +14,7 @@ main() {
   install_dotfiles $1
 
   mkdir ~/.ssh 2>/dev/null
+  link_private_file ${KEYBASE_PRIVATE_DIR} ~/.private
   link_private_file ~/.private/ssh_config ~/.ssh/config
   link_private_file ~/.private/s3cfg ~/.s3cfg
   link_private_file ~/.private/gitconfig.symlink ~/.gitconfig
