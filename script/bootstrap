@@ -13,7 +13,7 @@ main() {
 
   install_dotfiles $1
 
-  mkdir ~/.ssh 2>/dev/null
+  mkdir ~/.ssh 2>/dev/null || true
   link_private_file ${KEYBASE_PRIVATE_DIR} ~/.private
   link_private_file ~/.private/ssh_config ~/.ssh/config
   link_private_file ~/.private/s3cfg ~/.s3cfg
