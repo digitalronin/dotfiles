@@ -18,15 +18,10 @@ main() {
   safe_symlink ${KEYBASE_PRIVATE_DIR}/ssh_dir ~/.ssh
   safe_symlink ~/.private/s3cfg ~/.s3cfg
   safe_symlink ~/.private/gitconfig.symlink ~/.gitconfig
-
-  create_bin_scripts
+  safe_symlink $(pwd)/bin ~/bin
 
   echo ''
   echo '  All installed!'
-}
-
-create_bin_scripts() {
-  safe_symlink $(pwd)/bin ~/bin
 }
 
 install_dotfiles () {
