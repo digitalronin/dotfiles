@@ -105,7 +105,7 @@ link_private_file() {
   local src=$1
   local target=$2
 
-  if [ -f $target ]
+  if [ -e $target ]
   then
     info "${target} exists, moving to ${target}.bak"
     mv $target ${target}.bak
