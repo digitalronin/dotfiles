@@ -18,7 +18,7 @@ main() {
   safe_symlink ${KEYBASE_PRIVATE_DIR}/ssh_dir ~/.ssh
   safe_symlink ~/.private/s3cfg ~/.s3cfg
   safe_symlink ~/.private/gitconfig.symlink ~/.gitconfig
-  safe_symlink $(pwd)/bin ~/bin
+  safe_symlink ${KEYBASE_PRIVATE_DIR}/bin ~/bin
 
   echo ''
   echo '  All installed!'
