@@ -59,3 +59,5 @@ alias socialsend='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:i
 alias magnet='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine magnet-qt.exe'
 alias sparks='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine Sparks-qt.exe'
 alias corez='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine corez-qt.exe'
+
+alias add-ssh-keys='(cd ~/.ssh; for i in $(ls -1 do_rsa_* | grep -v pub); do ssh-add $i; done)'
