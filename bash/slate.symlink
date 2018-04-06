@@ -87,13 +87,11 @@ bind g:${hotkey} grid padding:5 0:6,3 1:12,6
 # Apps
 alias app-browser  'Google Chrome'
 alias app-editor   'MacVim'
-alias app-evernote 'Evernote'
 alias app-finder   'Finder'
 alias app-terminal 'iTerm'
 alias app-chat     'Slack'
 alias app-git      'GitX'
 bind b:alt;cmd focus ${app-browser}
-bind e:alt;cmd focus ${app-evernote}
 bind f:alt;cmd focus ${app-finder}
 bind t:alt;cmd focus ${app-terminal}
 bind v:alt;cmd focus ${app-editor}
@@ -111,14 +109,12 @@ bind u:${hotkey} undo
 bind space:${hotkey} ${full}
 
 # 2 monitor layouts
-layout 2default ${app-evernote}:REPEAT ${laptop-full}
 layout 2default ${app-browser}:REPEAT  ${laptop-full}
 layout 2default ${app-editor}:REPEAT   ${laptop-full}
 layout 2default ${app-terminal}:REPEAT ${second-full}
 layout 2default ${app-chat}            ${second-left-third}
 
 # 1 monitor layouts
-layout 1default ${app-evernote}:REPEAT ${laptop-full}
 layout 1default ${app-terminal}:REPEAT ${laptop-full}
 layout 1default ${app-browser}:REPEAT  ${laptop-full}
 layout 1default ${app-finder}:REPEAT   ${laptop-full}
