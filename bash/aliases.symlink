@@ -54,7 +54,7 @@ alias webserver='python -m SimpleHTTPServer 8888'
 
 # Crypto wallets (running under Wine)
 alias cw=crypto_wallets
-alias mnreport='cd ~/p/masternodes/; ./report.rb output.html'
+alias mnreport='cd ~/p/masternodes/; ./report.rb output.html; open ~/p/masternodes/output.html'
 alias socialsend='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine send-qt.exe'
 alias magnet='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine magnet-qt.exe'
 alias sparks='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine Sparks-qt.exe'
