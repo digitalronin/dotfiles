@@ -12,7 +12,7 @@ alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'
 alias pup='tmux rename-window pup     ; cd ${HOME}/admoda/configuration_management/puppet'
 alias blog='tmux rename-window blog   ; cd ${HOME}/Projects/blog'
 
-alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; make server-production'
+alias accounts='cd /Users/david/p/dsmk_accounts_rails4; make server-production'
 
 alias sr='spring rspec'
 alias srs='spring stop; spring rake RAILS_ENV=test db:reset; spring rake db:test:prepare; spring rspec spec; spring rake teaspoon'
