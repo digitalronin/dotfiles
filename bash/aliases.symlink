@@ -3,6 +3,9 @@ alias vi='vim'
 alias be='bundle exec'
 alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 alias cdg='. cd-gem'
+alias r='fc -s'  # e.g. 'r foo=bar' repeat last command, replacing all 'foo' with 'bar'
+alias plax='/Applications/VLC.app/Contents/MacOS/VLC --play-and-exit --video-on-top --fullscreen'
+alias did=-"vi +'normal Go' +'r!date' +'normal Go' ~/Dropbox/did.txt"
 
 alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
 alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'
