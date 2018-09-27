@@ -58,11 +58,5 @@ alias webserver='python -m SimpleHTTPServer 8888'
 # Crypto wallets (running under Wine)
 alias cw=crypto_wallets
 alias mnreport='cd ~/p/masternodes/; ./report.rb output.html'
-alias socialsend='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine send-qt.exe'
-alias magnet='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine magnet-qt.exe'
-alias sparks='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine Sparks-qt.exe'
-alias corez='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine corez-qt.exe'
-alias zixx='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine zixx-qt.exe'
-alias cerberus='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine cerberus-qt.exe'
 
 alias add-ssh-keys='(cd ~/.ssh; for i in $(ls -1 digitalocean* do_rsa_* | grep -v pub); do ssh-add $i; done)'
