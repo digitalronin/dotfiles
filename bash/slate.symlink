@@ -71,7 +71,7 @@ bind right:${hotkey} throw right resize
 bind left:${hotkey}  throw left  resize
 bind up:${hotkey}    throw up    resize
 bind down:${hotkey}  throw down  resize
-bind q:${hotkey}     shell /Users/davidsalgado/bin/quit_slate.sh
+bind q:${hotkey}     shell /Users/david/bin/quit_slate.sh
 
 # Focus Bindings
 bind right:cmd;alt  focus right
@@ -86,16 +86,12 @@ bind g:${hotkey} grid padding:5 0:6,3 1:12,6
 
 # Apps
 alias app-browser  'Google Chrome'
-alias app-editor   'MacVim'
 alias app-finder   'Finder'
 alias app-terminal 'iTerm'
-alias app-chat     'Slack'
 alias app-git      'GitX'
 bind b:alt;cmd focus ${app-browser}
 bind f:alt;cmd focus ${app-finder}
 bind t:alt;cmd focus ${app-terminal}
-bind v:alt;cmd focus ${app-editor}
-bind c:alt;cmd focus ${app-chat}
 bind x:alt;cmd focus ${app-git}
 
 # Window Hints
@@ -109,18 +105,13 @@ bind u:${hotkey} undo
 bind space:${hotkey} ${full}
 
 # 2 monitor layouts
-layout 2default ${app-browser}:REPEAT  ${laptop-full}
-layout 2default ${app-editor}:REPEAT   ${laptop-full}
 layout 2default ${app-terminal}:REPEAT ${second-full}
-layout 2default ${app-chat}            ${second-left-third}
 
 # 1 monitor layouts
 layout 1default ${app-terminal}:REPEAT ${laptop-full}
 layout 1default ${app-browser}:REPEAT  ${laptop-full}
 layout 1default ${app-finder}:REPEAT   ${laptop-full}
-layout 1default ${app-editor}:REPEAT   ${laptop-full}
 layout 1default ${app-git}:REPEAT      ${laptop-full}
-layout 1default ${app-chat}            ${laptop-left-third}
 
 bind ]:${hotkey} layout 2default
 bind [:${hotkey} layout 1default
