@@ -11,3 +11,5 @@ if [[ -d /Users/davidsalgado/google-cloud-sdk ]]; then
   # The next line enables shell command completion for gcloud.
   source '/Users/davidsalgado/google-cloud-sdk/completion.bash.inc'
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
