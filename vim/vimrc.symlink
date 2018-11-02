@@ -119,6 +119,7 @@ let NERDTreeIgnore=['\.class$']
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class
 
 "UltiSnips
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger="<C-b>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
