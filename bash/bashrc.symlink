@@ -70,7 +70,11 @@ set_env_vars() {
 
   use_ssh_agent
 
-  export PATH="$HOME/.rvm/bin:$HOME/bin:/usr/local/opt/curl/bin:./.bundle/bin:/usr/local/bin:$PATH"
+  local readonly python_path="$HOME/Library/Python/3.7/bin"
+  local readonly curl_path="/usr/local/opt/curl/bin"
+  local readonly gettext_path="/usr/local/opt/gettext/bin"
+
+  export PATH="$HOME/.rvm/bin:$HOME/bin:${python_path}:${curl_path}:${gettext_path}:./.bundle/bin:/usr/local/bin:$PATH"
 
   # if [[ -d /Users/davidsalgado ]]; then
   #   # Fix ruby SSL problems
