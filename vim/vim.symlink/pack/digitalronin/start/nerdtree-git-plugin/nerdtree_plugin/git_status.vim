@@ -285,7 +285,7 @@ function! s:CursorHoldUpdate()
 endfunction
 
 augroup nerdtreegitplugin
-    autocmd BufWritePost * call s:FileUpdate(expand('%:p'))
+    autocmd BufWritePost * nested call s:FileUpdate(expand('%:p'))
 augroup END
 " FUNCTION: s:FileUpdate(fname) {{{2
 function! s:FileUpdate(fname)
