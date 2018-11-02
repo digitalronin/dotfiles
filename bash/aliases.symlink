@@ -3,13 +3,16 @@ alias vi='vim'
 alias be='bundle exec'
 alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 alias cdg='. cd-gem'
+alias r='fc -s'  # e.g. 'r foo=bar' repeat last command, replacing all 'foo' with 'bar'
+alias plax='/Applications/VLC.app/Contents/MacOS/VLC --play-and-exit --video-on-top --fullscreen'
+alias did=-"vi +'normal Go' +'r!date' +'normal Go' ~/Dropbox/did.txt"
 
 alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
 alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'
 alias pup='tmux rename-window pup     ; cd ${HOME}/admoda/configuration_management/puppet'
 alias blog='tmux rename-window blog   ; cd ${HOME}/Projects/blog'
 
-alias accounts='cd ~/Projects/Rails4/dsmk_accounts/; make server-production'
+alias accounts='cd /Users/david/p/dsmk_accounts_rails4; make server-production'
 
 alias sr='spring rspec'
 alias srs='spring stop; spring rake RAILS_ENV=test db:reset; spring rake db:test:prepare; spring rspec spec; spring rake teaspoon'
@@ -55,10 +58,5 @@ alias webserver='python -m SimpleHTTPServer 8888'
 # Crypto wallets (running under Wine)
 alias cw=crypto_wallets
 alias mnreport='cd ~/p/masternodes/; ./report.rb output.html'
-alias socialsend='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine send-qt.exe'
-alias magnet='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine magnet-qt.exe'
-alias sparks='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine Sparks-qt.exe'
-alias corez='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine corez-qt.exe'
-alias zixx='cd ~/Applications/Wine; export FREETYPE_PROPERTIES="truetype:interpreter-version=35"; wine zixx-qt.exe'
 
 alias add-ssh-keys='(cd ~/.ssh; for i in $(ls -1 digitalocean* do_rsa_* | grep -v pub); do ssh-add $i; done)'

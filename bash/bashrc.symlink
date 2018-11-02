@@ -76,6 +76,10 @@ set_env_vars() {
 
   export PATH="$HOME/.rvm/bin:$HOME/bin:${python_path}:${curl_path}:${gettext_path}:./.bundle/bin:/usr/local/bin:$PATH"
 
+  export PATH="$HOME/.rvm/bin:$HOME/bin:/usr/local/opt/curl/bin:./.bundle/bin:/usr/local/bin:$PATH"
+  # Add Rust toolchain to path
+  export PATH="$HOME/.cargo/bin:$PATH"
+
   # if [[ -d /Users/davidsalgado ]]; then
   #   # Fix ruby SSL problems
   #   export SSL_CERT_FILE=/Users/davidsalgado/.dotfiles/cacert.pem
