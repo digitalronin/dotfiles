@@ -3,7 +3,7 @@
 # bootstrap installs things.
 
 DOTFILES_ROOT="`pwd`"
-KEYBASE_PRIVATE_DIR="/keybase/private/digitalronin"
+KEYBASE_PRIVATE_DIR="${HOME}/.keybase"
 
 set -e
 
