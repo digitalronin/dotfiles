@@ -54,6 +54,7 @@ set_prompt() {
 
 set_editor() {
   EDITOR=vi
+  GIT_EDITOR=/usr/local/bin/vim
 }
 
 load_functions() {
@@ -91,8 +92,6 @@ set_env_vars() {
   # ^^ removed because it causes cert problems with homebrew
   # https://stackoverflow.com/questions/38737490/curl-certificate-verification-failed-on-mac
 
-  EDITOR=vim
-  GIT_EDITOR=${EDITOR}
   DISPLAY=:0.0
 
   # Only store unique commands in history, & disregard leading spaces
