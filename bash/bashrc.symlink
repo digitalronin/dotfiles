@@ -53,8 +53,8 @@ set_prompt() {
 }
 
 set_editor() {
-  EDITOR=vi
-  GIT_EDITOR=/usr/local/bin/vim
+  EDITOR=vim
+  GIT_EDITOR=vim
 }
 
 load_functions() {
