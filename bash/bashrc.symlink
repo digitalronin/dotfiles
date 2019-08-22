@@ -96,6 +96,9 @@ set_env_vars() {
 
   # Only store unique commands in history, & disregard leading spaces
   export HISTCONTROL=ignoreboth:erasedups
+
+  # Terraform module cache
+  export TF_PLUGIN_CACHE_DIR=~/.terraform_cache
 }
 
 use_ssh_agent() {
