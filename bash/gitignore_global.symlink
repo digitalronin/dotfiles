@@ -4,3 +4,5 @@
 .vagrant
 .bundle/
 tags
+.ctags_exclude
+.env
