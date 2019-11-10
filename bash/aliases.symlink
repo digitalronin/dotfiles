@@ -21,7 +21,6 @@ alias srs='spring stop; spring rake RAILS_ENV=test db:reset; spring rake db:test
 alias ss='mongrel_rails start'
 alias sc='script/console'
 alias dbc='script/dbconsole'
-alias ls='ls -G'
 alias ls='ls -l'
 alias agp='ag --pager "less -R"'
 
