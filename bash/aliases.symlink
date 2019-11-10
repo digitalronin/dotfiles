@@ -7,7 +7,8 @@ alias r='fc -s'  # e.g. 'r foo=bar' repeat last command, replacing all 'foo' wit
 alias plax='/Applications/VLC.app/Contents/MacOS/VLC --play-and-exit --video-on-top --fullscreen'
 alias did=-"vi +'normal Go' +'r!date' +'normal Go' ~/Dropbox/did.txt"
 alias webserver='python -m SimpleHTTPServer'
-alias tf=terraform
+alias hpr='export GIT_EDITOR=$(which vim); hub pull-request'
+alias tf='terraform'
 
 alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
 alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'

@@ -1,3 +1,7 @@
+snippet todo
+// TODO: $0
+endsnippet
+
 snippet cl "console.log..."
 console.log(${1});$0
 endsnippet
@@ -12,9 +16,8 @@ snippet fn "arrow func"
 }
 endsnippet
 
-snippet it "async unit test"
-it('$1', async () => {
+snippet it "it('whatever', () => {..."
+it('${1}', async () => {
 	$0
 });
-
 endsnippet
