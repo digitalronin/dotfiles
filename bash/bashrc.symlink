@@ -54,6 +54,7 @@ set_prompt() {
 
 set_editor() {
   EDITOR=vi
+  GIT_EDITOR=vi
 }
 
 load_functions() {
