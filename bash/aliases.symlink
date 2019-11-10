@@ -22,6 +22,7 @@ alias ss='mongrel_rails start'
 alias sc='script/console'
 alias dbc='script/dbconsole'
 alias ls='ls -l'
+alias lsl='ls -ltrh'
 alias agp='ag --pager "less -R"'
 
 alias pbd='pwd | pbcopy'
