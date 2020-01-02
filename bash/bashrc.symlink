@@ -99,6 +99,9 @@ set_env_vars() {
 
   # Terraform module cache
   export TF_PLUGIN_CACHE_DIR=~/.terraform_cache
+
+  # Suppress annoying message about zsh on OSX Catalina. Apple are dicks.
+  export BASH_SILENCE_DEPRECATION_WARNING=1
 }
 
 use_ssh_agent() {
