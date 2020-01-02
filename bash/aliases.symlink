@@ -14,6 +14,7 @@ alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
 alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'
 alias pup='tmux rename-window pup     ; cd ${HOME}/admoda/configuration_management/puppet'
 alias blog='tmux rename-window blog   ; cd ${HOME}/Projects/blog'
+alias countem='sort | uniq -c | sort -n'
 
 alias accounts='cd /Users/david/p/dsmk_accounts_rails4; make server-production'
 
