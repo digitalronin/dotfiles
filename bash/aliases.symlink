@@ -1,7 +1,7 @@
 alias 755='chmod 755'
 alias vi='vim'
 alias be='bundle exec'
-alias bi='bundle config set path .bundle gems; bundle install --binstubs'
+alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
 alias cdg='. cd-gem'
 alias r='fc -s'  # e.g. 'r foo=bar' repeat last command, replacing all 'foo' with 'bar'
 alias plax='/Applications/VLC.app/Contents/MacOS/VLC --play-and-exit --video-on-top --fullscreen'
@@ -64,3 +64,10 @@ alias cw=crypto_wallets
 alias mnreport='cd ~/p/masternodes/; ./report.rb output.html'
 
 alias add-ssh-keys='(cd ~/.ssh; for i in $(ls -1 digitalocean* do_rsa_* | grep -v pub); do ssh-add $i; done)'
+
+# MoJ 2019
+alias mcp='cd ~/p/moj/cloud-platform/'
+alias mcpe='cd ~/p/moj/cloud-platform-environments/'
+alias mcpi='cd ~/p/moj/cloud-platform-infrastructure/'
+alias bastion='ssh -A admin@bastion.live-1.cloud-platform.service.justice.gov.uk -p 50422'
+alias moj-env='. ~/p/moj/cloud-platform-infrastructure/.env'
