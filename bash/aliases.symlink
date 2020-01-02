@@ -6,7 +6,7 @@ alias cdg='. cd-gem'
 alias r='fc -s'  # e.g. 'r foo=bar' repeat last command, replacing all 'foo' with 'bar'
 alias plax='/Applications/VLC.app/Contents/MacOS/VLC --play-and-exit --video-on-top --fullscreen'
 alias did=-"vi +'normal Go' +'r!date' +'normal Go' ~/Dropbox/did.txt"
-alias hpr='export GIT_EDITOR=$(which vim); hub pull-request'
+alias hpr='git push origin $(git rev-parse --abbrev-ref HEAD) && export GIT_EDITOR=$(which vim); hub pull-request'
 alias tf='terraform'
 
 alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
