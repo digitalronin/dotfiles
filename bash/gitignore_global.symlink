@@ -4,5 +4,5 @@
 .vagrant
 .bundle/
 tags
-.ctags_exclude
+node_modules/
 .env

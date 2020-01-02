@@ -281,6 +281,10 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
+" Ale https://github.com/dense-analysis/ale
+let g:ale_linters = {'ruby': ['standardrb']}
+let g:ale_fixers = {'ruby': ['standardrb']}
+let g:ale_fix_on_save = 1
 
 " Enable abbreviations in vim-mustache-handlebars
 let g:mustache_abbreviations = 1
@@ -324,3 +328,10 @@ set nrformats=alpha
 " x   magic insert mode prefix
 " y   <%=  %>
 " z   bg
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL

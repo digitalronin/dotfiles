@@ -97,6 +97,9 @@ set_env_vars() {
   # Only store unique commands in history, & disregard leading spaces
   export HISTCONTROL=ignoreboth:erasedups
 
+  # silence osx catalina zsh nag
+  export BASH_SILENCE_DEPRECATION_WARNING=1
+
   # Terraform module cache
   export TF_PLUGIN_CACHE_DIR=~/.terraform_cache
 
