@@ -6,14 +6,15 @@ alias cdg='. cd-gem'
 alias r='fc -s'  # e.g. 'r foo=bar' repeat last command, replacing all 'foo' with 'bar'
 alias plax='/Applications/VLC.app/Contents/MacOS/VLC --play-and-exit --video-on-top --fullscreen'
 alias did=-"vi +'normal Go' +'r!date' +'normal Go' ~/Dropbox/did.txt"
-alias webserver='python -m SimpleHTTPServer'
-alias hpr='export GIT_EDITOR=$(which vim); hub pull-request'
+alias hpr='git push origin $(git rev-parse --abbrev-ref HEAD) && export GIT_EDITOR=$(which vim); hub pull-request'
 alias tf='terraform'
+alias standardrb='docker run --rm -v $(pwd):/app ministryofjustice/standardrb standardrb'
 
 alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
 alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'
 alias pup='tmux rename-window pup     ; cd ${HOME}/admoda/configuration_management/puppet'
 alias blog='tmux rename-window blog   ; cd ${HOME}/Projects/blog'
+alias countem='sort | uniq -c | sort -n'
 
 alias ls='ls -l'
 alias lsl='ls -ltrh'
@@ -47,10 +48,11 @@ alias webserver='python -m SimpleHTTPServer 8888'
 # Crypto wallets (running under Wine)
 alias cw=crypto_wallets
 
-
-# MoJ - ministryofjustice
-alias mcpe="cd ~/p/moj/cloud-platform-environments/"
-alias mcpi="cd ~/p/moj/cloud-platform-infrastructure/"
-alias moj-env=". ~/p/moj/cloud-platform-infrastructure/.env"
-
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+# MoJ 2019
+alias mcp='cd ~/p/moj/cloud-platform/'
+alias mcpe='cd ~/p/moj/cloud-platform-environments/'
+alias mcpi='cd ~/p/moj/cloud-platform-infrastructure/'
+alias bastion='ssh -A admin@bastion.live-1.cloud-platform.service.justice.gov.uk -p 50422'
+alias moj-env='. ~/p/moj/cloud-platform-infrastructure/.env'

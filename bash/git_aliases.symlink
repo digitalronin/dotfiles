@@ -12,3 +12,4 @@ alias gm_deploy='git checkout deploy; git merge master; git checkout master; git
 alias git-modified="git status --porcelain | grep '^ M ' | sed 's/^ M //'"
 alias push-branch='git push origin $(git rev-parse --abbrev-ref HEAD)'
 alias prune-local-branches='git branch | grep -v master | xargs git branch -d'
+alias git-set-remote="git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) $(git rev-parse --abbrev-ref HEAD)"
