@@ -9,6 +9,9 @@ main() {
   set_editor
   set_env_vars
   load_functions
+
+  # initialise rbenv
+  eval "$(rbenv init -)"
 }
 
 source_global_definitions() {
@@ -76,7 +79,7 @@ set_env_vars() {
   local readonly curl_path="/usr/local/opt/curl/bin"
   local readonly gettext_path="/usr/local/opt/gettext/bin"
 
-  export PATH="$HOME/.rvm/bin:$HOME/bin:${python_path}:${curl_path}:${gettext_path}:./.bundle/bin:/usr/local/bin:$PATH"
+  export PATH="$HOME/.rbenv/bin:$HOME/bin:${python_path}:${curl_path}:${gettext_path}:./.bundle/bin:/usr/local/bin:$PATH"
 
   # Add Rust toolchain to path
   export PATH="$HOME/.cargo/bin:$PATH"
