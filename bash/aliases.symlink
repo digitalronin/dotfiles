@@ -1,7 +1,7 @@
 alias 755='chmod 755'
 alias vi='vim'
 alias be='bundle exec'
-alias bi='bundle install --path .bundle/gems --binstubs .bundle/bin'
+alias bi='bundle install'
 alias cdg='. cd-gem'
 alias r='fc -s'  # e.g. 'r foo=bar' repeat last command, replacing all 'foo' with 'bar'
 alias plax='/Applications/VLC.app/Contents/MacOS/VLC --play-and-exit --video-on-top --fullscreen'
