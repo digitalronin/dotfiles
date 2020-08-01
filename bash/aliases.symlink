@@ -52,3 +52,5 @@ alias cw=crypto_wallets
 alias mcpe="cd ~/p/moj/cloud-platform-environments/"
 alias mcpi="cd ~/p/moj/cloud-platform-infrastructure/"
 alias moj-env=". ~/p/moj/cloud-platform-infrastructure/.env"
+
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
