@@ -15,17 +15,8 @@ alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'
 alias pup='tmux rename-window pup     ; cd ${HOME}/admoda/configuration_management/puppet'
 alias blog='tmux rename-window blog   ; cd ${HOME}/Projects/blog'
 
-alias accounts='cd /Users/david/p/dsmk_accounts_rails4; make server-production'
-
-alias sr='spring rspec'
-alias srs='spring stop; spring rake RAILS_ENV=test db:reset; spring rake db:test:prepare; spring rspec spec; spring rake teaspoon'
-
-alias ss='mongrel_rails start'
-alias sc='script/console'
-alias dbc='script/dbconsole'
 alias ls='ls -l'
 alias lsl='ls -ltrh'
-alias agp='ag --pager "less -R"'
 
 alias pbd='pwd | pbcopy'
 alias words_to_lines='ruby -e "gets.split.map {|i| puts i}"'
@@ -37,15 +28,10 @@ alias myexternalip='dig +short myip.opendns.com @resolver1.opendns.com'
 # Ctags
 alias ctx='ctags --exclude=@.ctags_exclude -R .'
 
-# Google BigQuery
-alias bq="~/google-cloud-sdk/bin/bq"
-
 # Docker
 alias docker-fix-time='docker-machine ssh default "sudo ntpclient -s -h pool.ntp.org"'
 alias dstop='docker stop $(docker ps -q)'
 alias docker_bash='docker run -it -v $(pwd):/opt/src -w /opt/src phusion/baseimage:0.9.15 /bin/bash'
-alias elixir1_1='docker run --rm -it --name elixir1.0 -v $(pwd):/app -w /app msaraiva/elixir-dev:1.1.1 sh'
-alias elixir1_2='docker run --rm -it --name elixir1.0 -v $(pwd):/app -w /app msaraiva/elixir-dev:1.2.0 sh'
 alias docker-killall='docker ps | grep -v CONTAINER | awk '"'"'{print $1}'"'"' | xargs -n 1 docker kill'
 
 alias cacert='curl curl.haxx.se/ca/cacert.pem > ~/.dotfiles/cacert.pem'
@@ -60,6 +46,4 @@ alias webserver='python -m SimpleHTTPServer 8888'
 
 # Crypto wallets (running under Wine)
 alias cw=crypto_wallets
-alias mnreport='cd ~/p/masternodes/; ./report.rb output.html'
 
-alias add-ssh-keys='(cd ~/.ssh; for i in $(ls -1 digitalocean* do_rsa_* | grep -v pub); do ssh-add $i; done)'
