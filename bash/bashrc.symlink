@@ -59,6 +59,7 @@ set_editor() {
 
 load_functions() {
   source ~/.functions.sh
+  source ~/bin/kd  # directory aliaser
 }
 
 set_env_vars() {
