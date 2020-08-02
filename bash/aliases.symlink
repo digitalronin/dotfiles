@@ -7,7 +7,10 @@ alias r='fc -s'  # e.g. 'r foo=bar' repeat last command, replacing all 'foo' wit
 alias plax='/Applications/VLC.app/Contents/MacOS/VLC --play-and-exit --video-on-top --fullscreen'
 alias did=-"vi +'normal Go' +'r!date' +'normal Go' ~/Dropbox/did.txt"
 alias hpr='git push origin $(git rev-parse --abbrev-ref HEAD) && export GIT_EDITOR=$(which vim); hub pull-request'
-alias gho="gh repo view $(git remote show origin | grep Fetch | sed 's/.*github.com.//' | sed 's/.git$//' ) --web"
+
+gho() {
+  gh repo view $(git remote show origin | grep Fetch | sed \'s/.*github.com.//\' | sed \'s/.git$//\' ) --web
+}
 
 alias tf='terraform'
 alias standardrb='docker run --rm -v $(pwd):/app ministryofjustice/standardrb standardrb'
@@ -49,6 +52,9 @@ alias webserver='python -m SimpleHTTPServer 8888'
 
 # Crypto wallets (running under Wine)
 alias cw=crypto_wallets
+
+# Private bash history
+alias priv='export HISTFILE=/tmp/history; history -r /tmp/history'
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
