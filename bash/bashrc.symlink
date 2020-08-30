@@ -56,8 +56,8 @@ set_prompt() {
 }
 
 set_editor() {
-  EDITOR=vim
-  GIT_EDITOR=vim
+  export EDITOR=vim
+  export GIT_EDITOR=vim
 }
 
 load_functions() {
