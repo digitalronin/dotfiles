@@ -10,6 +10,8 @@ alias gs='git status'
 alias gis='git status'
 alias gm_deploy='git checkout deploy; git merge master; git checkout master; git push'
 alias git-modified="git status --porcelain | grep '^ M ' | sed 's/^ M //'"
+alias grv="gh repo view --web"
+
 
 push-branch() {
   git push origin $(git rev-parse --abbrev-ref HEAD)
