@@ -12,6 +12,12 @@ alias gm_deploy='git checkout deploy; git merge master; git checkout master; git
 alias git-modified="git status --porcelain | grep '^ M ' | sed 's/^ M //'"
 alias grv="gh repo view --web"
 
+# https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb
+alias fp="fzf --preview 'bat {-1} --color always'"
+fd() {
+  preview="git diff $@ --color=always -- {-1}"
+  git diff $@ --name-only | fzf -m --ansi --preview $preview
+}
 
 push-branch() {
   git push origin $(git rev-parse --abbrev-ref HEAD)
