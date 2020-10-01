@@ -26,7 +26,7 @@ I used to handle these as git submodules, but that started to get painful. So, I
 
 Brewfile
 ========
-
+#Click on this link to check our website
 http://robots.thoughtbot.com/brewfile-a-gemfile-but-for-homebrew
 
 
