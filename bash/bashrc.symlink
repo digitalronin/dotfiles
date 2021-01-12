@@ -84,13 +84,6 @@ set_env_vars() {
   # Add Rust toolchain to path
   export PATH="$HOME/.cargo/bin:$PATH"
 
-  # if [[ -d /Users/davidsalgado ]]; then
-  #   # Fix ruby SSL problems
-  #   export SSL_CERT_FILE=/Users/davidsalgado/.dotfiles/cacert.pem
-  # fi
-  # ^^ removed because it causes cert problems with homebrew
-  # https://stackoverflow.com/questions/38737490/curl-certificate-verification-failed-on-mac
-
   DISPLAY=:0.0
 
   # Only store unique commands in history, & disregard leading spaces
