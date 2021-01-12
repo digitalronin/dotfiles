@@ -108,10 +108,6 @@ use_ssh_agent() {
 }
 
 main
-
-# added by travis gem
-[ -f /Users/davidsalgado/.travis/travis.sh ] && source /Users/davidsalgado/.travis/travis.sh
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/david/google-cloud-sdk/path.bash.inc' ]; then . '/Users/david/google-cloud-sdk/path.bash.inc'; fi
 
