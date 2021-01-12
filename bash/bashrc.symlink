@@ -10,8 +10,8 @@ main() {
   set_env_vars
   load_functions
 
-  # initialise rbenv
-  eval "$(rbenv init -)"
+  source /usr/local/share/chruby/chruby.sh
+  chruby 2.7.1
 }
 
 source_global_definitions() {
