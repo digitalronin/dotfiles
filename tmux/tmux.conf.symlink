@@ -17,7 +17,6 @@ bind \; last-window
 unbind "'"
 bind "'" last-pane
 
-
 # Smart pane switching with awareness of vim splits
 # https://gist.github.com/mislav/5189704
 bind k run-shell 'tmux-vim-select-pane -U'
@@ -58,10 +57,11 @@ bind "\"" split-window -c '#{pane_current_path}'
 bind "\%" split-window -h -c '#{pane_current_path}'
 
 # appearance
-###qqq set-option -g pane-active-border-fg red
-set -g status-bg blue
+set-option -g pane-active-border-style fg=red
+
 ###qqq set-window-option -g window-status-current-bg red
-set -g base-index 1
+set-window-option -g window-status-current-style bg=red
+set -g status-bg green
 
 # Set window notifications
 setw -g monitor-activity on
