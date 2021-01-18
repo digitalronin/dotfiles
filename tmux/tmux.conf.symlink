@@ -12,12 +12,6 @@ set -g pane-base-index 1
 
 # prefix q to display pane numbers, temporarily
 
-# vi keys for pane-to-pane movement
-#bind h select-pane -L
-#bind j select-pane -D
-#bind k select-pane -U
-#unbind l
-#bind l select-pane -R
 unbind \;
 bind \; last-window
 unbind "'"
@@ -42,11 +36,9 @@ source ~/.tmux-osx.conf
 # use C-a v to paste the tmux buffer
 bind v paste-buffer
 
-# Setup 'v' to begin selection as in Vim
-###qqq bind-key -t vi-copy v begin-selection
-
-# Update default binding of `Enter` to also use copy-pipe
-###qqq unbind -t vi-copy Enter
+# Setup 'v' to begin selection as in Vim, and 'y' to yank
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
 
 # Move current window left/right with Ctrl-Shift Left/Right
 bind-key -n C-S-Left swap-window -t -1
