@@ -10,8 +10,11 @@ main() {
   set_env_vars
   load_functions
 
-  source /usr/local/share/chruby/chruby.sh
-  chruby 2.7.1
+  # source /usr/local/share/chruby/auto.sh
+  if [ -f /usr/local/share/chruby/chruby.sh ]; then
+    source /usr/local/share/chruby/chruby.sh
+    chruby 2.7.1
+  fi
 }
 
 source_global_definitions() {
