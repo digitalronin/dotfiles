@@ -122,4 +122,4 @@ link_files () {
   success "linked $1 to $2"
 }
 
-main
+main $1
