@@ -9,12 +9,7 @@ main() {
   set_editor
   set_env_vars
   load_functions
-
-  # source /usr/local/share/chruby/auto.sh
-  if [ -f /usr/local/share/chruby/chruby.sh ]; then
-    source /usr/local/share/chruby/chruby.sh
-    chruby 2.7.1
-  fi
+  source_chruby
 }
 
 source_global_definitions() {
@@ -66,6 +61,14 @@ set_editor() {
 load_functions() {
   source ~/.functions.sh
   source ~/bin/kd  # directory aliaser
+}
+
+source_chruby() {
+  # source /usr/local/share/chruby/auto.sh
+  if [ -f /usr/local/share/chruby/chruby.sh ]; then
+    source /usr/local/share/chruby/chruby.sh
+    chruby 2.7.1
+  fi
 }
 
 set_env_vars() {
