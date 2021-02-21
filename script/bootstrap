@@ -3,7 +3,6 @@
 # bootstrap installs things.
 
 DOTFILES_ROOT="`pwd`"
-PRIVATE_DIR="/Users/david/.keybase/digitalronin" # rsynced from /keybase/private/digitalronin
 
 set -e
 
@@ -12,15 +11,6 @@ main() {
   echo $1
 
   install_dotfiles $1
-
-  mkdir ~/.ssh 2>/dev/null || true
-  safe_symlink ${PRIVATE_DIR}/private_dotfiles ~/.private
-  safe_symlink ${PRIVATE_DIR}/private_dotfiles/ssh_config ~/.ssh/config
-  safe_symlink ${PRIVATE_DIR}/private_dotfiles/s3cfg ~/.s3cfg
-  safe_symlink ${PRIVATE_DIR}/private_dotfiles/gitconfig.symlink ~/.gitconfig
-
-  echo ''
-  echo '  All installed!'
 }
 
 install_dotfiles () {
@@ -133,4 +123,3 @@ link_files () {
 }
 
 main
-
