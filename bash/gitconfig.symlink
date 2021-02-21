@@ -1,0 +1,7 @@
+[user]
+name = digitalronin
+email = david@digitalronin.com
+[core]
+	excludesFile = ~/.gitignore_global
+[init]
+	defaultBranch = main
