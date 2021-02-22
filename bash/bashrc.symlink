@@ -29,7 +29,6 @@ enable_nerdtree_arrows() {
 load_aliases() {
   . ~/.aliases
   . ~/.git_aliases
-  # . ~/.private/aliases
 }
 
 setup_completions() {
@@ -60,7 +59,7 @@ set_editor() {
 
 load_functions() {
   source ~/.functions.sh
-  source ~/bin/kd  # directory aliaser
+  touch ~/.kdrc && source ~/bin/kd  # directory aliaser
 }
 
 source_chruby() {
@@ -72,19 +71,8 @@ source_chruby() {
 }
 
 set_env_vars() {
-  # Any files in the private.symlink directory will end up
-  # being accessible via ~/.private
-  # private.symlink is in .gitignore, so that private
-  # information is not published to github
-
-  # TODO: source any .*_env.sh files that exist
-
-  use_ssh_agent
-
   local readonly gettext_path="/usr/local/opt/gettext/bin"
-
   export PATH="$HOME/bin:${gettext_path}:./.bundle/bin:/usr/local/bin:$PATH"
-
   DISPLAY=:0.0
 
   # Only store unique commands in history, & disregard leading spaces
@@ -98,14 +86,6 @@ set_env_vars() {
 
   # Suppress annoying message about zsh on OSX Catalina. Apple are dicks.
   export BASH_SILENCE_DEPRECATION_WARNING=1
-}
-
-use_ssh_agent() {
-  local readonly file=/tmp/env-ssh-agent
-
-  if [[ -f ${file} ]]; then
-    . ${file} > /dev/null
-  fi
 }
 
 main
