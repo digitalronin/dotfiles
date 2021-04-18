@@ -2,7 +2,7 @@
 
 _complete_make() {
   if [ -f [mM]akefile ]; then
-    targets=$(grep '^[a-z-]*:$' ?akefile | sed 's/://')
+    targets=$(grep '^[a-z-]*:.*$' ?akefile | sed 's/:.*//')
     cur="${COMP_WORDS[COMP_CWORD]}"
     COMPREPLY=( $(compgen -W "${targets}" -- ${cur}) )
   fi
