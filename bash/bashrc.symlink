@@ -86,6 +86,11 @@ set_env_vars() {
 
   # Suppress annoying message about zsh on OSX Catalina. Apple are dicks.
   export BASH_SILENCE_DEPRECATION_WARNING=1
+
+  # ssh-agent, for linux environments
+  if [[ -f ~/.ssh-agent ]]; then
+    source ~/.ssh-agent > /dev/null
+  fi
 }
 
 main
