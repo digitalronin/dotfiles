@@ -10,6 +10,7 @@ main() {
   set_env_vars
   load_functions
   source_chruby
+  set_android_development_env_vars
 }
 
 source_global_definitions() {
@@ -91,6 +92,14 @@ set_env_vars() {
   if [[ -f ~/.ssh-agent ]]; then
     source ~/.ssh-agent > /dev/null
   fi
+}
+
+set_android_development_env_vars() {
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
 }
 
 main
