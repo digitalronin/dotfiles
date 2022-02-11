@@ -28,3 +28,6 @@ alias prune-local-branches='git branch | grep -v master | xargs git branch -d'
 git-set-remote() {
   git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD) $(git rev-parse --abbrev-ref HEAD)
 }
+
+# Make a new, public github repo from the local (presumably new) repo
+alias github-create-public-repo='gh repo create --public --source . --push'
