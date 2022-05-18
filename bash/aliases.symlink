@@ -9,7 +9,7 @@ alias did=-"vi +'normal Go' +'r!date' +'normal Go' ~/Dropbox/did.txt"
 alias hpr='git push origin $(git rev-parse --abbrev-ref HEAD) && export GIT_EDITOR=$(which vim); hub pull-request'
 
 alias tf='terraform'
-alias standardrb='docker run --rm -v $(pwd):/app ministryofjustice/standardrb standardrb'
+# alias standardrb='docker run --rm -v $(pwd):/app ministryofjustice/standardrb standardrb'
 
 alias r32='tmux rename-window rails   ; cd ${HOME}/admoda/amoda_rails32'
 alias ads='tmux rename-window ads     ; cd ${HOME}/admoda/Adserver'
