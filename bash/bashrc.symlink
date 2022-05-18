@@ -64,10 +64,10 @@ load_functions() {
 }
 
 source_chruby() {
-  # source /usr/local/share/chruby/auto.sh
   if [ -f /usr/local/share/chruby/chruby.sh ]; then
     source /usr/local/share/chruby/chruby.sh
-    chruby 2.7.1
+    source /usr/local/share/chruby/auto.sh
+    chruby 3.1.2
   fi
 }
 
