@@ -31,3 +31,5 @@ git-set-remote() {
 
 # Make a new, public github repo from the local (presumably new) repo
 alias github-create-public-repo='gh repo create --public --source . --push'
+# Make a new, private github repo from the local (presumably new) repo
+alias github-create-private-repo='gh repo create --private --source . --push'
