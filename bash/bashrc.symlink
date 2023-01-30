@@ -10,7 +10,7 @@ main() {
   set_env_vars
   load_functions
   source_chruby
-  set_android_development_env_vars
+  # set_android_development_env_vars
 }
 
 source_global_definitions() {
