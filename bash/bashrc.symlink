@@ -75,7 +75,7 @@ source_chruby() {
 
 set_env_vars() {
   local readonly gettext_path="/usr/local/opt/gettext/bin"
-  export PATH="$HOME/bin:${gettext_path}:./.bundle/bin:/usr/local/bin:$PATH"
+  export PATH="$HOME/bin:$HOME/.local/bin:${gettext_path}:./.bundle/bin:/usr/local/bin:$PATH"
   DISPLAY=:0.0
 
   # Only store unique commands in history, & disregard leading spaces
