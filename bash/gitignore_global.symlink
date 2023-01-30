@@ -4,9 +4,11 @@
 .vagrant
 .bundle/
 tags
+.ctags_exclude
 node_modules/
 .env
 .env.*
 terraform.tfstate
 terraform.tfstate.backup
 .nvimrc
+.built
