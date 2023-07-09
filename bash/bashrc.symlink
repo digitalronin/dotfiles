@@ -13,6 +13,7 @@ main() {
   # set_android_development_env_vars
   setup_pyenv
   setup_pyenv_virtualenv
+  activate_venv  # defined in functions.sh
 }
 
 source_global_definitions() {

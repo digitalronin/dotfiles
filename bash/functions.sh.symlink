@@ -4,3 +4,23 @@ read() {
   fold -w 100 -s "${file}" | less
 }
 
+
+function cd() {
+    builtin cd "$@"
+    activate_venv
+}
+
+# Automatically activate a virtualenv if a .venv file exists in the target
+# directory
+function activate_venv() {
+    # Check if the current directory contains a .venv file
+    if [[ -f .venv ]]; then
+        # Read the virtual environment name from the .venv file and remove whitespace
+        venv_name=$(<.venv)
+        venv_name=$(echo "${venv_name}" | tr -d '[:space:]')
+
+        # Activate the virtual environment
+        source "${HOME}/.pyenv/versions/${venv_name}/bin/activate"
+    fi
+}
+
