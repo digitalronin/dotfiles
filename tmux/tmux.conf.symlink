@@ -76,3 +76,5 @@ set -g visual-activity on
 set -g display-panes-time 3000
 
 set -g history-limit 3000
+
+set-option -g focus-events on
