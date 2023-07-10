@@ -10,15 +10,15 @@ function cd() {
     activate_venv
 }
 
-# Automatically activate a virtualenv if a .venv file exists in the target
+# Automatically activate a virtualenv if a .virtualenv file exists in the target
 # directory, or any parent directory (as far as $HOME)
 function activate_venv() {
     local current_dir="$PWD"
     local home_dir="$HOME"
 
     while [[ "$current_dir" != "$home_dir" ]]; do
-        if [[ -f "$current_dir/.venv" ]]; then
-            local venv_name="$(cat "$current_dir/.venv")"
+        if [[ -f "$current_dir/.virtualenv" ]]; then
+            local venv_name="$(cat "$current_dir/.virtualenv")"
             venv_name=$(echo "${venv_name}" | tr -d '[:space:]')
             pyenv activate "$venv_name"
             return 0
@@ -27,6 +27,6 @@ function activate_venv() {
         current_dir="$(dirname "$current_dir")"
     done
 
-    # No .venv file found, deactivate any existing virtualenv
+    # No .virtualenv file found, deactivate any existing virtualenv
     pyenv deactivate
 }
