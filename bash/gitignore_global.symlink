@@ -13,4 +13,5 @@ terraform.tfstate.backup
 .nvimrc
 .built
 .python-version
+.virtualenv
 __pycache__
