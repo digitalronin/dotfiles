@@ -10,7 +10,7 @@ alias gs='git status'
 alias gis='git status'
 alias gm_deploy='git checkout deploy; git merge master; git checkout master; git push'
 alias git-modified="git status --porcelain | grep '^ M ' | sed 's/^ M //'"
-alias grv="gh repo view --web"
+alias grv="gh repo view --web --branch $(git branch --show-current)"
 
 # https://medium.com/@GroundControl/better-git-diffs-with-fzf-89083739a9cb
 alias fp="fzf --preview 'bat {-1} --color always'"
