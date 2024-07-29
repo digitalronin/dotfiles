@@ -187,5 +187,5 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "2", setWindowUpperRight)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "3", setWindowLowerLeft)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "4", setWindowLowerRight)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Space", maximiseWindow)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", moveToFirstMonitor)
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "M", moveToSecondMonitor)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, ",", moveToFirstMonitor)  -- < to move to left screen
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, ".", moveToSecondMonitor) -- > to move to right screen
