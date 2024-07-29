@@ -1,128 +1,176 @@
--- Maximise current window
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Space", function()
+function fullScreen(window, screen)
+    if not window then
+        hs.alert.show("No focused window")
+        return
+    end
+
+    if not screen then
+        hs.alert.show("No screen provided")
+        return
+    end
+
+    local windowFrame = window:frame()
+    local screenFrame = screen:frame()
+
+    setWindowPosition(windowFrame, screenFrame.x, screenFrame.y)
+    setWindowSize(windowFrame, screenFrame.w, screenFrame.h)
+    window:setFrame(windowFrame)
+end
+
+
+function setWindowPosition(frame, x, y)
+  frame.x = x
+  frame.y = y
+end
+
+
+function setWindowSize(frame, width, height)
+  frame.w = width
+  frame.h = height
+end
+
+
+function maximiseWindow()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
-  local max = screen:frame()
+  fullScreen(win, screen)
+end
 
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w
-  f.h = max.h
-  win:setFrame(f)
-end)
 
 -- Make current window fill left half of screen
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
+function setWindowLeftHalf()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
+  setWindowPosition(f, max.x, max.y)
+  setWindowSize(f, max.w / 2, max.h)
   win:setFrame(f)
-end)
+end
+
 
 -- Make current window fill right half of screen
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
+function setWindowRightHalf()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-
-  f.x = max.x + (max.w / 2)
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
+  setWindowPosition(f, max.x + (max.w / 2), max.y)
+  setWindowSize(f, max.w / 2, max.h)
   win:setFrame(f)
-end)
+end
+
 
 -- Make current window fill upper half of screen
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
+function setWindowUpperHalf()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w
-  f.h = max.h / 2
+  setWindowPosition(f, max.x, max.y)
+  setWindowSize(f, max.w, max.h / 2)
   win:setFrame(f)
-end)
+end
+
 
 -- Make current window fill lower half of screen
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
+function setWindowLowerHalf()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y + (max.h / 2)
-  f.w = max.w
-  f.h = max.h / 2
+  setWindowPosition(f, max.x, max.y + (max.h / 2))
+  setWindowSize(f, max.w, max.h / 2)
   win:setFrame(f)
-end)
+end
 
--- Make current window fill top-left quarter half of screen
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", function()
+
+-- Make current window fill top-left quarter of screen
+function setWindowUpperLeft()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h / 2
+  setWindowPosition(f, max.x, max.y)
+  setWindowSize(f, max.w / 2, max.h / 2)
   win:setFrame(f)
-end)
+end
 
--- Make current window fill top-right quarter half of screen
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "2", function()
+
+-- Make current window fill top-right quarter of screen
+function setWindowUpperRight()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-
-  f.x = max.x + (max.w / 2)
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h / 2
+  setWindowPosition(f, max.x + (max.w / 2), max.y)
+  setWindowSize(f, max.w / 2, max.h / 2)
   win:setFrame(f)
-end)
+end
 
--- Make current window fill bottom-left quarter half of screen
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "3", function()
+
+-- Make current window fill bottom-left quarter of screen
+function setWindowLowerLeft()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y + (max.h / 2)
-  f.w = max.w / 2
-  f.h = max.h / 2
+  setWindowPosition(f, max.x, max.y + (max.h / 2))
+  setWindowSize(f, max.w / 2, max.h / 2)
   win:setFrame(f)
-end)
+end
 
--- Make current window fill bottom-right quarter half of screen
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "4", function()
+
+-- Make current window fill bottom-right quarter of screen
+function setWindowLowerRight()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
-
-  f.x = max.x + (max.w / 2)
-  f.y = max.y + (max.h / 2)
-  f.w = max.w / 2
-  f.h = max.h / 2
+  setWindowPosition(f, max.x + (max.w / 2), max.y + (max.h / 2))
+  setWindowSize(f, max.w / 2, max.h / 2)
   win:setFrame(f)
-end)
+end
+
+
+-- Function to move the currently focused window to the first monitor
+function moveToFirstMonitor()
+    local window = hs.window.focusedWindow()
+    if not window then
+        hs.alert.show("No focused window")
+        return
+    end
+
+    local screens = hs.screen.allScreens()
+    if #screens < 1 then
+        hs.alert.show("No monitors detected")
+        return
+    end
+
+    local firstScreen = screens[1]
+    fullScreen(window, firstScreen)
+end
+
+
+-- Function to move the current window to the second monitor
+function moveToSecondMonitor()
+    local window = hs.window.focusedWindow()
+    if not window then
+        hs.alert.show("No focused window")
+        return
+    end
+
+    local screens = hs.screen.allScreens()
+    if #screens < 2 then
+        hs.alert.show("Second monitor not detected")
+        return
+    end
+
+    local secondScreen = screens[2]
+    fullScreen(window, secondScreen)
+end
+
 
 -- Reload config
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
@@ -130,4 +178,14 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
 end)
 hs.alert.show("Config loaded")
 
-
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", setWindowLeftHalf)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", setWindowRightHalf)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", setWindowUpperHalf)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", setWindowLowerHalf)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "1", setWindowUpperLeft)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "2", setWindowUpperRight)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "3", setWindowLowerLeft)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "4", setWindowLowerRight)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Space", maximiseWindow)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", moveToFirstMonitor)
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "M", moveToSecondMonitor)
