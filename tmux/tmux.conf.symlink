@@ -34,8 +34,8 @@ set -g mouse on
 # set -g mouse-resize-pane on
 # set -g mouse-select-window on
 
-if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
-source ~/.tmux-osx.conf
+set-option -g default-terminal "screen-256color"
+set-option -ga terminal-overrides ",*256col*:Tc"
 
 # use C-a v to paste the tmux buffer
 bind v paste-buffer
