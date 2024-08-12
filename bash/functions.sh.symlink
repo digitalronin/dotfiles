@@ -27,6 +27,6 @@ function activate_venv() {
         current_dir="$(dirname "$current_dir")"
     done
 
-    # No .virtualenv file found, deactivate any existing virtualenv
-    pyenv deactivate
+    # No .virtualenv file found, actvate default
+    pyenv activate default
 }
