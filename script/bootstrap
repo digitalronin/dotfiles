@@ -11,6 +11,7 @@ main() {
   echo $1
 
   install_dotfiles $1
+  setup_hammerspoon
 }
 
 install_dotfiles () {
@@ -83,6 +84,29 @@ install_dotfiles () {
     fi
 
   done
+}
+
+
+setup_hammerspoon() {
+  info 'setting up Hammerspoon'
+
+  HAMMERSPOON_DIR="$HOME/.hammerspoon"
+  HAMMERSPOON_INIT="$HAMMERSPOON_DIR/init.lua"
+  INIT_LUA_SYMLINK="$DOTFILES_ROOT/hammerspoon/init_lua.symlink"
+
+  # Create the ~/.hammerspoon directory if it doesn't exist
+  if [ ! -d "$HAMMERSPOON_DIR" ]; then
+    mkdir -p $HAMMERSPOON_DIR
+    success "created directory $HAMMERSPOON_DIR"
+  fi
+
+  # Create a symlink for init.lua in ~/.hammerspoon
+  if [ -e $HAMMERSPOON_INIT ] || [ -L $HAMMERSPOON_INIT ]; then
+    safe_symlink $INIT_LUA_SYMLINK $HAMMERSPOON_INIT
+  else
+    ln -s $INIT_LUA_SYMLINK $HAMMERSPOON_INIT
+    success "linked $INIT_LUA_SYMLINK to $HAMMERSPOON_INIT"
+  fi
 }
 
 safe_symlink() {
