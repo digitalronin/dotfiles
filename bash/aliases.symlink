@@ -53,10 +53,3 @@ alias cw=crypto_wallets
 alias priv='export HISTFILE=/tmp/history; history -r /tmp/history'
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-
-# MoJ 2019
-alias mcp='cd ~/p/moj/cloud-platform/'
-alias mcpe='cd ~/p/moj/cloud-platform-environments/'
-alias mcpi='cd ~/p/moj/cloud-platform-infrastructure/'
-alias bastion='ssh -A admin@bastion.live-1.cloud-platform.service.justice.gov.uk -p 50422'
-alias moj-env='. ~/p/moj/cloud-platform-infrastructure/.env'
