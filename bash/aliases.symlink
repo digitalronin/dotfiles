@@ -55,3 +55,5 @@ alias priv='export HISTFILE=/tmp/history; history -r /tmp/history'
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 alias jql="jq -C | less -R"
+alias lsr="ls | sort --random-sort"
+# alias pytst="pytest --no-cov --disable-warnings"
